@@ -1,0 +1,154 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Lexend", sans-serif;
+}
+
+.logo {
+  width: 154px;
+}
+
+.nav-bar {
+  display: flex;
+  align-items: center;
+  padding: 24px;
+  position: sticky;
+  top: 0px;
+  background: rgb(255, 255, 255, 1);
+  justify-content: space-between;
+  z-index: 20;
+  border-bottom: 2px solid rgb(255, 255, 255, 1);
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 10px;
+}
+
+.top-left {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.navi-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100rem;
+  /* border: 2px solid black; */
+}
+
+.middle {
+  display: flex;
+  margin-top: 0;
+  margin-bottom: 0;
+  align-items: center;
+  width: 40vw;
+  padding: 10px;
+  justify-content: space-evenly;
+}
+
+.top-right {
+  display: flex;
+  align-items: center;
+  width: 15rem;
+  justify-content: space-between;
+}
+
+.login{
+  color: black;
+}
+
+.build-res-btn {
+  display: flex;
+  font-size: 16px;
+  padding: 15px;
+  color: orange;
+  border-radius: 15px;
+  transition: background-color 0.5s ease, color 0.5s ease;
+}
+
+.context,
+.pointer {
+  cursor: pointer;
+}
+
+.context {
+  position: relative;
+  text-decoration: none;
+  color: grey;
+  color: var(--text-color);
+  display: inline-block;
+  font-size: 18px;
+}
+
+.context::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -5px;
+  width: 0;
+  height: 3px;
+  background-color: black;
+  transition: width 0.5s ease;
+}
+
+.context:hover::after {
+  width: 100%; 
+}
+
+.content {
+  background: rgb(255, 255, 255, 1);
+  font-family: "Rubik", sans-serif;
+  display: flex;
+  height: 80vh;
+  padding: 25px;
+  /* border: 2px solid black; */
+}
+
+.content-left {
+  /* border: 2px solid black; */
+  width: 45rem;
+  height: 60vh;
+  padding: 30px;
+  margin: 40px;
+  /* font-family: "Lexend", sans-serif; */
+  line-height: 30px;
+  color: black;
+  letter-spacing: 1.4px;
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 40px;
+}
+
+.content-left h1{
+  font-size: 45px;
+  line-height: 120%;
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
+  color: black;
+  margin-bottom: 27px;
+}
+
+
+.description{
+  width: 40rem;
+  font-weight: 500;
+}
+
+.get-started-btn{
+  display: flex;
+  /* border: 2px solid black;  */
+  width: 100%;
+  margin-top: 25px;
+
+}
+
+.content-right{
+  border: 2px solid black;
+  width: 40rem;
+  height: 75vh;
+}

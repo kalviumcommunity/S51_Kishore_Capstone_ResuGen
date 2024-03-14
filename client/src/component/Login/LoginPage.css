@@ -1,0 +1,47 @@
+.header{
+    position: sticky;
+    z-index: 20;
+    padding: 12px;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 10px;
+}
+
+.logo {
+    width: 154px;
+}
+
+.content{
+    display: flex;
+    /* justify-content: ; */
+    align-items: center;
+}
+/* 
+.content-left{
+    border: 2px solid black;
+} */
+
+.content-left-logo{
+    padding: 10px;
+    width: 100%;
+}
+
+.content-left h1{
+    font-size: 55px;
+    line-height: 120%;
+    font-family: "Poppins", sans-serif;
+    font-weight: 600;
+    color: black;
+    margin-bottom: 27px;
+}
+
+.content-left p{
+    font-family: "Plus Jakarta Sans", sans-serif;
+    font-weight: 400;
+    font-size: 21px;
+    line-height: 28px;
+    color: #000;
+}
+
+.content-right{
+    height: vh;
+}
+  
