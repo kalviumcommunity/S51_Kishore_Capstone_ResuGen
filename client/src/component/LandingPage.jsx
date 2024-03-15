@@ -46,7 +46,35 @@ const LandingPage = () => {
         </div>
       </div>
 
-      
+      <div className="content">
+        <div className="content-right">
+          <img src="" alt="" />
+        </div>
+        <div className="content-left">
+          <h1>Build Your Dream Resume Now!</h1>
+          <div className="description">
+            <p>
+              Lorem ipsum dolor sit amet consectetur, adipisicing elit. Cum
+            </p>
+          </div>
+
+          <div className="get-started-btn">
+            <Button
+              sx={{
+                border: "2px solid black",
+                color: "black",
+                fontWeight: "medium",
+                "&:hover": {
+                  backgroundColor: "black",
+                  color: "white",
+                },
+              }}
+            >
+              Get Started
+            </Button>
+          </div>
+        </div>
+      </div>
     </>
   );
 };
