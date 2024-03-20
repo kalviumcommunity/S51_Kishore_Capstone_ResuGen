@@ -152,6 +152,10 @@
   border: 1.5px solid #2d79f3;
 }
 
+.eye-close{
+  width: 20px;
+}
+
 .flex-row {
   display: flex;
   flex-direction: row;

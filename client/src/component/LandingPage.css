@@ -56,7 +56,7 @@ body {
   justify-content: space-between;
 }
 
-.login{
+.login {
   color: black;
 }
 
@@ -95,7 +95,7 @@ body {
 }
 
 .context:hover::after {
-  width: 100%; 
+  width: 100%;
 }
 
 .content {
@@ -124,7 +124,7 @@ body {
   margin-bottom: 40px;
 }
 
-.content-left h1{
+.content-left h1 {
   font-size: 45px;
   line-height: 120%;
   font-family: "Poppins", sans-serif;
@@ -133,22 +133,140 @@ body {
   margin-bottom: 27px;
 }
 
-
-.description{
+.description {
   width: 40rem;
   font-weight: 500;
 }
 
-.get-started-btn{
+.get-started-btn {
   display: flex;
   /* border: 2px solid black;  */
   width: 100%;
   margin-top: 25px;
-
 }
 
-.content-right{
-  border: 2px solid black;
+.content-right {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* border: 2px solid black; */
   width: 40rem;
-  height: 75vh;
+  height: 70vh;
 }
+
+.content-right-img{
+
+  /* border: 2px solid red; */
+  height: 70vh;
+}
+
+.features-div {
+  /* border: 2px solid black; */
+  padding: 30px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.feature-heading h2 {
+  font-size: 40px;
+  font-weight: 540;
+}
+
+.features-title{
+  font-size: 45px;
+  /* border: 2px solid black; */
+  font-weight: light;
+  text-align: center;
+}
+
+.features {
+  /* border: 2px solid yellow; */
+  padding: 25px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 45px;
+}
+
+.feature {
+  /* border: 2px solid salmon; */
+  height: 18rem;
+  width: 35rem;
+  padding: 30px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+
+.feature-heading {
+  display: flex;
+  justify-content: flex-start;
+  width: 100%;
+}
+
+.feature-heading h2{
+  padding: 15px;
+}
+
+.feature-p {
+  display: flex;
+  position: relative;
+  padding: 20px;
+  font-size: 24px;
+  font-weight: 100;
+  justify-content: center;
+  align-items: center;
+}
+
+.feature-img-div{
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.feature-img{
+  border: 2px solid black;
+  width: 8%;
+  height: 40px;
+}
+
+.splide {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  border: 2px solid black;
+  width: 100%;
+  max-width: 1200px;
+  height: 400px;
+  margin: 0 auto;
+}
+
+.splide__slide img {
+  width: 100%; 
+  height: auto; 
+}
+
+
+.splide__arrow {
+  background-color: rgba(0, 0, 0, 0.5); 
+  color: white; 
+  font-size: 24px; 
+}
+
+/* Customize pagination */
+.splide__pagination {
+  margin-top: 20px; 
+}
+
+/* Customize pagination bullet */
+.splide__pagination__page.is-active button {
+  background-color: black; 
+}
+
+.splide__pagination__page:not(.is-active):hover button {
+  background-color: rgba(0, 0, 0, 0.5); /* Set hover color */
+}
+
