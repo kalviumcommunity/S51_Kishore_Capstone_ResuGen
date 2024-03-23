@@ -1,10 +1,36 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "./LandingPage.css";
 import Logo from "../assets/Logo.png";
+import LandingPageLogo from "../assets/landing-page-img.png";
 import Button from "@mui/material/Button";
 import { Link } from "react-router-dom";
+import { Splide, SplideSlide } from "@splidejs/react-splide";
+import "@splidejs/splide/dist/css/themes/splide-default.min.css";
+import { Splide as CoreSplide } from "@splidejs/splide";
+import { Intersection } from "@splidejs/splide-extension-intersection";
 
 const LandingPage = () => {
+  useEffect(() => {
+    new CoreSplide("#splide", {
+      type: "loop",
+      perPage: 2,
+      gap: "2rem",
+      border: "2px solid black",
+      breakpoints: {
+        600: {
+          perPage: 1,
+        },
+      },
+    }).mount({ Intersection });
+  }, []);
+
+  const handleTemplateScroll = () => {
+    const splideSection = document.querySelector(".splide");
+    if (splideSection) {
+      splideSection.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
   return (
     <>
       <div className="nav-bar">
@@ -16,9 +42,15 @@ const LandingPage = () => {
 
         <div className="navi-bar">
           <div className="middle">
-            <p className="context">Build Your Resume</p>
+            {/* <Link to="/build"> */}
+              <p className="context">Build Your Resume</p>
+            {/* </Link> */}
             <p className="context">Resume Examples</p>
-            <p className="context">Resume Templates</p>
+
+            <p className="context" onClick={handleTemplateScroll}>
+              Resume Templates
+            </p>
+            <p className="context">Your templates</p>
           </div>
 
           <div className="top-right">
@@ -27,20 +59,22 @@ const LandingPage = () => {
             </Link>
 
             <div className="build-res-btn pointer">
-              <Button
-                sx={{
-                  border: "2px solid orange",
-                  color: "black",
-                  borderRadius: "10px",
-                  "&:hover": {
-                    backgroundColor: "orange",
-                    color: "white",
-                  },
-                  transition: "background-color 0.3s ease",
-                }}
-              >
-                Build my Resume
-              </Button>
+              {/* <Link to="/build"> */}
+                <Button
+                  sx={{
+                    border: "2px solid orange",
+                    color: "black",
+                    borderRadius: "15px",
+                    "&:hover": {
+                      backgroundColor: "orange",
+                      color: "white",
+                    },
+                    transition: "background-color 0.3s ease",
+                  }}
+                >
+                  Build my Resume
+                </Button>
+              {/* </Link> */}
             </div>
           </div>
         </div>
@@ -48,14 +82,12 @@ const LandingPage = () => {
 
       <div className="content">
         <div className="content-right">
-          <img src="" alt="" />
+          <img className="content-right-img" src={LandingPageLogo} alt="" />
         </div>
         <div className="content-left">
           <h1>Build Your Dream Resume Now!</h1>
           <div className="description">
-            <p>
-              Lorem ipsum dolor sit amet consectetur, adipisicing elit. Cum
-            </p>
+            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Cum</p>
           </div>
 
           <div className="get-started-btn">
@@ -74,6 +106,89 @@ const LandingPage = () => {
             </Button>
           </div>
         </div>
+      </div>
+
+      <div className="features-div">
+        <h2 className="features-title">
+          Get our dream job sooner with this
+          <br /> easy-to-use resume builder app
+        </h2>
+        <div className="features">
+          <div className="feature one">
+            <div className="feature-heading">
+              <h2>Professional Templates</h2>
+            </div>
+
+            <p className="feature-p">
+              Lorem ipsum dolor sit amet consectetur, adipisicing elit. Cum sint
+              dignissimos quia temporibus id! Lorem ipsum dolor sit amet,
+              consectetur adipisicing elit. Esse ?
+            </p>
+          </div>
+          <div className="feature two">
+            <div className="feature-heading">
+              <h2>Customisable fonts and colors</h2>
+            </div>
+
+            <p className="feature-p">
+              Lorem ipsum dolor sit amet consectetur, adipisicing elit. Cum sint
+              dignissimos quia temporibus id! Lorem ipsum dolor sit amet,
+              consectetur adipisicing elit. Esse ?
+            </p>
+          </div>
+          <div className="feature three">
+            <div className="feature-heading">
+              <h2>Free resume Examples</h2>
+            </div>
+
+            <p className="feature-p">
+              Lorem ipsum dolor sit amet consectetur, adipisicing elit. Cum sint
+              dignissimos quia temporibus id! Lorem ipsum dolor sit amet,
+              consectetur adipisicing elit. Esse ?
+            </p>
+          </div>
+          <div className="feature four">
+            <div className="feature-heading">
+              <h2>Professional Templates</h2>
+            </div>
+
+            <p className="feature-p">
+              Lorem ipsum dolor sit amet consectetur, adipisicing elit. Cum sint
+              dignissimos quia temporibus id! Lorem ipsum dolor sit amet,
+              consectetur adipisicing elit. Esse ?
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div className="splide">
+        <Splide id="splide">
+          <SplideSlide className="splide__slide">
+            <img src={Logo} alt="Image 1" />
+          </SplideSlide>
+          <SplideSlide className="splide__slide">
+            <img src={Logo} alt="Image 2" />
+          </SplideSlide>
+          <SplideSlide className="splide__slide">
+            <img src={Logo} alt="Image 3" />
+          </SplideSlide>
+          <SplideSlide className="splide__slide">
+            <img src={Logo} alt="Image 4" />
+          </SplideSlide>
+          <SplideSlide className="splide__slide">
+            <img src={Logo} alt="Image 5" />
+          </SplideSlide>
+          <SplideSlide className="splide__slide">
+            <img src={Logo} alt="Image 6" />
+          </SplideSlide>
+          <SplideSlide className="splide__slide">
+            <img src={Logo} alt="Image 7" />
+          </SplideSlide>
+        </Splide>
+      </div>
+
+      <div className="footer">
+        <h2>To</h2>
       </div>
     </>
   );
