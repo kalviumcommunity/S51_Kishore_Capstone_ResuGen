@@ -1,23 +1,55 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import Logo from "../../assets/Logo.png";
 import "./LoginPage.css";
 import { GoEyeClosed, GoEye } from "react-icons/go";
+import { fireStore } from "../../firebase"
+import { addDoc, collection } from "firebase/firestore";
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
 
 
 const LoginPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [errorMessage, setErrorMessage] = useState(null);
   const [confirmPassword, setConfirmPassword] = useState(false);
   const [hideSignup, setHideSignup] = useState(false);
   const [hideForgetPass, setHideForgetPass] = useState(false);
   const [changeLogintoSignup, setChangeLogintoSingup] = useState("Login");
-  const [hideP, setHideP] = useState(false);
   const [eye, setEye] = useState(false);
-  const [confirmEye, setConfirmEye] = useState(false)
+  const [confirmEye, setConfirmEye] = useState(false);
 
-  const handleSubmit = (e) => {
+  const messageRef = useRef()
+  const ref = collection(fireStore, "messages")
+  const auth = getAuth();
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
     console.log("Form submitted!");
+    console.log(messageRef.current.value)
+
+    let data = {
+      message: messageRef.current.value
+    }
+
+    try{
+      addDoc(ref, data)
+      await signInWithEmailAndPassword(auth, email, password);
+      console.log("User signed in");
+    }catch(err){
+      setErrorMessage(err.message);
+      console.error("Error signing in:", err)
+    }
+  };
+
+  const handleSignUp = async () => {
+    try {
+      // Create new user with email and password
+      await createUserWithEmailAndPassword(auth, email, password);
+      console.log("User signed up successfully!");
+    } catch (error) {
+      setErrorMessage(error.message);
+      console.error("Error signing up:", error);
+    }
   };
 
   const handlePassEye = () => {
@@ -25,15 +57,14 @@ const LoginPage = () => {
   };
 
   const handleConfirmPassEye = () => {
-    setConfirmEye(!confirmEye)
-  }
+    setConfirmEye(!confirmEye);
+  };
 
   const handleSignupClick = () => {
     setConfirmPassword(true);
     setHideSignup(true);
     setHideForgetPass(true);
     setChangeLogintoSingup("Sign Up");
-    setHideP(true);
   };
 
   return (
@@ -74,6 +105,7 @@ const LoginPage = () => {
                   type="text"
                   className="input"
                   placeholder="Enter your Email"
+                  ref={messageRef}
                 />
               </div>
 
@@ -159,7 +191,7 @@ const LoginPage = () => {
                 </>
               )}
 
-              <button className="button-submit" type="submit">
+              <button className="button-submit" type="submit" onClick={handleSignUp}>
                 {changeLogintoSignup}
               </button>
               {!hideSignup && (
@@ -173,11 +205,8 @@ const LoginPage = () => {
                 </>
               )}
 
-              {!hideP && (
-                <>
-                  <p className="p line">Or With</p>
-                </>
-              )}
+              <p className="p line">Or Continue With</p>
+
               <div className="flex-row">
                 <button className="btn google">
                   <svg

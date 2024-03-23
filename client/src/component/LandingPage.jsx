@@ -1,7 +1,7 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import "./LandingPage.css";
 import Logo from "../assets/Logo.png";
-import LandingPageLogo from "../assets/landing-page-img.png"
+import LandingPageLogo from "../assets/landing-page-img.png";
 import Button from "@mui/material/Button";
 import { Link } from "react-router-dom";
 import { Splide, SplideSlide } from "@splidejs/react-splide";
@@ -42,12 +42,15 @@ const LandingPage = () => {
 
         <div className="navi-bar">
           <div className="middle">
-            <p className="context">Build Your Resume</p>
             {/* <Link to="/build"> */}
-             <p className="context">Resume Examples</p>
+              <p className="context">Build Your Resume</p>
             {/* </Link> */}
-            
-            <p className="context" onClick={handleTemplateScroll}>Resume Templates</p>
+            <p className="context">Resume Examples</p>
+
+            <p className="context" onClick={handleTemplateScroll}>
+              Resume Templates
+            </p>
+            <p className="context">Your templates</p>
           </div>
 
           <div className="top-right">
@@ -56,20 +59,22 @@ const LandingPage = () => {
             </Link>
 
             <div className="build-res-btn pointer">
-              <Button
-                sx={{
-                  border: "2px solid orange",
-                  color: "black",
-                  borderRadius: "10px",
-                  "&:hover": {
-                    backgroundColor: "orange",
-                    color: "white",
-                  },
-                  transition: "background-color 0.3s ease",
-                }}
-              >
-                Build my Resume
-              </Button>
+              {/* <Link to="/build"> */}
+                <Button
+                  sx={{
+                    border: "2px solid orange",
+                    color: "black",
+                    borderRadius: "15px",
+                    "&:hover": {
+                      backgroundColor: "orange",
+                      color: "white",
+                    },
+                    transition: "background-color 0.3s ease",
+                  }}
+                >
+                  Build my Resume
+                </Button>
+              {/* </Link> */}
             </div>
           </div>
         </div>

@@ -15,7 +15,7 @@ body {
 .nav-bar {
   display: flex;
   align-items: center;
-  padding: 24px;
+  padding: 25px;
   position: sticky;
   top: 0px;
   background: rgb(255, 255, 255, 1);
@@ -36,7 +36,6 @@ body {
   justify-content: space-between;
   align-items: center;
   width: 100rem;
-  /* border: 2px solid black; */
 }
 
 .middle {
@@ -44,9 +43,9 @@ body {
   margin-top: 0;
   margin-bottom: 0;
   align-items: center;
-  width: 40vw;
+  width: 50vw;
   padding: 10px;
-  justify-content: space-evenly;
+  justify-content: space-around;
 }
 
 .top-right {
@@ -78,7 +77,6 @@ body {
   position: relative;
   text-decoration: none;
   color: grey;
-  color: var(--text-color);
   display: inline-block;
   font-size: 18px;
 }
@@ -113,7 +111,6 @@ body {
   height: 60vh;
   padding: 30px;
   margin: 40px;
-  /* font-family: "Lexend", sans-serif; */
   line-height: 30px;
   color: black;
   letter-spacing: 1.4px;
@@ -140,7 +137,6 @@ body {
 
 .get-started-btn {
   display: flex;
-  /* border: 2px solid black;  */
   width: 100%;
   margin-top: 25px;
 }
@@ -149,19 +145,15 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  /* border: 2px solid black; */
   width: 40rem;
   height: 70vh;
 }
 
 .content-right-img{
-
-  /* border: 2px solid red; */
   height: 70vh;
 }
 
 .features-div {
-  /* border: 2px solid black; */
   padding: 30px;
   width: 100%;
   display: flex;
@@ -177,13 +169,11 @@ body {
 
 .features-title{
   font-size: 45px;
-  /* border: 2px solid black; */
   font-weight: light;
   text-align: center;
 }
 
 .features {
-  /* border: 2px solid yellow; */
   padding: 25px;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -191,7 +181,6 @@ body {
 }
 
 .feature {
-  /* border: 2px solid salmon; */
   height: 18rem;
   width: 35rem;
   padding: 30px;
@@ -256,17 +245,15 @@ body {
   font-size: 24px; 
 }
 
-/* Customize pagination */
 .splide__pagination {
   margin-top: 20px; 
 }
 
-/* Customize pagination bullet */
 .splide__pagination__page.is-active button {
   background-color: black; 
 }
 
 .splide__pagination__page:not(.is-active):hover button {
-  background-color: rgba(0, 0, 0, 0.5); /* Set hover color */
+  background-color: rgba(0, 0, 0, 0.5); 
 }
 
