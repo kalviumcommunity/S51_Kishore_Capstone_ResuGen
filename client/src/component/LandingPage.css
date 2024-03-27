@@ -2,6 +2,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  overflow-x: none;
 }
 
 body {
@@ -15,7 +16,7 @@ body {
 .nav-bar {
   display: flex;
   align-items: center;
-  padding: 25px;
+  padding: 20px;
   position: sticky;
   top: 0px;
   background: rgb(255, 255, 255, 1);
@@ -167,7 +168,7 @@ body {
   font-weight: 540;
 }
 
-.features-title{
+.features-heading{
   font-size: 45px;
   font-weight: light;
   text-align: center;
@@ -222,38 +223,122 @@ body {
   height: 40px;
 }
 
-.splide {
+.splide-div{
   display: flex;
   align-items: center;
+  flex-direction: column;
   justify-content: space-evenly;
-  border: 2px solid black;
+}
+
+.splide-heading{
+  font-size: 45px;
+  font-weight: light;
+  text-align: center;
+}
+
+.splide {
+  /* border: 2px solid black; */
+  padding: 20px 0;
   width: 100%;
-  max-width: 1200px;
-  height: 400px;
-  margin: 0 auto;
+
 }
 
-.splide__slide img {
-  width: 100%; 
-  height: auto; 
+.splide__slide{
+  border: 2px solid slateblue;
+  height: 30rem;
+  display: block;
+  border-radius: 8px;
+  transition: transform 400ms;
+  transform: scale(.85);
+  transform-origin: center center;
+  transition: ease-in-out .3s;
 }
 
 
-.splide__arrow {
-  background-color: rgba(0, 0, 0, 0.5); 
-  color: white; 
-  font-size: 24px; 
+.splide__slide p{
+  text-align: center;
+}
+
+.splide__slide.is-active{
+    transform: scale(1);
+    transition: cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+
+.splide .splide__arrow {
+  top: 0;
+  bottom: 0;
+  height: 100%;
+  transform: none;
+  border-radius: unset;
+  width: 50px;
+  opacity: .9;
+  svg {
+    filter: invert(1);
+    width: 24px;
+    height: 24px;
+  }
+}
+
+.splide__arrow.splide__arrow--prev {
+  border: 2px solid transparent;
+  left: 0;
+}
+
+.splide__arrow.splide__arrow--next {
+  right: 0;
+  border: 2px solid transparent;
 }
 
 .splide__pagination {
-  margin-top: 20px; 
+  position: absolute;
+  bottom: 20px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
 }
 
-.splide__pagination__page.is-active button {
+.splide__pagination__page {
+  border: 2px solid salmon;
+  width: 10px; /* Adjust the size of the dots */
+  height: 10px; /* Adjust the size of the dots */
+  margin: 0 5px; /* Adjust the spacing between dots */
+  background-color: #000; 
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.splide__pagination__page.is-active {
   background-color: black; 
 }
 
-.splide__pagination__page:not(.is-active):hover button {
-  background-color: rgba(0, 0, 0, 0.5); 
+
+.example-heading{
+  font-size: 35px;
+  font-weight: light;
+  text-align: center;
 }
+
+.examples{
+  margin: 20px;
+  border: 2px solid black;
+  padding: 30px;
+  display: grid;
+  gap: 40px;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+}
+
+.example{
+  border: 2px solid salmon;
+  height: 30rem;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease-in-out;
+}
+
+.example:hover{
+  transform: scale(1.05);
+}
+
+
+
 
