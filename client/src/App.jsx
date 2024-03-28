@@ -1,8 +1,10 @@
 // import './App.css'
 import LandingPage from './component/LandingPage'
 import LoginPage from "./component/Login/LoginPage"
-// import BuildResume from "./component/Build/BuildResume"
+import BuildResume from "./component/Build/BuildResume"
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import MyResume from './component/UserResumes/MyResume';
+
 
 function App() {
 
@@ -12,7 +14,8 @@ function App() {
       <Routes>
         <Route path="/" element={<LandingPage />} />
         <Route path='/login' element={<LoginPage />} /> 
-        {/* <Route path='/build' element={<BuildResume />}></Route> */}
+        <Route path='/build' element={<BuildResume />}></Route>
+        <Route path='/my-resumes' element={<MyResume />}></Route>
       </Routes>
     </BrowserRouter>
         
