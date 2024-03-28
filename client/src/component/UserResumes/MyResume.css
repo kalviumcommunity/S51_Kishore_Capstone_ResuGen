@@ -1,0 +1,25 @@
+.user-resume-div{
+    padding: 20px;
+    font-size: 25px;
+}
+
+.user-resume {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 10px;
+    justify-content: center;
+  }
+  
+  .user {
+    width: 20vw;
+    height: 50vh;
+    background-color: #f0f0f0;
+    margin: 10px;
+    transition: transform 0.3s ease;
+  }
+  
+  .user:hover {
+    transform: scale(1.1); 
+    cursor: pointer;
+  }
+  

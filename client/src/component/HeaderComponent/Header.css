@@ -1,0 +1,13 @@
+.header {
+  position: sticky;
+  display: flex;
+  align-items: center;
+  z-index: 20;
+  padding: 12px;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 10px;
+  width: 100%;
+}
+
+.logo {
+  width: 154px;
+}
