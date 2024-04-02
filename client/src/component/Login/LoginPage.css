@@ -1,20 +1,8 @@
-.header {
-  position: sticky;
+.login-content {
   display: flex;
   align-items: center;
-  z-index: 20;
-  padding: 12px;
-  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 10px;
-  width: 100%;
-}
-
-.logo {
-  width: 154px;
-}
-
-.content {
-  display: flex;
-  align-items: center;
+  justify-content: space-around;
+  padding: 20px;
 }
 
 .content-left-logo {
@@ -22,38 +10,42 @@
   width: 100%;
 }
 
-.content-left h1 {
-  font-size: 55px;
-  line-height: 120%;
-  font-family: "Poppins", sans-serif;
-  font-weight: 600;
-  color: black;
-  margin-bottom: 27px;
+.login-content-left{
+  /* border: 2px solid black; */
+  height: 45vh;
+  width: 45vw;
+  padding: 18px;
+  display: flex;
+  justify-content: space-around;
+  flex-direction: column;
 }
 
-.content-left p {
-  width: 40.5rem;
+.login-description{
+  /* border: 2px solid red; */
+  height: 26vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 15px;
 }
 
-.content-left p {
+.login-description p {
   font-family: "Plus Jakarta Sans", sans-serif;
   font-weight: 400;
+  /* width: 40.5rem; */
   font-size: 21px;
   line-height: 28px;
   color: #000;
 }
 
-.login-right {
-  border-radius: 10px;
-  position: relative;
-  /* top: 40px; */
-  padding: -40px;
-  width: 40rem;
-  height: 75vh;
-  box-shadow: 0px 0px 18px rgba(0, 0, 0, 0.15);
+.login-description h1{
+  font-size: 40px;
 }
 
 .signup-form {
+  /* border: 2px solid rebeccapurple; */
+  border-radius: 15px;
+  width: 40vw;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -65,7 +57,6 @@
   padding: 15px;
   text-align: center;
 }
-
 
 .title {
   color: orange;
@@ -79,7 +70,7 @@
 }
 
 .label {
-  display: block;
+  /* display: block; */
   font-family: "Poppins", sans-serif;
   font-weight: 400;
   font-size: 12px;
