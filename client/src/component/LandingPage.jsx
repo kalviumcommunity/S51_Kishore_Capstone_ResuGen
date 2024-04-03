@@ -8,8 +8,16 @@ import { Splide, SplideSlide } from "@splidejs/react-splide";
 import "@splidejs/react-splide/css/sea-green";
 import { Scrollbars } from "react-custom-scrollbars";
 import { useSpring, animated } from "@react-spring/web";
+import useUser from "../Hooks/useUser";
+import { GiHamburgerMenu } from "react-icons/gi";
+import { AnimatePresence, motion } from "framer-motion";
+import { PropagateLoader } from "react-spinners";
+import { GrFormClose } from "react-icons/gr";
+import { width } from "@mui/system";
+// import {motion} from "framer-motion"
 
 const LandingPage = () => {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [navbarVisible, setNavbarVisible] = useState(true);
 
   useEffect(() => {
@@ -39,6 +47,13 @@ const LandingPage = () => {
     };
   }, []);
 
+  const handleLogoScroll = () => {
+    const navbarDiv = document.querySelector(".content");
+    if (navbarDiv) {
+      navbarDiv.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
   const handleExampleScroll = () => {
     const splideSection = document.querySelector(".splide");
     if (splideSection) {
@@ -46,11 +61,27 @@ const LandingPage = () => {
     }
   };
 
-  const handleLogoScroll = () => {
-    const navbarDiv = document.querySelector(".content");
-    if (navbarDiv) {
-      navbarDiv.scrollIntoView({ behavior: "smooth" });
+  const handleTemplateScroll = () => {
+    const templateContainer = document.querySelector(".resume-example-div");
+    if (templateContainer) {
+      templateContainer.scrollIntoView({ behavior: "smooth" });
     }
+  };
+
+  const dashboardAnimation = {
+    initial: {
+      scaleY: 0,
+    },
+    animate: {
+      scaleY: 1,
+    },
+    exit: {
+      scaleY: 0,
+    },
+  };
+
+  const toggleHamburgerClick = () => {
+    setIsMenuOpen(!isMenuOpen);
   };
 
   const animation = useSpring({
@@ -62,8 +93,16 @@ const LandingPage = () => {
     // delay:500
   });
 
+  const contentAnimation = useSpring({
+    from: { opacity: 0, transform: "translateX(20px)" },
+    to: {
+      opacity: 1,
+      transform: "translateX(0)",
+    },
+  });
+
   const handleScroll = () => {
-    if (window.scrollY > 100) {
+    if (window.scrollY > 200) {
       setNavbarVisible(false);
       console.log("Navbar hidden");
     } else {
@@ -71,9 +110,54 @@ const LandingPage = () => {
     }
   };
 
+  const { data, isLoading, isError } = useUser();
+
   return (
     <>
+      <AnimatePresence>
+        <motion.div
+          variants={dashboardAnimation}
+          initial="initial"
+          animate="animate"
+          exit="exit"
+          className="dashboard-menu"
+        >
+          {isMenuOpen && (
+            <div className="menu-content">
+              <div className="close-div">
+                <GrFormClose
+                  onClick={toggleHamburgerClick}
+                  style={{
+                    width: "2rem",
+                    height: "5rem",
+                  
+                  }}
+                />
+              </div>
+              <Link to="/build">
+                <p className="context menu">Build Your Resume</p>
+              </Link>
+              <p className="context menu" onClick={handleExampleScroll}>
+                Resume Examples
+              </p>
+              <p className="context menu" onClick={handleTemplateScroll}>
+                Resume Templates
+              </p>
+              <Link to="/my-resumes">
+                <p className="context menu">My Resumes</p>
+              </Link>
+            </div>
+          )}
+        </motion.div>
+      </AnimatePresence>
+
       <animated.div style={animation} className="nav-bar">
+        <GiHamburgerMenu
+          onClick={toggleHamburgerClick}
+          className="hamburger-icon"
+          style={{ width: "7.5rem" }}
+        />
+
         <div className="top-left">
           <Link to="/">
             <img
@@ -94,8 +178,12 @@ const LandingPage = () => {
               Resume Examples
             </p>
 
-            <p className="context">Resume Templates</p>
-            <p className="context">My Resumes</p>
+            <p className="context" onClick={handleTemplateScroll}>
+              Resume Templates
+            </p>
+            <Link to="/my-resumes">
+              <p className="context">My Resumes</p>
+            </Link>
           </div>
 
           <div className="top-right">
@@ -125,158 +213,155 @@ const LandingPage = () => {
         </div>
       </animated.div>
 
-      <Scrollbars style={{ width: "100%", height: "80vh" }}>
-        <div className="content">
-          <div className="content-right">
-            <img className="content-right-img" src={LandingPageLogo} alt="" />
-          </div>
-          <div className="content-left">
-            <h1>Build Your Dream Resume Now!</h1>
-            <div className="description">
-              <p>
-                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Cum
-              </p>
-            </div>
-
-            <div className="get-started-btn">
-              <Link to="/build">
-                <Button
-                  sx={{
-                    border: "2px solid black",
-                    color: "black",
-                    fontWeight: "medium",
-                    borderRadius: "10px",
-                    "&:hover": {
-                      backgroundColor: "black",
-                      color: "white",
-                    },
-                  }}
-                  className="button"
-                >
-                  Get Started
-                </Button>
-              </Link>
-            </div>
-          </div>
+      <animated.div style={contentAnimation} className="content">
+        <div className="content-right">
+          <img className="content-right-img" src={LandingPageLogo} alt="" />
         </div>
-
-        <div className="features-div">
-          <h2 className="features-heading">
-            Get our dream job sooner with this
-            <br /> easy-to-use resume builder app
-          </h2>
-          <div className="features">
-            <div className="feature one">
-              <div className="feature-heading">
-                <h2>Professional Templates</h2>
-              </div>
-
-              <p className="feature-p">
-                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Cum
-                sint dignissimos quia temporibus id! Lorem ipsum dolor sit amet,
-                consectetur adipisicing elit. Esse ?
-              </p>
-            </div>
-            <div className="feature two">
-              <div className="feature-heading">
-                <h2>Customisable fonts and colors</h2>
-              </div>
-
-              <p className="feature-p">
-                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Cum
-                sint dignissimos quia temporibus id! Lorem ipsum dolor sit amet,
-                consectetur adipisicing elit. Esse ?
-              </p>
-            </div>
-            <div className="feature three">
-              <div className="feature-heading">
-                <h2>Free resume Examples</h2>
-              </div>
-
-              <p className="feature-p">
-                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Cum
-                sint dignissimos quia temporibus id! Lorem ipsum dolor sit amet,
-                consectetur adipisicing elit. Esse ?
-              </p>
-            </div>
-            <div className="feature four">
-              <div className="feature-heading">
-                <h2>Professional Templates</h2>
-              </div>
-
-              <p className="feature-p">
-                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Cum
-                sint dignissimos quia temporibus id! Lorem ipsum dolor sit amet,
-                consectetur adipisicing elit. Esse ?
-              </p>
-            </div>
+        <div className="content-left">
+          <h1>Build Your Dream Resume Now!</h1>
+          <div className="description">
+            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Cum</p>
           </div>
-          {/* <button className="get-started-btn">
-            Get Started
-          </button> */}
-        </div>
 
-        <div className="splide-div">
-          <h2 className="splide-heading">
-            Check out some of our templates :)
-          </h2>
+          <div className="get-started-btn">
+            <Link to="/build">
+              <Button
+                sx={{
+                  border: "2px solid black",
+                  color: "black",
+                  fontWeight: "medium",
+                  padding: "8px",
 
-          <div id="splide" className="splide">
-            <Splide
-              options={{
-                type: "loop",
-                perPage: 4,
-                fixedWidth: true,
-                focus: "center",
-                autoplay: true,
-                interval: 8000,
-                flickMaxPages: 3,
-                updateOnMove: true,
-                pagination: true,
-                padding: "10%",
-                throttle: 1000,
-                breakpoints: {
-                  1440: {
-                    perPage: 1,
-                    padding: "30%",
+                  borderRadius: "10px",
+                  "&:hover": {
+                    backgroundColor: "black",
+                    color: "white",
                   },
-                },
-              }}
-            >
-              <SplideSlide>
-                <img src={Logo} alt="Slide 1" />
-                <p>This is slide one.</p>
-              </SplideSlide>
-              <SplideSlide>
-                <img src={Logo} alt="Slide 2" />
-                <p>This is slide two.</p>
-              </SplideSlide>
-              <SplideSlide>
-                <img src={Logo} alt="Slide 3" />
-                <p>This is slide three</p>
-              </SplideSlide>
-              <SplideSlide>
-                <img src={Logo} alt="Slide 4" />
-                <p>This is slide four</p>
-              </SplideSlide>
-            </Splide>
+                }}
+                className="button"
+              >
+                Get Started
+              </Button>
+            </Link>
           </div>
         </div>
+      </animated.div>
 
-        <div className="resume-example-div">
-          <div className="example-heading">
-              <h2>Our Most Popular Resume Example</h2>
+      <div className="features-div">
+        <h2 className="features-heading">
+          Get our dream job sooner with this
+          <br /> easy-to-use resume builder app
+        </h2>
+        <div className="features">
+          <div className="feature one">
+            <div className="feature-heading">
+              <h2>Professional Templates</h2>
+            </div>
+
+            <p className="feature-p">
+              Lorem ipsum dolor sit amet consectetur, adipisicing elit. Cum sint
+              dignissimos quia temporibus id! Lorem ipsum dolor sit amet,
+              consectetur adipisicing elit. Esse ?
+            </p>
           </div>
-          <div className="examples">
-            <div className="example"></div>
-            <div className="example"></div>
-            <div className="example"></div>
-            <div className="example"></div>
-            <div className="example"></div>
-            <div className="example"></div>
+          <div className="feature two">
+            <div className="feature-heading">
+              <h2>Customisable fonts and colors</h2>
+            </div>
+
+            <p className="feature-p">
+              Lorem ipsum dolor sit amet consectetur, adipisicing elit. Cum sint
+              dignissimos quia temporibus id! Lorem ipsum dolor sit amet,
+              consectetur adipisicing elit. Esse ?
+            </p>
+          </div>
+          <div className="feature three">
+            <div className="feature-heading">
+              <h2>Free resume Examples</h2>
+            </div>
+
+            <p className="feature-p">
+              Lorem ipsum dolor sit amet consectetur, adipisicing elit. Cum sint
+              dignissimos quia temporibus id! Lorem ipsum dolor sit amet,
+              consectetur adipisicing elit. Esse ?
+            </p>
+          </div>
+          <div className="feature four">
+            <div className="feature-heading">
+              <h2>Professional Templates</h2>
+            </div>
+
+            <p className="feature-p">
+              Lorem ipsum dolor sit amet consectetur, adipisicing elit. Cum sint
+              dignissimos quia temporibus id! Lorem ipsum dolor sit amet,
+              consectetur adipisicing elit. Esse ?
+            </p>
           </div>
         </div>
-      </Scrollbars>
+        {/* <button className="get-started-btn">
+              Get Started
+            </button> */}
+      </div>
+
+      <div className="splide-div">
+        <h2 className="splide-heading">Check out some of our templates :)</h2>
+
+        <div id="splide" className="splide">
+          <Splide
+            options={{
+              type: "loop",
+              perPage: 4,
+              fixedWidth: true,
+              focus: "center",
+              autoplay: true,
+              interval: 8000,
+              flickMaxPages: 3,
+              updateOnMove: true,
+              pagination: true,
+              padding: "10%",
+              throttle: 1000,
+              breakpoints: {
+                1440: {
+                  perPage: 1,
+                  padding: "30%",
+                },
+              },
+            }}
+          >
+            <SplideSlide>
+              <img src={Logo} alt="Slide 1" />
+              <p>This is slide one.</p>
+            </SplideSlide>
+            <SplideSlide>
+              <img src={Logo} alt="Slide 2" />
+              <p>This is slide two.</p>
+            </SplideSlide>
+            <SplideSlide>
+              <img src={Logo} alt="Slide 3" />
+              <p>This is slide three</p>
+            </SplideSlide>
+            <SplideSlide>
+              <img src={Logo} alt="Slide 4" />
+              <p>This is slide four</p>
+            </SplideSlide>
+          </Splide>
+        </div>
+      </div>
+
+      <div className="resume-example-div">
+        <div className="example-heading">
+          <h2>Our Most Popular Resume Example</h2>
+        </div>
+        <div className="examples">
+          <div className="example"></div>
+          <div className="example"></div>
+          <div className="example"></div>
+          <div className="example"></div>
+          <div className="example"></div>
+          <div className="example"></div>
+        </div>
+      </div>
+      {/* </Scrollbars> */}
     </>
   );
 };

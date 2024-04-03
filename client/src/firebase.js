@@ -1,16 +1,21 @@
-import { initializeApp } from "firebase/app";
-import {getFirestore} from "firebase/firestore"
+import { getApp, getApps, initializeApp } from "firebase/app";
+import { getAuth } from "firebase/auth";
+import { getFirestore } from "firebase/firestore";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyCiMGGNE9031aJeZ7J_MyCB5EVT_QjDPnU",
-  authDomain: "resu-gen-c74b7.firebaseapp.com",
-  projectId: "resu-gen-c74b7",
-  storageBucket: "resu-gen-c74b7.appspot.com",
-  messagingSenderId: "391321275929",
-  appId: "1:391321275929:web:74182f7c3092c785d76488",
-  measurementId: "G-VNLVRDVRQS"
+  apiKey: import.meta.env.VITE_API_KEY,
+  authDomain: import.meta.env.VITE_AUTH_DOMAIN,
+  projectId: import.meta.env.VITE_PROJECT_ID,
+  storageBucket: import.meta.env.VITE_STORAGE_BUCKET,
+  messagingSenderId: import.meta.env.VITE_MESSAGING_SENDER_ID,
+  appId: import.meta.env.VITE_APP_ID
 };
 
+// console.log(process.env.REACT_APP_API_KEY)
+
 // Initialize Firebase
-const app = initializeApp(firebaseConfig);
-export const fireStore = getFirestore(app)
+const app = getApps().length > 0 ? getApp() : initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db = getFirestore(app);
+
+export { auth, db };
