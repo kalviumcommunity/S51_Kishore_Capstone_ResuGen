@@ -1,0 +1,9 @@
+.auth-btn-div{
+    width: 100%;
+    padding: 10px;
+    border: 2px solid #e5e6eb;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+}
