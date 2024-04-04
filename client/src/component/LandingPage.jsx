@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
 import "./LandingPage.css";
+import SignUpPage from "./SignUp/SignUp";
 import Logo from "../assets/Logo.png";
 import LandingPageLogo from "../assets/landing-page-img.png";
 import Button from "@mui/material/Button";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Splide, SplideSlide } from "@splidejs/react-splide";
 import "@splidejs/react-splide/css/sea-green";
 import { Scrollbars } from "react-custom-scrollbars";
@@ -11,14 +12,18 @@ import { useSpring, animated } from "@react-spring/web";
 import useUser from "../Hooks/useUser";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { AnimatePresence, motion } from "framer-motion";
-import { PropagateLoader } from "react-spinners";
 import { GrFormClose } from "react-icons/gr";
-import { width } from "@mui/system";
-// import {motion} from "framer-motion"
+import Spinner from "./SpinnerCompo/Spinner";
+import { signOut } from "firebase/auth";
+import { auth } from "../firebase";
+import { useQueryClient } from "react-query";
 
 const LandingPage = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [navbarVisible, setNavbarVisible] = useState(true);
+  const [userLoggedIn, setUserLoggedIn] = useState(false);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     new Splide("#splide", {
@@ -40,7 +45,10 @@ const LandingPage = () => {
       },
     });
 
+   
+
     window.addEventListener("scroll", handleScroll);
+    checkUserStatus()
 
     return () => {
       window.removeEventListener("scroll", handleScroll);
@@ -51,6 +59,15 @@ const LandingPage = () => {
     const navbarDiv = document.querySelector(".content");
     if (navbarDiv) {
       navbarDiv.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
+  const checkUserStatus = async () => {
+    const { data, isLoading, isError } = await useUser();
+    if (!isLoading && !isError && data) {
+      setUserLoggedIn(true);
+    } else {
+      setUserLoggedIn(false);
     }
   };
 
@@ -68,15 +85,26 @@ const LandingPage = () => {
     }
   };
 
-  const dashboardAnimation = {
+  const handleHamburgerAnimation = {
     initial: {
       scaleY: 0,
+      opacity: 0,
     },
     animate: {
       scaleY: 1,
+      opacity: 1,
+      transition: {
+        duration: 0.5,
+        ease: [0.12, 0, 0.39, 0],
+      },
     },
     exit: {
       scaleY: 0,
+      opacity: 0,
+      transition: {
+        duration: 0.5,
+        ease: [0.12, 0, 0.39, 1],
+      },
     },
   };
 
@@ -110,13 +138,31 @@ const LandingPage = () => {
     }
   };
 
-  const { data, isLoading, isError } = useUser();
+  // const { data, isLoading, isError } = useUser();
+
+  const queryClient = useQueryClient();
+
+  // if (isLoading) {
+  //   return <Spinner />;
+  // }
+
+  const handleLogOut = async () => {
+    console.log("User logged out")
+    try {
+      await auth.signOut().then(() => {
+        queryClient.setQueryData("user", null);
+      });
+      // navigate("/");
+    } catch (error) {
+      console.error("Logout error:", error);
+    }
+  };
 
   return (
     <>
       <AnimatePresence>
         <motion.div
-          variants={dashboardAnimation}
+          handleHamburgerAnimation={handleHamburgerAnimation}
           initial="initial"
           animate="animate"
           exit="exit"
@@ -130,7 +176,6 @@ const LandingPage = () => {
                   style={{
                     width: "2rem",
                     height: "5rem",
-                  
                   }}
                 />
               </div>
@@ -146,6 +191,15 @@ const LandingPage = () => {
               <Link to="/my-resumes">
                 <p className="context menu">My Resumes</p>
               </Link>
+              {userLoggedIn ? (
+                <p onClick={handleLogOut} className="logout context pointer">
+                  Log out
+                </p>
+              ) : (
+                <Link className="login" to="/login">
+                  <p className="login context pointer">Login</p>
+                </Link>
+              )}
             </div>
           )}
         </motion.div>
@@ -187,9 +241,15 @@ const LandingPage = () => {
           </div>
 
           <div className="top-right">
-            <Link className="login" to="/login">
-              <p className="login context pointer">Login</p>
-            </Link>
+            {userLoggedIn ? (
+              <p onClick={handleLogOut} className="logout context pointer">
+                Log out
+              </p>
+            ) : (
+              <Link className="login" to="/login">
+                <p className="login context pointer">Login</p>
+              </Link>
+            )}
 
             <div className="build-res-btn pointer">
               <Link to="/build">

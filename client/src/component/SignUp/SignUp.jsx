@@ -62,13 +62,13 @@ const SignUpPage = () => {
       console.log("data:", data);
       if (!isLoading && data) {
         console.log("Redirecting to home page...");
-        // navigate("/", { replace: true });
+        navigate("/", { replace: true });   
       }
     }, [isLoading, data, navigate]);
 
-  if (isLoading) {
-    return <Spinner />;
-  }
+//   if (isLoading) {
+//     return <Spinner />;
+//   }
 
   return (
     <>
