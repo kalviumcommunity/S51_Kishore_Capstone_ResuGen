@@ -9,13 +9,14 @@ const useUser = () => {
             try {
                 const userDetail = await getUserDetail();
                 return userDetail;
+                toast.success("Succesfully Login In")
             } catch (err) {
                 if (err.response?.status === 401) {
                     console.error("User not authenticated:", err.message);
                 } else {
                     // Handle errors
                     console.error("Something went wrong:", err.message);
-                    toast.error("Something went wrong."); 
+                    toast.error("Failed to Login", err); 
                 }
                 throw err;
             }
