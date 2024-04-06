@@ -2,14 +2,13 @@ import React, { useState } from "react";
 import "./BuildResume.css";
 import Logo from "../../assets/Logo.png";
 import { Scrollbars } from "react-custom-scrollbars";
+import Header from "../HeaderComponent/Header";
 
 const BuildResume = () => {
   return (
     <>
       <Scrollbars style={{ width: "100%", height: "92.8vh" }}>
-        <div className="header">
-          <img className="logo" src={Logo} alt="logo" />
-        </div>
+        <Header />
 
         <div className="template-heading">
           <h1>Choose a Template!</h1>

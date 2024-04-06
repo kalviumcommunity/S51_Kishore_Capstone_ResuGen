@@ -36,13 +36,12 @@ body {
 .colored-squares {
   display: flex;
   justify-content: center;
-  /* flex-direction: row; */
   gap: 10px;
   border: 2px solid black;
 }
 
 .default-colors{
-  width: 20rem;
+  width: 20vw;
   display: flex;
 
   justify-content: space-evenly;
@@ -79,7 +78,6 @@ body {
   display: flex;
   justify-content: space-around;
   align-items: center;
-  /* border: 2px solid red; */
   width: 6.5rem;
 }
 
