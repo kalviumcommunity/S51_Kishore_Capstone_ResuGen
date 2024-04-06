@@ -1,15 +1,15 @@
-import React from 'react'
-import "./Spinner.css"
-import {PropagateLoader} from "react-spinners"
- 
+import React from "react";
+import "./Spinner.css";
+import { PacmanLoader } from "react-spinners";
+
 const Spinner = () => {
   return (
     <>
-        <div className="spinner">
-          <PropagateLoader color='#000' size={45} />
-        </div>
+      <div className="spinner">
+        <PacmanLoader size={35} />
+      </div>
     </>
-  )
-}
+  );
+};
 
-export default Spinner
+export default Spinner;
