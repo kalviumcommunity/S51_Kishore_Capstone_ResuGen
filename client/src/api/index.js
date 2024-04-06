@@ -3,10 +3,10 @@ import { auth, db } from "../firebase";
 
 export const getUserDetail = () => {
     return new Promise((resolve, reject) => {
-        const unsubscribe = auth.onAuthStateChanged((userCred) => {
+        const unsubscribeAuth = auth.onAuthStateChanged((userCred) => {
             if (userCred) {
                 const userData = userCred.providerData[0];
-                console.log(userData); // Make sure to remove this future me :)
+                console.log(userData); // Make sure to remove this in production
                 const userDocRef = doc(db, "users", userData?.uid);
                 const unsubscribeSnapshot = onSnapshot(userDocRef, (_doc) => {
                     if (_doc.exists()) {
@@ -18,10 +18,11 @@ export const getUserDetail = () => {
                             .catch((error) => reject(error));
                     }
                 });
-                return () => unsubscribeSnapshot();
-            } else {
-                reject(new Error("User not authenticated"));
-            }
+                return () => {
+                    unsubscribeSnapshot();
+                    unsubscribeAuth(); // Unsubscribe from onAuthStateChanged
+                };
+            } 
         });
     });
 };

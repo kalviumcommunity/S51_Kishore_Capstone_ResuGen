@@ -4,65 +4,64 @@ import { NavLink, useNavigate } from "react-router-dom";
 import Logo from "../../assets/Logo.png";
 import { GoEyeClosed, GoEye } from "react-icons/go";
 import { Scrollbars } from "react-custom-scrollbars";
-// import { Link, useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
 // import { useAuth } from "../context/AuthContext"
 import Head from "../HeaderComponent/Header";
 import AuthButton from "../AuthButtonCompo/AuthButton";
 import { FaGoogle, FaGithub } from "react-icons/fa6";
 import useUser from "../../Hooks/useUser";
+import Spinner from "../SpinnerCompo/Spinner";
+import {
+  signInWithEmailAndPassword,
+} from "firebase/auth";
+import { auth } from "../../firebase";
 
 const LoginPage = () => {
-
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [errorMessage, setErrorMessage] = useState(null);
-  const [confirmPassword, setConfirmPassword] = useState(false);
+  const [confirmPassword, setConfirmPassword] = useState("");
   const [hideSignup, setHideSignup] = useState(false);
-  const [hideForgetPass, setHideForgetPass] = useState(false);
-  const [changeLogintoSignup, setChangeLogintoSingup] = useState("Login");
   const [eye, setEye] = useState(false);
-  const [confirmEye, setConfirmEye] = useState(false);
-
-  const [error, setError] = useState("");
-  const [loading, setLoading] = useState(false);
-
-  // const history = useHistory();
-  const emailRef = useRef();
-  // const { signup } = useAuth()
-  // const { login } = useAuth()
-  const passwordRef = useRef();
-  const passwordConfirmRef = useRef();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log("Form submitted!");
+    try {
+      const userCredentials = await signInWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+      console.log(userCredentials);
+      const user = userCredentials.user;
+      localStorage.setItem("token", user.accessToken);
+      localStorage.setItem("user", JSON.stringify(user));
+      navigate("/");
+    } catch (error) {
+      console.log("Error", error);
+    }
   };
 
   const handlePassEye = () => {
     setEye(!eye);
   };
 
-  const handleConfirmPassEye = () => {
-    setConfirmEye(!confirmEye);
-  };
+  const { data, isLoading, isError } = useUser();
 
-  const handleSignupClick = () => {
-    setConfirmPassword(true);
-    setHideSignup(true);
-    setHideForgetPass(true);
-    setChangeLogintoSingup("Sign Up");
-  };
+  const navigate = useNavigate();
 
-  const {data, isLoading, isError} = useUser()
-
-  const navigate = useNavigate()
-  
   useEffect(() => {
-    if(!isLoading && data){
-      navigate("/", {replace: true})
+    console.log("isLoading:", isLoading);
+    // console.log("data:", data);
+    if (!isLoading && data) {
+      console.log("Redirecting to home page...");
+      navigate("/", { replace: true });
     }
-  })
+  }, [isLoading, data, navigate]);
 
+  if (isLoading) {
+    return <Spinner />;
+  }
 
   return (
     <>
@@ -103,6 +102,7 @@ const LoginPage = () => {
                     type="text"
                     className="input"
                     placeholder="Enter your Email"
+                    onChange={(e) => setEmail(e.target.value)}
                   />
                 </div>
 
@@ -126,6 +126,7 @@ const LoginPage = () => {
                         type="text"
                         className="input"
                         placeholder="Enter your Password"
+                        onChange={(e) => setPassword(e.target.value)}
                         // ref={passwordRef}
                       />
                       <GoEyeClosed onClick={handlePassEye} />
@@ -143,67 +144,26 @@ const LoginPage = () => {
                   )}
                 </div>
 
-                {confirmPassword && (
-                  <>
-                    <div className="flex-column">
-                      <label>Confirm Password </label>
-                    </div>
-                    <div className="inputForm">
-                      <svg
-                        key="password-icon"
-                        height="20"
-                        viewBox="-64 0 512 512"
-                        width="20"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <path d="M336 512h-288c-26.453125 0-48-21.523438-48-48v-224c0-26.476562 21.546875-48 48-48h288c26.453125 0 48 21.523438 48 48v224c0 26.476562-21.546875 48-48 48zm-288-288c-8.8125 0-16 7.167969-16 16v224c0 8.832031 7.1875 16 16 16h288c8.8125 0 16-7.167969 16-16v-224c0-8.832031-7.1875-16-16-16zm0 0"></path>
-                        <path d="M304 224c-8.832031 0-16-7.167969-16-16v-80c0-52.929688-43.070312-96-96-96s-96 43.070312-96 96v80c0 8.832031-7.167969 16-16 16s-16-7.167969-16-16v-80c0-70.59375 57.40625-128 128-128s128 57.40625 128 128v80c0 8.832031-7.167969 16-16 16zm0 0"></path>
-                      </svg>
-                      {confirmEye ? (
-                        <>
-                          <input
-                            type="text"
-                            className="input"
-                            placeholder="Enter your Password"
-                          />
-                          <GoEyeClosed onClick={handleConfirmPassEye} />
-                        </>
-                      ) : (
-                        <>
-                          <input
-                            type="password"
-                            className="input"
-                            placeholder="Confirm your Password"
-                          />
-                          <GoEye onClick={handleConfirmPassEye} />
-                        </>
-                      )}
-                    </div>
-                  </>
-                )}
-
-                {!hideForgetPass && (
-                  <>
-                    <div className="flex-row">
-                      <label className="span">Forgot password?</label>
-                    </div>
-                  </>
-                )}
+                <div className="flex-row">
+                  <Link to="/forgotpass">
+                    <label className="span">Forgot password?</label>
+                  </Link>
+                </div>
 
                 <button
                   className="button-submit"
                   type="submit"
                   // onClick={handleSignUp}
                 >
-                  {changeLogintoSignup}
+                  Login
                 </button>
                 {!hideSignup && (
                   <>
                     <p className="p">
-                      Don't have an account?{" "}
-                      <span onClick={handleSignupClick} className="span">
-                        Sign Up
-                      </span>
+                      Don't have an account?
+                      <Link to="/signup">
+                        <span className="span">Sign Up</span>
+                      </Link>
                     </p>
                   </>
                 )}
