@@ -1,7 +1,6 @@
 import React from 'react';
 import './ForgotPassCompo.css';
 import Head from '../HeaderComponent/Header';
-import CustomInput from './CustomInput'; // Import the CustomInput component
 
 const ForgotPassCompo = () => {
   return (
