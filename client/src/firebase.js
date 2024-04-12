@@ -11,8 +11,6 @@ const firebaseConfig = {
   appId: import.meta.env.VITE_APP_ID
 };
 
-// console.log(process.env.REACT_APP_API_KEY)
-
 // Initialize Firebase
 const app = getApps().length > 0 ? getApp() : initializeApp(firebaseConfig);
 const auth = getAuth(app);
