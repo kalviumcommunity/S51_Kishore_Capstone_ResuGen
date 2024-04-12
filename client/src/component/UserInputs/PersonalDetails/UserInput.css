@@ -10,6 +10,8 @@
 
 .user-input-next-btn-div{
     /* border: 2px solid black; */
+    text-decoration: none;
+    text-decoration-line: none;
     display: flex;
     width: 97%;
     justify-content: flex-end;

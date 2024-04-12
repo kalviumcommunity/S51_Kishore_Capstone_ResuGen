@@ -1,0 +1,36 @@
+.user-exp-div {
+    margin-top: 20px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+  }
+  
+  .user-exp-next-btn-div {
+    margin-bottom: 20px;
+    text-align: right;
+  }
+  
+  .user-exp-next-btn {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .user-exp-top h1 {
+    font-size: 24px;
+    margin-bottom: 10px;
+  }
+  
+  .user-exp-top p {
+    font-size: 16px;
+    color: #666;
+    margin-bottom: 20px;
+  }
+  
+  .user-exp {
+    /* Styles for input fields and other elements */
+  }
+  
