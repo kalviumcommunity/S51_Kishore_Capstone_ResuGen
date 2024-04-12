@@ -12,6 +12,9 @@ import ForgotPassCompo from './component/ForgotPass/ForgotPassCompo';
 import ResTemp1 from './component/pages/ResTemp1';
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer } from 'react-toastify';
+import UserInput from './component/UserInputs/PersonalDetails/UserInput';
+import CreateResume from './component/CreateResume/CreateResume';
+import UserExp from './component/UserInputs/Experience/UserExp';
 
 function App() {
   const queryClient = new QueryClient();
@@ -30,12 +33,17 @@ function App() {
           </Route>
           <Route path="/forgotpass" element={<ForgotPassCompo />} />
           {/* <Route path="/profile/:uid" element={<MyResume />} /> */}
-          <Route path="/templates" element={<ResTemp1 />} />
+          <Route path="/templates" element={<ResTemp1 />} /> {/* Remove this route after testing */}
+          
+          <Route path="/inputs" element={<UserInput />}></Route> {/* Remove this route after testing */}
+          <Route path='/create-resume' element={<CreateResume />} />
+          <Route path="/work-experience" element={<UserExp />}></Route>
         </Routes>
       </BrowserRouter>
       <ToastContainer position="top-right" theme="dark" />
       <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>
+    
   );
 }
 
