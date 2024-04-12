@@ -1,0 +1,89 @@
+.user-input-div{
+    display: flex;
+    flex-direction: column;
+    /* align-items: center; */
+    border: 2px solid black;
+    width: 35vw;
+    height: 100vh;
+    /* align-items: center; */
+}
+
+.user-input-next-btn-div{
+    /* border: 2px solid black; */
+    display: flex;
+    width: 97%;
+    justify-content: flex-end;
+    padding-top: 10px;
+}
+
+.user-input-next-btn{
+    cursor: pointer;
+    border: 2px solid lightblue;
+    padding: 10px;
+    border-radius: 8px;
+}
+
+.user-input-next-btn:hover{
+    background-color: lightblue;
+    color: white;
+}
+
+
+.user-input-top{
+    padding: 10px;
+    margin: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 14vh;
+}
+
+.user-input-top h3{
+    font-size: 20px;
+    line-height: 28px;
+    font-weight: 400;
+    color: #000;
+}
+
+.user-input-top p{
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 22px;
+}
+
+.user-input{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    /* border: 2px solid yellow; */
+    font: inherit;
+    vertical-align: baseline;
+    -webkit-font-smoothing: antialiased;
+    height: 50vh;
+}
+
+.user-input-wrap{
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    justify-content: space-around;
+    height: 8vh;
+}
+
+.user-input-wrap input{
+    width: 200px;
+    padding: 10px;
+    margin: 5px 0;
+    box-sizing: border-box; 
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    background-color: #f8f8f8; 
+    font-size: 16px; 
+    color: #333; 
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.user-input-wrap input:focus{
+    border-color: #0066cc; 
+    box-shadow: 0 0 8px rgba(0, 102, 204, 0.3);
+    outline: none;
+}
