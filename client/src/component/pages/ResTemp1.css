@@ -1,0 +1,22 @@
+/* Style the main resume container */
+.resume-template1 {
+  width: 80%; /* Adjust width as needed */
+  margin: 0 auto; /* Center the resume horizontally */
+  font-family: Arial, sans-serif; /* Set a base font family */
+  padding: 20px; /* Add some padding for spacing */
+}
+
+/* Style headings (h2) */
+h2 {
+  margin-bottom: 15px; /* Add space below headings */
+}
+
+/* Style individual sections within the resume */
+.personal-info,
+.education,
+.work-experience,
+.skills {
+  margin-bottom: 20px; /* Add space between sections */
+  border-bottom: 1px solid #ddd; /* Add a dividing line */
+  padding-bottom: 10px; /* Add space below the dividing line */
+}

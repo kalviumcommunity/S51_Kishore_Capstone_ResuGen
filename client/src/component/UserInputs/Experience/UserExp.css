@@ -1,36 +1,94 @@
-.user-exp-div {
-    margin-top: 20px;
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    background-color: #f9f9f9;
-  }
-  
-  .user-exp-next-btn-div {
-    margin-bottom: 20px;
-    text-align: right;
-  }
-  
-  .user-exp-next-btn {
-    padding: 10px 20px;
-    background-color: #007bff;
-    color: #fff;
-    border-radius: 5px;
+.user-exp {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  font: inherit;
+  vertical-align: baseline;
+  -webkit-font-smoothing: antialiased;
+  /* height: 25vh; */
+}
+
+.user-exp-top-buttons{
+  display: flex;
+  /* border: 2px solid black; */
+  align-items: center;
+  justify-content: flex-end;
+  /* width: 20%; */
+  /* padding: 10px; */
+  margin: 10px;
+  border-bottom: 2px solid black;
+}
+
+.user-exp-next-btn-div{
+    text-decoration: none;
+    text-decoration-line: none;
+    display: flex;
+    /* width: 97%; */
+    justify-content: flex-end;
+    padding: 10px;
+}
+
+.user-exp-back-btn{
+  cursor: pointer;
+  border: 2px solid lightblue;
+  padding: 10px;
+  border-radius: 8px;
+}
+
+.user-exp-back-btn:hover{
+  background-color: red;
+  color: white;
+}
+
+.user-exp-next-btn{
     cursor: pointer;
-  }
-  
-  .user-exp-top h1 {
-    font-size: 24px;
-    margin-bottom: 10px;
-  }
-  
-  .user-exp-top p {
-    font-size: 16px;
-    color: #666;
-    margin-bottom: 20px;
-  }
-  
-  .user-exp {
-    /* Styles for input fields and other elements */
-  }
-  
+    border: 2px solid lightblue;
+    padding: 10px;
+    border-radius: 8px;
+}
+
+.user-exp-next-btn:hover{
+  background-color: lightblue;
+  color: white;
+}
+
+.user-exp-wrap {
+  display: flex;
+  padding: 10px;
+  flex-direction: column;
+  justify-content: space-around;
+  /* height: 5vh; */
+}
+
+.user-exp-wrap input,
+.user-exp-work-summary-div input {
+  width: 200px;
+  padding: 10px;
+  margin: 5px 0;
+  box-sizing: border-box;
+  border: 2px solid #ccc;
+  border-radius: 5px;
+  background-color: #f8f8f8;
+  font-size: 16px;
+  color: #333;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.user-exp-wrap input:focus,
+.user-exp-work-summary-div input {
+  border-color: #0066cc;
+  box-shadow: 0 0 8px rgba(0, 102, 204, 0.3);
+  outline: none;
+}
+
+.user-exp-work-summary-div {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  /* width: 20vw; */
+}
+
+.user-exp-work-summary-div input {
+  margin-top: 10px;
+  height: 28vh;
+  width: 95%;
+}

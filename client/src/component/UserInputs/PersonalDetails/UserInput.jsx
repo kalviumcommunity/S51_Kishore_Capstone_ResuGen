@@ -1,11 +1,14 @@
 import React from "react";
+import { connect } from "react-redux";
+import { updatePersonalInfo } from "../../../Redux/Actions/actions";
+
 import "./UserInput.css";
 
-const UserInput = ({ onNext }) => {
+const UserInput = ({ onNext, personalInfo, updatePersonalInfo }) => {
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    // Assuming onPersonalInfoChange is defined elsewhere
-    onPersonalInfoChange((prev) => ({ ...prev, [name]: value }));
+    // Dispatch action to update personal information
+    updatePersonalInfo({ ...personalInfo, [name]: value });
   };
 
   return (
@@ -16,66 +19,92 @@ const UserInput = ({ onNext }) => {
         </div>
         <div className="user-input-top">
           <h1>Personal Details</h1>
-          <p>Get started with the basics: your name and contact information</p>
+          <p>Get started with the basics your name and contact information</p>
         </div>
         <div className="user-input">
-          <div className="user-input-wrap">
-            <label>First Name</label>
-            <input
-              type="text"
-              name="firstName"
-              placeholder="Enter your first name"
-              onChange={handleInputChange}
-            />
-          </div>
-          <div className="user-input-wrap">
-            <label>Last Name</label>
-            <input
-              type="text"
-              name="lastName"
-              placeholder="Enter your last name"
-              onChange={handleInputChange}
-            />
-          </div>
-          <div className="user-input-wrap">
-            <label>Email</label>
-            <input
-              type="email"
-              name="email"
-              required={true}
-              onChange={handleInputChange}
-            />
-          </div>
-          <div className="user-input-wrap">
-            <label>Phone</label>
-            <input type="text" name="phone" onChange={handleInputChange} />
-          </div>
-          <div className="user-input-wrap">
-            <label>Job Title</label>
-            <input
-              type="text"
-              name="jobTitle"
-              placeholder="Enter your job title"
-              onChange={handleInputChange}
-            />
-          </div>
-          <div className="user-input-wrap">
-            <label>Address</label>
-            <input
-              type="text"
-              name="address"
-              placeholder="Enter your address"
-              onChange={handleInputChange}
-            />
-          </div>
-          <div className="user-input-wrap">
-            <label>Profile Description</label>
-            <input type="text" />
-          </div>
+          {[
+            {
+              label: "First Name",
+              name: "firstName",
+              type: "text",
+              placeholder: "Enter your first name",
+            },
+            {
+              label: "Last Name",
+              name: "lastName",
+              type: "text",
+              placeholder: "Enter your last name",
+            },
+            {
+              label: "Email",
+              name: "email",
+              type: "email",
+              placeholder: "Enter your email",
+            },
+            {
+              label: "Phone",
+              name: "phone",
+              type: "text",
+              placeholder: "Enter your phone number",
+            },
+            {
+              label: "Job Title",
+              name: "jobTitle",
+              type: "text",
+              placeholder: "Enter your job title",
+            },
+            {
+              label: "City",
+              name: "city",
+              type: "text",
+              placeholder: "Enter your city",
+            },
+            {
+              label: "Zip Code",
+              name: "zipCode",
+              type: "text",
+              placeholder: "Enter your zip code",
+            },
+            {
+              label: "State",
+              name: "state",
+              type: "text",
+              placeholder: "Enter your state",
+            },
+            {
+              label: "Country",
+              name: "country",
+              type: "text",
+              placeholder: "Enter your country",
+            },
+            {
+              label: "Profile Description",
+              name: "profileDescription",
+              type: "text",
+              placeholder: "Enter your profile description",
+            },
+          ].map((input, index) => (
+            <div key={index} className="user-input-wrap">
+              <label>{input.label}</label>
+              <input
+                type={input.type}
+                name={input.name}
+                placeholder={input.placeholder}
+                value={personalInfo[input.name]}
+                onChange={handleInputChange}
+              />
+            </div>
+          ))}
         </div>
       </div>
     </>
   );
 };
 
-export default UserInput;
+// Map state to props
+const mapStateToProps = (state) => ({
+  personalInfo: state.personalInfo,
+});
+
+// Connect component to Redux store
+export default connect(mapStateToProps, { updatePersonalInfo })(UserInput);
