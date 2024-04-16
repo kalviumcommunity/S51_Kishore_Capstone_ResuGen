@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { addExperience } from "../../../Redux/Actions/actions"; 
+import { addExperience } from "../../../Redux/Actions/actions";
 
 import "./UserExp.css";
 
@@ -45,18 +45,18 @@ const UserExp = ({ onNext, onBack, experienceInfo, addExperience }) => {
             {
               label: "Company Name",
               name: "companyName",
-              type: "text"
+              type: "text",
             },
             {
               label: "Start Date",
               name: "startDate",
-              type: "date"
+              type: "date",
             },
             {
               label: "Last Date",
               name: "lastDate",
-              type: "date"
-            }
+              type: "date",
+            },
           ].map((input, index) => (
             <div key={index} className="user-exp-wrap">
               <label>{input.label}</label>
@@ -71,7 +71,7 @@ const UserExp = ({ onNext, onBack, experienceInfo, addExperience }) => {
         </div>
         <div className="user-exp-work-summary-div">
           <label>Work Summary</label>
-          <input type="text" onChange={handleExpInputChange} />
+          <input type="text" name="workSummary" onChange={handleExpInputChange} value={experienceInfo[name]} />
         </div>
       </div>
     </>
