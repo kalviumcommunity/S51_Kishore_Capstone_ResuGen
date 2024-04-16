@@ -1,19 +1,30 @@
 import React from 'react';
+import { connect } from 'react-redux';
 
-const Education = ({ education }) => {
+const Education = ({ educationInfo }) => {
+
+  const {schoolName, schoolLocation, startDate, endDate, degree, fieldOfStudy} = educationInfo
+
   return (
     <div className="education">
       <h2>Education</h2>
-      {education.map((edu, index) => (
-        <div key={index} className="education-item">
-          <h3>{edu.institution}</h3>
-          <p>{edu.location}</p>
-          <p>{edu.duration}</p>
-          <p>{edu.degree}</p>
+        <div className="education-item">
+          <h3></h3>
+          <p>{schoolName}</p>
+
+          <p>{schoolLocation}</p>
+          <p>{startDate}</p>
+          <p>{endDate}</p>
+          <p>{degree}</p>
+          {/* <p>{}</p> */}
         </div>
-      ))}
+
     </div>
   );
 };
 
-export default Education;
+const mapStateToProps = (state) => ({
+  educationInfo: state.educationInfo
+})
+
+export default connect(mapStateToProps)(Education);
