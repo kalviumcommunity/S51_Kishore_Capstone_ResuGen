@@ -13,9 +13,11 @@
     text-decoration: none;
     text-decoration-line: none;
     display: flex;
-    width: 97%;
+    align-items: center;
     justify-content: flex-end;
-    padding-top: 10px;
+    padding: 10px;
+    margin: 10px;
+    border-bottom: 2px solid black;
 }
 
 .user-input-next-btn{
@@ -68,7 +70,7 @@
     flex-direction: column;
     padding: 10px;
     justify-content: space-around;
-    height: 8vh;
+    height: 13vh;
 }
 
 .user-input-wrap input{
