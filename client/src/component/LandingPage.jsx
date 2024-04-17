@@ -457,13 +457,7 @@ const LandingPage = () => {
                   <img key={data.id} src={data.templateImg} alt="template" />
                 </div>
               ))}
-          
 
-          <div className="example"></div>
-          <div className="example"></div>
-          <div className="example"></div>
-          <div className="example"></div>
-          <div className="example"></div>
         </div>
       </div>
       {/* </Scrollbars> */}
