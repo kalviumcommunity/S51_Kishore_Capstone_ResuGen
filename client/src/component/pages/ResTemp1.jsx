@@ -7,14 +7,14 @@
 
     const ResTemp1 = ({ personalInfo, experienceInfo, educationInfo }) => {
 
-      const skillsData = ['HTML', 'CSS', 'JavaScript', 'React', 'Node.js', 'MongoDB'];
+      // const skillsData = ['HTML', 'CSS', 'JavaScript', 'React', 'Node.js', 'MongoDB'];
 
       return (
         <div className="resume-template1">
           <PersonalInformation {...personalInfo} />
           <WorkExperience {...experienceInfo} />
           <Education education={educationInfo} />
-          <Skills skills={skillsData} />
+          <Skills  />
         </div>
       );
     };

@@ -1,8 +1,9 @@
 import React from "react";
 import { connect } from "react-redux";
+import { updateSkills } from "../../../Redux/Actions/actions"; // Import the updateSkills action
 import "./UserSkills.css";
 
-const UserSkills = ({ onNext, onBack, skillsInfo, updateSkillInfo }) => {
+const UserSkills = ({ onNext, onBack, skillsInfo, updateSkills }) => {
   const handleNextClick = () => {
     onNext();
   };
@@ -11,11 +12,12 @@ const UserSkills = ({ onNext, onBack, skillsInfo, updateSkillInfo }) => {
     onBack();
   };
 
-  const handleExpInputChange = (e) => {
+  const handleSkillsInputChange = (e) => {
     const { name, value } = e.target;
-    // Dispatch action to add experience information
-    addExperience({ ...experienceInfo, [name]: value });
+    // Dispatch action to update skills information
+    updateSkills({ ...skillsInfo, [name]: value });
   };
+
   return (
     <>
       <div className="user-input-div">
@@ -31,9 +33,41 @@ const UserSkills = ({ onNext, onBack, skillsInfo, updateSkillInfo }) => {
           <h1>Skills</h1>
           <p>Tell us more about your work Skills</p>
         </div>
+
+        <div className="user-skills">
+          {[
+            {
+              label: "Skills",
+              name: "skills",
+              type: "text",
+              placeholder: "Enter your skills",
+            },
+            {
+              label: "Expertise Level",
+              name: "expertiseLevel",
+              type: "range",
+            },
+          ].map((input, index) => (
+            <div key={index} className="user-skill-wrap">
+              <label>{input.label}</label>
+              <input
+                type={input.type}
+                name={input.name}
+                placeholder={input.placeholder || false}
+                onChange={handleSkillsInputChange}
+              />
+            </div>
+          ))}
+        </div>
       </div>
     </>
   );
 };
 
-export default UserSkills;
+// Map state to props
+const mapStateToProps = (state) => ({
+  skillsInfo: state.skillsInfo,
+});
+
+// Connect component to Redux store
+export default connect(mapStateToProps, { updateSkills })(UserSkills);

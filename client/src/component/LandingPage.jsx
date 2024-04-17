@@ -7,7 +7,7 @@ import Button from "@mui/material/Button";
 import { Link, useNavigate } from "react-router-dom";
 import { Splide, SplideSlide } from "@splidejs/react-splide";
 import "@splidejs/react-splide/css/sea-green";
-import { Scrollbars } from "react-custom-scrollbars";
+// import { Scrollbars } from "react-custom-scrollbars";
 import { useSpring, animated } from "@react-spring/web";
 import useUser from "../Hooks/useUser";
 import { GiHamburgerMenu } from "react-icons/gi";
@@ -17,13 +17,51 @@ import Spinner from "./SpinnerCompo/Spinner";
 import { signOut } from "firebase/auth";
 import { auth } from "../firebase";
 import { useQueryClient } from "react-query";
+import { toast } from "react-toastify";
+import { adminId } from "../admin/AdminAcc";
+import stickynote from "../assets/sticky-notes.png";
+import templateicon from "../assets/feature-template-img.png";
+import resumeicon from "../assets/resume.png";
+import customfonticon from "../assets/font-size.png";
+import Skeleton from "react-loading-skeleton";
+import Foot from "./Footer/Footer";
+
+// import {useUser} from "../Hooks"
 
 const LandingPage = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [navbarVisible, setNavbarVisible] = useState(true);
   const [userLoggedIn, setUserLoggedIn] = useState(false);
+  const [tempImg, setTemplateImg] = useState("");
+  // const [userData, setUserData] = useState(null);
+
+  const { data, isLoading, isError } = useUser();
+
+  // console.log(isLoading, "Loading")
+  console.log(data, "data");
 
   const navigate = useNavigate();
+
+  console.log(isLoading, "Loading");
+
+  const checkUserStatus = async () => {
+    if (!isLoading && !isError && data) {
+      setUserLoggedIn(true);
+    } else {
+      setUserLoggedIn(false);
+    }
+  };
+
+  const fetchTemplateData = async () => {
+    try {
+      const response = await fetch("http://localhost:3000/template");
+      const templateData = await response.json(); // Parse JSON response
+      setTemplateImg(templateData); // Set tempImg to array of template data
+      console.log(tempImg, "templateData");
+    } catch (err) {
+      console.log("Error fetching data", err);
+    }
+  };
 
   useEffect(() => {
     new Splide("#splide", {
@@ -45,10 +83,10 @@ const LandingPage = () => {
       },
     });
 
-   
-
+    checkUserStatus();
+    fetchTemplateData();
+    // fetchData();
     window.addEventListener("scroll", handleScroll);
-    checkUserStatus()
 
     return () => {
       window.removeEventListener("scroll", handleScroll);
@@ -59,15 +97,6 @@ const LandingPage = () => {
     const navbarDiv = document.querySelector(".content");
     if (navbarDiv) {
       navbarDiv.scrollIntoView({ behavior: "smooth" });
-    }
-  };
-
-  const checkUserStatus = async () => {
-    const { data, isLoading, isError } = await useUser();
-    if (!isLoading && !isError && data) {
-      setUserLoggedIn(true);
-    } else {
-      setUserLoggedIn(false);
     }
   };
 
@@ -130,7 +159,7 @@ const LandingPage = () => {
   });
 
   const handleScroll = () => {
-    if (window.scrollY > 200) {
+    if (window.scrollY > 500) {
       setNavbarVisible(false);
       console.log("Navbar hidden");
     } else {
@@ -138,21 +167,18 @@ const LandingPage = () => {
     }
   };
 
-  // const { data, isLoading, isError } = useUser();
-
   const queryClient = useQueryClient();
 
-  // if (isLoading) {
-  //   return <Spinner />;
-  // }
-
   const handleLogOut = async () => {
-    console.log("User logged out")
     try {
-      await auth.signOut().then(() => {
-        queryClient.setQueryData("user", null);
-      });
+      await auth.signOut();
+      queryClient.setQueryData("user", null);
+      toast.success("Logged Out Successfully");
+      setUserData(null);
+
       // navigate("/");
+      // Show success message
+      console.log("Logged Out Successfully");
     } catch (error) {
       console.error("Logout error:", error);
     }
@@ -160,15 +186,15 @@ const LandingPage = () => {
 
   return (
     <>
-      <AnimatePresence>
-        <motion.div
-          handleHamburgerAnimation={handleHamburgerAnimation}
-          initial="initial"
-          animate="animate"
-          exit="exit"
-          className="dashboard-menu"
-        >
-          {isMenuOpen && (
+      {isMenuOpen && (
+        <AnimatePresence>
+          <motion.div
+            handleHamburgerAnimation={handleHamburgerAnimation}
+            initial="initial"
+            animate="animate"
+            exit="exit"
+            className="dashboard-menu"
+          >
             <div className="menu-content">
               <div className="close-div">
                 <GrFormClose
@@ -191,7 +217,8 @@ const LandingPage = () => {
               <Link to="/my-resumes">
                 <p className="context menu">My Resumes</p>
               </Link>
-              {userLoggedIn ? (
+
+              {data ? (
                 <p onClick={handleLogOut} className="logout context pointer">
                   Log out
                 </p>
@@ -201,9 +228,9 @@ const LandingPage = () => {
                 </Link>
               )}
             </div>
-          )}
-        </motion.div>
-      </AnimatePresence>
+          </motion.div>
+        </AnimatePresence>
+      )}
 
       <animated.div style={animation} className="nav-bar">
         <GiHamburgerMenu
@@ -238,10 +265,16 @@ const LandingPage = () => {
             <Link to="/my-resumes">
               <p className="context">My Resumes</p>
             </Link>
+            {/* {adminId.includes(data?.uid) && (
+                <Link to="/templates/create">
+                  <p className="context">Add Templates</p>
+                </Link>
+              )} */}
           </div>
 
           <div className="top-right">
-            {userLoggedIn ? (
+            {/* {console.log(userLoggedIn)} */}
+            {data ? (
               <p onClick={handleLogOut} className="logout context pointer">
                 Log out
               </p>
@@ -315,6 +348,7 @@ const LandingPage = () => {
         <div className="features">
           <div className="feature one">
             <div className="feature-heading">
+              <img className="features-img" src={templateicon} alt="" />
               <h2>Professional Templates</h2>
             </div>
 
@@ -326,6 +360,7 @@ const LandingPage = () => {
           </div>
           <div className="feature two">
             <div className="feature-heading">
+              <img className="features-img" src={customfonticon} alt="" />
               <h2>Customisable fonts and colors</h2>
             </div>
 
@@ -337,6 +372,7 @@ const LandingPage = () => {
           </div>
           <div className="feature three">
             <div className="feature-heading">
+              <img className="features-img" src={resumeicon} alt="" />
               <h2>Free resume Examples</h2>
             </div>
 
@@ -348,6 +384,7 @@ const LandingPage = () => {
           </div>
           <div className="feature four">
             <div className="feature-heading">
+              <img className="features-img" src={stickynote} alt="" />
               <h2>Professional Templates</h2>
             </div>
 
@@ -359,8 +396,8 @@ const LandingPage = () => {
           </div>
         </div>
         {/* <button className="get-started-btn">
-              Get Started
-            </button> */}
+                Get Started
+              </button> */}
       </div>
 
       <div className="splide-div">
@@ -413,7 +450,15 @@ const LandingPage = () => {
           <h2>Our Most Popular Resume Example</h2>
         </div>
         <div className="examples">
-          <div className="example"></div>
+          
+            {Array.isArray(tempImg) &&
+              tempImg.map((data) => (
+                <div className="example">
+                  <img key={data.id} src={data.templateImg} alt="template" />
+                </div>
+              ))}
+          
+
           <div className="example"></div>
           <div className="example"></div>
           <div className="example"></div>
@@ -422,6 +467,7 @@ const LandingPage = () => {
         </div>
       </div>
       {/* </Scrollbars> */}
+      <Foot />
     </>
   );
 };
