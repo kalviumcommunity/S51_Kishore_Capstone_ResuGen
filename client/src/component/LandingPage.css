@@ -319,7 +319,7 @@ body {
 }
 
 .example {
-  border: 2px solid salmon;
+  /* border: 2px solid salmon; */
   height: 70vh; /*should change the height to auto afterwards once i got the API */
   padding: 10px;
   border-radius: 10px;

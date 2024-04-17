@@ -1,0 +1,44 @@
+.footer-div{
+    display: flex;
+    border: 2px solid black;
+    background-color: black;
+    color: white;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px;
+}
+
+.footer-logo-div{
+    /* border: 2px solid salmon; */
+    display: flex;  
+    flex-direction: column;
+    justify-content: space-around;
+    height: 20vh;
+}
+
+.footer-logo-div pre{
+    font-size: x-large;
+}
+
+.footer-logo{
+    width: 15vw;
+}
+
+.footer-socails{
+    /* border: 2px solid rebeccapurple; */
+    display: flex;
+    height: 15vh;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.footer-socails pre{
+    font-size: 20px;
+}
+
+.footer-social-handles{
+    /* border: 2px solid white; */
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
