@@ -1,16 +1,23 @@
 import React from 'react';
+import { connect } from 'react-redux';
 
-const Skills = ({ skills }) => {
+const Skills = ({ skillsInfo }) => {
+
+  const {skills, expertiseLevel} = skillsInfo
+
   return (
     <div className="skills">
-      <h2>Skills</h2>
+    <h2>Skills</h2>
       <ul>
-        {skills.map((skill, index) => (
-          <li key={index}>{skill}</li>
-        ))}
+        <li>{skills}</li>
+        {expertiseLevel}
       </ul>
     </div>
   );
 };
 
-export default Skills;
+const mapStateToProps = (state) => ({
+  skillsInfo: state.skillsInfo
+})
+
+export default connect(mapStateToProps)(Skills);

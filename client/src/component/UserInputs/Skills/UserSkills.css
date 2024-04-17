@@ -1,0 +1,33 @@
+.user-skills {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  font: inherit;
+  vertical-align: baseline;
+  -webkit-font-smoothing: antialiased;
+}
+
+.user-skill-wrap {
+  display: grid;
+  padding: 10px;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.user-skill-wrap input {
+  width: 200px;
+  padding: 10px;
+  margin: 5px 0;
+  box-sizing: border-box;
+  border: 2px solid #ccc;
+  border-radius: 5px;
+  background-color: #f8f8f8;
+  font-size: 16px;
+  color: #333;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.user-skill-wrap input:focus {
+  border-color: #0066cc;
+  box-shadow: 0 0 8px rgba(0, 102, 204, 0.3);
+  outline: none;
+}

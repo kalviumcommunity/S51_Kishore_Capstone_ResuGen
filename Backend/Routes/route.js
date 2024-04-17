@@ -3,7 +3,6 @@ const templatesRoute = express.Router();
 const Templates = require("../model/Template.model")
 
 
-
 templatesRoute.get("/template", async (req, res) => {
   try {
     // Simulate fetching template data from a database or external API

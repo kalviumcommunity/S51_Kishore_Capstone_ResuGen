@@ -81,7 +81,7 @@ const UserEducation = ({ onNext, onBack, updateEducation }) => {
 };
 
 const mapStateToProps = (state) => ({
-  educationInfo: state.userEducationInfoReducer, 
+  educationInfo: state.educationInfoReducer, 
 });
 
 export default connect(mapStateToProps, { updateEducation })(UserEducation); // Added updateEducation as mapDispatchToProps
