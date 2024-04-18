@@ -36,7 +36,7 @@ function App() {
           <Route path="/templates" element={<ResTemp1 />} /> {/* Remove this route after testing */}
           
           <Route path="/inputs" element={<UserInput />}></Route> {/* Remove this route after testing */}
-          <Route path='/create-resume' element={<CreateResume />} />
+          <Route path='/build/create-resume' element={<CreateResume />} />
           <Route path="/work-experience" element={<UserExp />}></Route>
         </Routes>
       </BrowserRouter>
