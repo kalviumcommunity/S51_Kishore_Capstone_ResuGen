@@ -4,6 +4,7 @@
   font: inherit;
   vertical-align: baseline;
   --webkit-font-smoothing: antialiased;
+  margin-top: 20px; 
 }
 
 .user-edu-wrap {
@@ -29,4 +30,31 @@
   border-color: #0066cc;
   box-shadow: 0 0 8px rgba(0, 102, 204, 0.3);
   outline: none;
+}
+
+.add-more-btn-div{
+  display: flex;
+  justify-content: start;
+  padding: 15px;
+}
+
+.add-more-btn-div div {
+  background-color: black; 
+  border: none;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  padding: 10px;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: transform 0.3s ease;
+}
+
+.add-more-btn-div div:hover {
+  background-color: rgb(235, 235, 235); 
+  color: black;
+  transform: scale(1.05);
 }
