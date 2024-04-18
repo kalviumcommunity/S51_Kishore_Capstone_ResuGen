@@ -25,6 +25,7 @@ import resumeicon from "../assets/resume.png";
 import customfonticon from "../assets/font-size.png";
 import Skeleton from "react-loading-skeleton";
 import Foot from "./Footer/Footer";
+import { MdOutlineKeyboardArrowUp } from "react-icons/md";
 
 // import {useUser} from "../Hooks"
 
@@ -33,6 +34,7 @@ const LandingPage = () => {
   const [navbarVisible, setNavbarVisible] = useState(true);
   const [userLoggedIn, setUserLoggedIn] = useState(false);
   const [tempImg, setTemplateImg] = useState("");
+  const [showBackToTop, setShowBackToTop] = useState(false);
   // const [userData, setUserData] = useState(null);
 
   const { data, isLoading, isError } = useUser();
@@ -55,8 +57,8 @@ const LandingPage = () => {
   const fetchTemplateData = async () => {
     try {
       const response = await fetch("http://localhost:3000/template");
-      const templateData = await response.json(); // Parse JSON response
-      setTemplateImg(templateData); // Set tempImg to array of template data
+      const templateData = await response.json();
+      setTemplateImg(templateData);
       console.log(tempImg, "templateData");
     } catch (err) {
       console.log("Error fetching data", err);
@@ -86,10 +88,10 @@ const LandingPage = () => {
     checkUserStatus();
     fetchTemplateData();
     // fetchData();
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handleBackToTopScroll);
 
     return () => {
-      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("scroll", handleBackToTopScroll);
     };
   }, []);
 
@@ -111,6 +113,14 @@ const LandingPage = () => {
     const templateContainer = document.querySelector(".resume-example-div");
     if (templateContainer) {
       templateContainer.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
+  const handleBackToTopScroll = () => {
+    if (window.scrollY > 1000) {
+      setShowBackToTop(true);
+    } else {
+      setShowBackToTop(false);
     }
   };
 
@@ -184,6 +194,13 @@ const LandingPage = () => {
     }
   };
 
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  };
+
   return (
     <>
       {isMenuOpen && (
@@ -230,6 +247,12 @@ const LandingPage = () => {
             </div>
           </motion.div>
         </AnimatePresence>
+      )}
+
+      {showBackToTop && (
+        <div className="back-to-top-btn" onClick={scrollToTop}>
+          <MdOutlineKeyboardArrowUp className="arrow-icon" />
+        </div>
       )}
 
       <animated.div style={animation} className="nav-bar">
@@ -395,9 +418,6 @@ const LandingPage = () => {
             </p>
           </div>
         </div>
-        {/* <button className="get-started-btn">
-                Get Started
-              </button> */}
       </div>
 
       <div className="splide-div">
@@ -450,14 +470,12 @@ const LandingPage = () => {
           <h2>Our Most Popular Resume Example</h2>
         </div>
         <div className="examples">
-          
-            {Array.isArray(tempImg) &&
-              tempImg.map((data) => (
-                <div className="example">
-                  <img key={data.id} src={data.templateImg} alt="template" />
-                </div>
-              ))}
-
+          {Array.isArray(tempImg) &&
+            tempImg.map((data) => (
+              <div className="example">
+                <img key={data.id} src={data.templateImg} alt="template" />
+              </div>
+            ))}
         </div>
       </div>
       {/* </Scrollbars> */}
