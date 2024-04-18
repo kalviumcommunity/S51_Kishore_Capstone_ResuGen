@@ -1,30 +1,27 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import educationInfoReducer from './../../Redux/Reducers/educationInfoReducer';
 
 const Education = ({ educationInfo }) => {
-
-  const {schoolName, schoolLocation, startDate, endDate, degree, fieldOfStudy} = educationInfo
-
   return (
     <div className="education">
       <h2>Education</h2>
-        <div className="education-item">
-          <h3></h3>
-          <p>{schoolName}</p>
-
-          <p>{schoolLocation}</p>
-          <p>{startDate}</p>
-          <p>{endDate}</p>
-          <p>{degree}</p>
-          {/* <p>{}</p> */}
+      {educationInfo.map((education, index) => (
+        <div key={index} className="education-item">
+          <h3>{education.schoolName}</h3>
+          <p>{education.schoolLocation}</p>
+          <p>{education.startDate}</p>
+          <p>{education.endDate}</p>
+          <p>{education.degree}</p>
+          <p>{education.fieldOfStudy}</p>
         </div>
-
+      ))}
     </div>
   );
 };
 
 const mapStateToProps = (state) => ({
-  educationInfo: state.educationInfo
-})
+  educationInfo: state.educationInfoReducer // Assuming `educationInfo` is an array of education entries
+});
 
 export default connect(mapStateToProps)(Education);

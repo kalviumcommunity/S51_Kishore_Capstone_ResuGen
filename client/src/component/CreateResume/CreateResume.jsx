@@ -1,14 +1,14 @@
-import React, {useState} from "react";
-import { connect } from "react-redux"; // Import connect
+import React, { useState } from "react";
+import { connect } from "react-redux";
+import { updateEducation } from "../../Redux/Actions/actions"; // Import the action creator
 import ResTemp1 from "../pages/ResTemp1";
 import UserInput from "../UserInputs/PersonalDetails/UserInput";
 import UserExp from "../UserInputs/Experience/UserExp";
 import "./CreateResume.css";
 import Header from "../HeaderComponent/Header";
 import UserEducation from "./../UserInputs/Education/UserEducation";
-import UserSkills from "../UserInputs/Skills/UserSkills";
 
-const CreateResume = ({ personalInfo, experienceInfo, educationInfo }) => { 
+const CreateResume = ({ personalInfo, experienceInfo, educationInfo, updateEducation }) => {
   const [step, setStep] = useState(1);
 
   const handleNext = () => {
@@ -22,25 +22,23 @@ const CreateResume = ({ personalInfo, experienceInfo, educationInfo }) => {
   return (
     <>
       <Header />
-      <div className="create-res-div"></div>
       <div className="create-res">
-        {step === 1 && (
-          <UserInput onNext={handleNext} />
-        )}
-        {step === 2 && (
-          <UserExp onNext={handleNext} onBack={handleBack} />
-        )}
-        {step == 3 && (
-          <UserEducation onNext={handleNext} onBack={handleBack} />
-        )}
-        {step == 4 && (
-          <UserSkills onNext={handleNext} onBack={handleBack} />
-        )}
-        <ResTemp1
-            personalInfo={personalInfo} //from Redux store
-            experienceInfo={experienceInfo} 
+        {step === 1 && <UserInput onNext={handleNext} />}
+        {step === 2 && <UserExp onNext={handleNext} onBack={handleBack} />}
+        {step === 3 && (
+          <UserEducation
+            onNext={handleNext}
+            onBack={handleBack}
+            updateEducation={updateEducation}
             educationInfo={educationInfo}
           />
+        )}
+        {step === 4 && <UserSkills onNext={handleNext} onBack={handleBack} />}
+        <ResTemp1
+          personalInfo={personalInfo}
+          experienceInfo={experienceInfo}
+          educationInfo={educationInfo}
+        />
       </div>
     </>
   );
@@ -49,6 +47,11 @@ const CreateResume = ({ personalInfo, experienceInfo, educationInfo }) => {
 const mapStateToProps = (state) => ({
   personalInfo: state.personalInfo,
   experienceInfo: state.experienceInfo,
+  educationInfo: state.educationInfo,
 });
 
-export default connect(mapStateToProps)(CreateResume);
+const mapDispatchToProps = {
+  updateEducation, 
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(CreateResume);
