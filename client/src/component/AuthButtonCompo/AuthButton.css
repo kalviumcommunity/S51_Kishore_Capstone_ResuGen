@@ -1,9 +1,15 @@
 .auth-btn-div{
-    width: 100%;
+    width: 13.5vw;
     padding: 10px;
     border: 2px solid #e5e6eb;
     display: flex;
     align-items: center;
     justify-content: space-between;
     cursor: pointer;
+}
+
+.auth-btn-div p {
+    font-size: 14px;
+    font-weight: 500;
+
 }
