@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import "./BuildResume.css";
 import Logo from "../../assets/Logo.png";
-import { Scrollbars } from "react-custom-scrollbars";
+// import { Scrollbars } from "react-custom-scrollbars";
 import Header from "../HeaderComponent/Header";
 
 const BuildResume = () => {
   return (
     <>
-      <Scrollbars style={{ width: "100%", height: "92.8vh" }}>
+      {/* <Scrollbars style={{ width: "100%", height: "92.8vh" }}> */}
         <Header />
 
         <div className="template-heading">
@@ -46,7 +46,7 @@ const BuildResume = () => {
         <div className="template-footer">
           <p>@2024 Copyrights blah blah blah!!..</p>
         </div>
-      </Scrollbars>
+      {/* </Scrollbars> */}
     </>
   );
 };

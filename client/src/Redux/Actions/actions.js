@@ -5,7 +5,8 @@ export const updatePersonalInfo = (info) => ({
   payload: info,
 });
 
-export const addExperience = (experience) => ({
+export const addExperience = (experience, dispatch) => ({
+  
   type: ADD_EXPERIENCE,
   payload: experience,
 });

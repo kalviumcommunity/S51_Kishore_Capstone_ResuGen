@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
-import { updateEducation } from "../../Redux/Actions/actions"; // Import the action creator
+import { addEducation } from "../../Redux/Actions/actions"; // Import the action creator
 import ResTemp1 from "../pages/ResTemp1";
 import UserInput from "../UserInputs/PersonalDetails/UserInput";
 import UserExp from "../UserInputs/Experience/UserExp";
@@ -8,7 +8,7 @@ import "./CreateResume.css";
 import Header from "../HeaderComponent/Header";
 import UserEducation from "./../UserInputs/Education/UserEducation";
 
-const CreateResume = ({ personalInfo, experienceInfo, educationInfo, updateEducation }) => {
+const CreateResume = ({ personalInfo, experienceInfo, educationInfo, addEducation }) => {
   const [step, setStep] = useState(1);
 
   const handleNext = () => {
@@ -29,8 +29,7 @@ const CreateResume = ({ personalInfo, experienceInfo, educationInfo, updateEduca
           <UserEducation
             onNext={handleNext}
             onBack={handleBack}
-            updateEducation={updateEducation}
-            educationInfo={educationInfo}
+            addEducation={addEducation} 
           />
         )}
         {step === 4 && <UserSkills onNext={handleNext} onBack={handleBack} />}
@@ -51,7 +50,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = {
-  updateEducation, 
+  addEducation, 
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(CreateResume);

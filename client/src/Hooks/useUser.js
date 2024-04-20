@@ -8,13 +8,12 @@ const useUser = () => {
         async () => {
             try {
                 const userDetail = await getUserDetail();
+                toast.success("Successfully Logged In")
                 return userDetail;
-                toast.success("Succesfully Login In")
             } catch (err) {
                 if (err.response?.status === 401) {
                     console.error("User not authenticated:", err.message);
                 } else {
-                    // Handle errors
                     console.error("Something went wrong:", err.message);
                     toast.error("Failed to Login", err); 
                 }
@@ -23,7 +22,7 @@ const useUser = () => {
         },
         { refetchOnWindowFocus: false }
     );
-
+        // console.log(data.uid, "data")
     return { data, isLoading, isError, refetch };
 };
 
