@@ -54,6 +54,10 @@ const LandingPage = () => {
     }
   };
 
+  if (isLoading){
+    <Spinner />
+  }
+
   const fetchTemplateData = async () => {
     try {
       const response = await fetch("http://localhost:3000/template");
