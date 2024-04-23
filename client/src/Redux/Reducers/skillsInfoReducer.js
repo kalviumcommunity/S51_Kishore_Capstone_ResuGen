@@ -1,15 +1,21 @@
 const initialState = {
-    skills: "",
-    expertiseLevel: ""
-}
+  skillsInfo: { skills: "", expertiseLevel: "" },
+};
 
-const skillsInfo = (state = initialState, action) => {
-    switch(action.type){
-        case "UPDATE_SKILLS":
-            return {...state, ...action.payload}
-        default:
-            return state
-    }
-}
+const skillsFormData = (state = initialState, action) => {
+  console.log(action.payload)
+  switch (action.type) {
+    case "UPDATE_SKILLS":
+      return {
+        ...state,
+        skillsInfo: {
+          skills: action.payload.skills,
+          expertiseLevel: action.payload.expertiseLevel,
+        },
+      };
+    default:
+      return state;
+  }
+};
 
-export default skillsInfo;
+export default skillsFormData;
