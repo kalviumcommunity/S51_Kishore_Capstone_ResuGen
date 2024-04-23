@@ -1,10 +1,13 @@
+// eslint-disable-next-line no-unused-vars
 import React from "react";
-import { connect } from "react-redux";
+import { useDispatch } from "react-redux";
 import { addExperience } from "../../../Redux/Actions/actions";
-
 import "./UserExp.css";
 
-const UserExp = ({ onNext, onBack, experienceInfo, addExperience }) => {
+// eslint-disable-next-line react/prop-types
+const UserExp = ({ onNext, onBack }) => {
+  const dispatch = useDispatch();
+
   const handleNextClick = () => {
     onNext();
   };
@@ -15,8 +18,7 @@ const UserExp = ({ onNext, onBack, experienceInfo, addExperience }) => {
 
   const handleExpInputChange = (e) => {
     const { name, value } = e.target;
-    // Dispatch action to add experience information
-    addExperience({ ...experienceInfo, [name]: value });
+    dispatch(addExperience({ [name]: value }));
   };
 
   return (
@@ -63,7 +65,6 @@ const UserExp = ({ onNext, onBack, experienceInfo, addExperience }) => {
               <input
                 type={input.type}
                 name={input.name}
-                value={experienceInfo[input.name]}
                 onChange={handleExpInputChange}
               />
             </div>
@@ -71,17 +72,15 @@ const UserExp = ({ onNext, onBack, experienceInfo, addExperience }) => {
         </div>
         <div className="user-exp-work-summary-div">
           <label>Work Summary</label>
-          <input type="text" name="workSummary" onChange={handleExpInputChange} value={experienceInfo[name]} />
+          <input
+            type="text"
+            name="workSummary"
+            onChange={handleExpInputChange}
+          />
         </div>
       </div>
     </>
   );
 };
 
-// Map state to props
-const mapStateToProps = (state) => ({
-  experienceInfo: state.experienceInfo,
-});
-
-// Connect component to Redux store
-export default connect(mapStateToProps, { addExperience })(UserExp);
+export default UserExp;

@@ -1,9 +1,13 @@
+// eslint-disable-next-line no-unused-vars
 import React from "react";
-import { connect } from "react-redux";
-import { updateSkills } from "../../../Redux/Actions/actions"; // Import the updateSkills action
+import { useDispatch } from "react-redux";
+import { updateSkills } from "../../../Redux/Actions/actions";
 import "./UserSkills.css";
 
-const UserSkills = ({ onNext, onBack, skillsInfo, updateSkills }) => {
+// eslint-disable-next-line react/prop-types
+const UserSkills = ({ onNext, onBack }) => {
+  const dispatch = useDispatch();
+
   const handleNextClick = () => {
     onNext();
   };
@@ -14,8 +18,7 @@ const UserSkills = ({ onNext, onBack, skillsInfo, updateSkills }) => {
 
   const handleSkillsInputChange = (e) => {
     const { name, value } = e.target;
-    // Dispatch action to update skills information
-    updateSkills({ ...skillsInfo, [name]: value });
+    updateSkills({ [name]: value }, dispatch); 
   };
 
   return (
@@ -53,7 +56,7 @@ const UserSkills = ({ onNext, onBack, skillsInfo, updateSkills }) => {
               <input
                 type={input.type}
                 name={input.name}
-                placeholder={input.placeholder || false}
+                // placeholder={input.placeholder}
                 onChange={handleSkillsInputChange}
               />
             </div>
@@ -64,10 +67,4 @@ const UserSkills = ({ onNext, onBack, skillsInfo, updateSkills }) => {
   );
 };
 
-// Map state to props
-const mapStateToProps = (state) => ({
-  skillsInfo: state.skillsInfo,
-});
-
-// Connect component to Redux store
-export default connect(mapStateToProps, { updateSkills })(UserSkills);
+export default UserSkills;
