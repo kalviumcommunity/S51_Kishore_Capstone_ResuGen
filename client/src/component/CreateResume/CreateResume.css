@@ -1,13 +1,6 @@
-.create-res-div{
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
-
-
 .create-res{
     display: flex;
-    width: 90vw;
+    width: 98vw;
     height: 100vh;
     padding: 15px;
     /* justify-content: space-between; */

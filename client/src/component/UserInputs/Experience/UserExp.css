@@ -59,8 +59,7 @@
   /* height: 5vh; */
 }
 
-.user-exp-wrap input,
-.user-exp-work-summary-div input {
+.user-exp-wrap input{
   width: 200px;
   padding: 10px;
   margin: 5px 0;
@@ -73,22 +72,45 @@
   transition: border-color 0.3s, box-shadow 0.3s;
 }
 
-.user-exp-wrap input:focus,
-.user-exp-work-summary-div input {
+.user-exp-wrap input:focus{
   border-color: #0066cc;
   box-shadow: 0 0 8px rgba(0, 102, 204, 0.3);
   outline: none;
 }
 
+
 .user-exp-work-summary-div {
   display: flex;
   flex-direction: column;
   padding: 20px;
-  /* width: 20vw; */
+}
+
+.user-exp-work-summary-div input:focus {
+  border-color: #0066cc;
+  box-shadow: 0 0 8px rgba(0, 102, 204, 0.3);
+  outline: none;
+  text-align: start;
+}
+
+.user-exp-work-summary-div input {
+  height: 25vh;
+  width: 95%;
 }
 
 .user-exp-work-summary-div input {
   margin-top: 10px;
-  height: 28vh;
+  height: 25vh;
   width: 95%;
+  padding: 10px;
+  border: 2px solid #ccc;
+  border-radius: 5px;
+  background-color: #f8f8f8;
+  font-size: 16px;
+  color: #333;
+  transition: border-color 0.3s, box-shadow 0.3s;
+  /* Ensure cursor starts from the top left */
+  caret-color: #333; /* Adjust color as needed */
 }
+
+
+

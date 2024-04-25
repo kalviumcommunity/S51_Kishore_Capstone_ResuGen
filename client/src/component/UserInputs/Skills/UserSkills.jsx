@@ -18,7 +18,7 @@ const UserSkills = ({ onNext, onBack }) => {
 
   const handleSkillsInputChange = (e) => {
     const { name, value } = e.target;
-    updateSkills({ [name]: value }, dispatch); 
+    dispatch(updateSkills({ [name]: value })); 
   };
 
   return (

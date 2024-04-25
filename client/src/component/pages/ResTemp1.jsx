@@ -14,8 +14,7 @@ const ResTemp1 = () => {
   const educationFormData = useSelector(
     (state) => state.educationInfo.educationFormData
   );
-  const skillsInfo = useSelector((state) => state.skillsInfo);
-  console.log(skillsInfo);
+  const skillsFormData = useSelector((state) => state.skillsInfo.skillsFormData);
 
   return (
     <>
@@ -46,12 +45,12 @@ const ResTemp1 = () => {
               <h2>Technical Skills</h2>
               <div className="info-skills">
                 <div className="skill">
-                  <li>Skills: {skillsInfo.skills}</li>
-                  <p>Expertise Level: {skillsInfo.expertiseLevel}</p>
+                  <li>{skillsFormData.skills}</li>
+                  <p>{skillsFormData.expertiseLevel}</p>
                 </div>
                 <div className="skill">
-                  <li>Skills: {skillsInfo.skills}</li>
-                  <p>Expertise Level: {skillsInfo.expertiseLevel}</p>
+                  <li>{skillsFormData.skills}</li>
+                  <p>{skillsFormData.expertiseLevel}</p>
                 </div>
               </div>
             </div>
