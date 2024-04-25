@@ -1,11 +1,11 @@
 const initialState = {
   educationFormData: {
-    schoolName: "",
-    schoolLocation: "",
-    startDate: "",
-    endDate: "",
-    degree: "",
-    fieldOfStudy: "",
+    schoolName: "University of Fictional Studies",
+    schoolLocation: "Fiction City",
+    startDate: "September 2010",
+    endDate: "May 2014",
+    degree: "Bachelor of Science",
+    fieldOfStudy: "Computer Science",
   },
 };
 
