@@ -1,14 +1,15 @@
+// eslint-disable-next-line no-unused-vars
 import React, { useState } from "react";
-import { connect } from "react-redux";
-import { addEducation } from "../../Redux/Actions/actions"; // Import the action creator
+
 import ResTemp1 from "../pages/ResTemp1";
 import UserInput from "../UserInputs/PersonalDetails/UserInput";
 import UserExp from "../UserInputs/Experience/UserExp";
 import "./CreateResume.css";
 import Header from "../HeaderComponent/Header";
 import UserEducation from "./../UserInputs/Education/UserEducation";
+import UserSkills from "../UserInputs/Skills/UserSkills";
 
-const CreateResume = ({ personalInfo, experienceInfo, educationInfo, addEducation }) => {
+const CreateResume = () => {
   const [step, setStep] = useState(1);
 
   const handleNext = () => {
@@ -29,28 +30,15 @@ const CreateResume = ({ personalInfo, experienceInfo, educationInfo, addEducatio
           <UserEducation
             onNext={handleNext}
             onBack={handleBack}
-            addEducation={addEducation} 
+            // addEducation={addEducation}
           />
         )}
         {step === 4 && <UserSkills onNext={handleNext} onBack={handleBack} />}
-        <ResTemp1
-          personalInfo={personalInfo}
-          experienceInfo={experienceInfo}
-          educationInfo={educationInfo}
-        />
+        <ResTemp1 />
       </div>
     </>
   );
 };
 
-const mapStateToProps = (state) => ({
-  personalInfo: state.personalInfo,
-  experienceInfo: state.experienceInfo,
-  educationInfo: state.educationInfo,
-});
 
-const mapDispatchToProps = {
-  addEducation, 
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(CreateResume);
+export default CreateResume
