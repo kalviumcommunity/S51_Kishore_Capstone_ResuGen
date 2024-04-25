@@ -1,4 +1,4 @@
-import { UPDATE_PERSONAL_INFO, ADD_EXPERIENCE, UPDATE_EDUCATION, UPDATE_SKILLS, ADD_EDUCATION } from './actionTypes'; 
+import { UPDATE_PERSONAL_INFO, ADD_EXPERIENCE, UPDATE_EDUCATION, UPDATE_SKILLS, ADD_EDUCATION, ADD_NEW_EXPERIENCE } from './actionTypes'; 
 
 export const updatePersonalInfo = (info) => ({
   type: UPDATE_PERSONAL_INFO,
@@ -10,18 +10,20 @@ export const addExperience = (experience) => ({
   payload: experience,
 });
 
+export const addNewExperience = (newExp) => ({
+  type: ADD_NEW_EXPERIENCE,
+  payload: newExp,
+})
+
 export const updateEducation = (info) => ({
   type: UPDATE_EDUCATION,
   payload: info,
 })
 
-export const updateSkills = (info, dispatch) => {
-  console.log(info)
-  return dispatch({
-    type: UPDATE_SKILLS,
-    payload: info
-  })
-}
+export const updateSkills = (info) => ({
+  type: UPDATE_SKILLS,
+  payload: info
+});
 
 
 
