@@ -1,12 +1,15 @@
 // eslint-disable-next-line no-unused-vars
 import React from "react";
-import { useDispatch } from "react-redux";
-import { updateSkills } from "../../../Redux/Actions/actions";
+import { useDispatch, useSelector } from "react-redux";
+import { updateSkills, addNewSkills } from "../../../Redux/Actions/actions";
 import "./UserSkills.css";
 
 // eslint-disable-next-line react/prop-types
 const UserSkills = ({ onNext, onBack }) => {
   const dispatch = useDispatch();
+  const skillsFormData = useSelector(
+    (state) => state.skillsInfo.skillsFormData
+  );
 
   const handleNextClick = () => {
     onNext();
@@ -16,10 +19,14 @@ const UserSkills = ({ onNext, onBack }) => {
     onBack();
   };
 
-  const handleSkillsInputChange = (e) => {
+  const handleSkillsInputChange = (e, index) => {
     const { name, value } = e.target;
-    dispatch(updateSkills({ [name]: value })); 
+    dispatch(updateSkills({ [name]: value }, index));
   };
+
+  const handleNewSkills = () => {
+    dispatch(addNewSkills())
+  }
 
   return (
     <>
@@ -37,30 +44,24 @@ const UserSkills = ({ onNext, onBack }) => {
           <p>Tell us more about your work Skills</p>
         </div>
 
-        <div className="user-skills">
-          {[
-            {
-              label: "Skills",
-              name: "skills",
-              type: "text",
-              placeholder: "Enter your skills",
-            },
-            {
-              label: "Expertise Level",
-              name: "expertiseLevel",
-              type: "range",
-            },
-          ].map((input, index) => (
-            <div key={index} className="user-skill-wrap">
-              <label>{input.label}</label>
-              <input
-                type={input.type}
-                name={input.name}
-                // placeholder={input.placeholder}
-                onChange={handleSkillsInputChange}
-              />
+        {skillsFormData &&
+          skillsFormData.map((skillData, index) => (
+            <div className="user-skills" key={index}>
+              {Object.keys(skillData).map((key, inputIndex) => (
+                <div className="user-skill-wrap" key={inputIndex}>
+                  <label>{key}</label>
+                  <input
+                    type="text"
+                    name={key}
+                    value={skillData[key]}
+                    onChange={(e) => handleSkillsInputChange(e, index)}
+                  />
+                </div>
+              ))}
             </div>
           ))}
+        <div onClick={handleNewSkills} className="user-exp-add-exp-btn-div">
+          <div className="user-exp-add-exp-btn">+ Add More Skills</div>
         </div>
       </div>
     </>

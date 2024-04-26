@@ -1,14 +1,18 @@
 // eslint-disable-next-line no-unused-vars
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
-import { updateEducation } from "../../../Redux/Actions/actions";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  updateEducation,
+  addNewEducation,
+} from "../../../Redux/Actions/actions";
 import "./UserEducation.css";
-
 
 // eslint-disable-next-line react/prop-types
 const UserEducation = ({ onNext, onBack }) => {
-
   const dispatch = useDispatch();
+  const educationFormData = useSelector(
+    (state) => state.educationInfo.educationFormData
+  );
 
   const handleNextClick = () => {
     onNext();
@@ -18,16 +22,15 @@ const UserEducation = ({ onNext, onBack }) => {
     onBack();
   };
 
-  const handleEducationInputChange = (e) => {
+  const handleEducationInputChange = (e, index) => {
     const { name, value } = e.target;
     // Dispatch action to update education information
-    dispatch(updateEducation({ [name]: value }));
+    dispatch(updateEducation({ [name]: value }, index));
   };
 
-  // const handleAddMoreEducation = () => {
-  //   addEducation({}); // Dispatch addEducation action with an empty object or with default values
-  //   setAdditionalEducations([...additionalEducations, {}]);
-  // };
+  const handleAddEducation = () => {
+    dispatch(addNewEducation());
+  };
 
   return (
     <div className="user-input-div">
@@ -45,54 +48,28 @@ const UserEducation = ({ onNext, onBack }) => {
         <p>Tell us more about your education</p>
       </div>
 
-      {/* {additionalEducations.map((education, index) => ( */}
-      <div className="user-education">
-        {[
-          {
-            label: "School Name",
-            name: "schoolName",
-            input: "text",
-          },
-          {
-            label: "School Location",
-            name: "schoolLocation",
-            input: "text",
-          },
-          {
-            label: "Start Date",
-            name: "startDate",
-            input: "date",
-          },
-          {
-            label: "End Date",
-            name: "endDate",
-            input: "date",
-          },
-          {
-            label: "Degree",
-            name: "degree",
-            input: "text",
-          },
-          {
-            label: "Field of Study",
-            name: "fieldOfStudy",
-            input: "text",
-          },
-        ].map((input, inputIndex) => (
-          <div key={inputIndex} className="user-edu-wrap">
-            <label>{input.label}</label>
-            <input
-              type={input.input}
-              name={input.name}
-              onChange={handleEducationInputChange}
-            />
+      {educationFormData &&
+        educationFormData.map((eduData, index) => (
+          <div className="user-education" key={index}>
+            <div className="user-education">
+              {Object.keys(eduData).map((key, inputIndex) => (
+                <div key={inputIndex} className="user-edu-wrap">
+                  <label>{key}</label>
+                  <input
+                    type="text"
+                    name={key}
+                    value={eduData[key]}
+                    onChange={(e) => handleEducationInputChange(e, index)}
+                  />
+                </div>
+              ))}
+            </div>
           </div>
         ))}
-      </div>
 
-      {/* <div className="add-more-btn-div" onClick={handleAddMoreEducation}>
-        <div>+ Add more Education</div>
-      </div> */}
+      <div onClick={handleAddEducation} className="user-exp-add-exp-btn-div">
+        <div className="user-exp-add-exp-btn">+ Add More Education</div>
+      </div>
     </div>
   );
 };
