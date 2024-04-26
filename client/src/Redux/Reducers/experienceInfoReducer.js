@@ -1,37 +1,32 @@
+import { ADD_EXPERIENCE, ADD_NEW_EXPERIENCE } from "./../Actions/actionTypes";
+
 const initialState = {
-  experienceFormData: {
-    positionTitle: "Software Engineer",
-    companyName: "Tech Innovations Inc.",
-    startDate: "July 2015",
-    lastDate: "Present",
-    workSummary: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus ipsam commodi velit saepe dolorum sunt fuga ea harum eveniet? Reiciendis odio quia eveniet dolorem numquam repudiandae incidunt unde placeat fugiat.",
-    experiences: {} // Initialize as an empty object
-  }
+  experienceDataList: [
+    // Initial set of experience information
+    {
+      PositionTitle: "",
+      CompanyName: "",
+      StartDate: "",
+      LastDate: "",
+      WorkSummary: "",
+    },
+  ],
 };
 
 const experienceInfoReducer = (state = initialState, action) => {
-  console.log(action.payload, action.type);
+  console.log(action.payload)
   switch (action.type) {
-    case "ADD_EXPERIENCE":
+    case ADD_EXPERIENCE:
       return {
         ...state,
-        experienceFormData: {
-          ...state.experienceFormData,
-          ...action.payload,
-        },
+        experienceDataList: state.experienceDataList.map((formData, index) =>
+          index === action.index ? { ...formData, ...action.payload } : formData
+        ),
       };
-    case "ADD_NEW_EXPERIENCE":
-      // Generate a unique key for the new experience object
-      const newKey = `experience${Object.keys(state.experienceFormData.experiences).length + 1}`;
+    case ADD_NEW_EXPERIENCE:
       return {
         ...state,
-        experienceFormData: {
-          ...state.experienceFormData,
-          experiences: {
-            ...state.experienceFormData.experiences,
-            [newKey]: action.payload, // Add the new experience object with the unique key
-          },
-        },
+        experienceDataList: [...state.experienceDataList, { ...initialState.experienceDataList[0] }],
       };
     default:
       return state;

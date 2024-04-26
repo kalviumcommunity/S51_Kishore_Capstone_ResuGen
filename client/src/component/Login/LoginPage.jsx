@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import "./LoginPage.css";
 import Logo from "../../assets/Logo.png";
 import { FaGoogle, FaGithub } from "react-icons/fa6";
@@ -21,7 +21,7 @@ const LoginPage = () => {
     }
   }, [isLoading, data, navigate]);
 
-  console.log(isLoading, "Loading")
+  console.log(isLoading, "Loading");
 
   // if (isLoading == true){
   //   <Spinner />
@@ -44,23 +44,80 @@ const LoginPage = () => {
     }
   };
 
+  const [formData, setFormData] = useState({
+    email: "",
+    password: "",
+    confirmPassword: "",
+  });
+
+  const handleChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // Handle form submission logic here
+    console.log(formData);
+  };
+
   return (
     <>
       <Header />
+      <div className="login-div">
+        <div className="log-div">
+          <form className="form" onSubmit={handleSubmit}>
+            <p className="title">Register </p>
+            <p className="message">
+              Signup now and get full access to our app.{" "}
+            </p>
 
-      <div className="login-content">
-        <div className="box-shadow">
-          <div className="content-logo">
-            <img className="logo" src={Logo} alt="logo" />
-          </div>
-          <h2>
-            Welcome to <span className="title">ResuGen</span>
-          </h2>
-          <div className="login-description">
-            <h1>The Best Online Resume Builder Out There.</h1>
-            <p>A Quick and Efficient way to make your resume stand out.</p>
-          </div>
+            <label>
+              <input
+                required
+                placeholder=""
+                type="email"
+                className="input"
+                name="email"
+                value={formData.email}
+                onChange={handleChange}
+              />
+              <span>Email</span>
+            </label>
 
+            <label>
+              <input
+                required
+                placeholder=""
+                type="password"
+                className="input"
+                name="password"
+                value={formData.password}
+                onChange={handleChange}
+              />
+              <span>Password</span>
+            </label>
+            <label>
+              <input
+                required
+                placeholder=""
+                type="password"
+                className="input"
+                name="confirmPassword"
+                value={formData.confirmPassword}
+                onChange={handleChange}
+              />
+              <span>Confirm password</span>
+            </label>
+            <button type="submit" className="submit">
+              Submit
+            </button>
+            <p className="signin">
+              Already have an account? <a href="#">Sign in</a>
+            </p>
+          </form>
           <div className="flex-row">
             <AuthButton
               Icon={FaGoogle}

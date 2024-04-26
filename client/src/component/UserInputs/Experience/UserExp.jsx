@@ -1,13 +1,18 @@
-import React, { useState } from "react";
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addExperience } from "../../../Redux/Actions/actions";
+import {
+  addExperience,
+  addNewExperience,
+} from "../../../Redux/Actions/actions";
 import "./UserExp.css";
-import AddMoreExp from "../../AddFields/AddExp/AddMoreExp";
+// import AddMoreExp from "../../AddFields/AddExp/AddMoreExp";
 
 const UserExp = ({ onNext, onBack }) => {
   const dispatch = useDispatch();
-  const experienceFormData = useSelector(state => state.experienceInfo.experienceFormData);
-  const [additionalExperiences, setAdditionalExperiences] = useState([]);
+  const experienceFormData = useSelector(
+    (state) => state.experienceInfo.experienceDataList
+  );
+  console.log(experienceFormData);
 
   const handleNextClick = () => {
     onNext();
@@ -17,13 +22,19 @@ const UserExp = ({ onNext, onBack }) => {
     onBack();
   };
 
-  const handleExpInputChange = (e) => {
+  const handleExpInputChange = (e, index) => {
     const { name, value } = e.target;
-    dispatch(addExperience({ [name]: value }));
+    dispatch(addExperience({ [name]: value }, index));
   };
 
-  const handleAddExperience = (experience) => {
-    setAdditionalExperiences([...additionalExperiences, experience]);
+  const handleAddExperience = () => {
+    dispatch(addNewExperience());
+  };
+
+  const handleInputType = (key) => {
+    if (key == "StartDate" || key == "LastDate") {
+      return "date";
+    }
   };
 
   return (
@@ -42,52 +53,36 @@ const UserExp = ({ onNext, onBack }) => {
           <h1>Experience</h1>
           <p>Tell us more about your work experience</p>
         </div>
-        {Object.keys(experienceFormData.experiences).map((key, index) => (
-          <div key={key} className="user-exp">
-            {[
-              {
-                label: "Position title",
-                name: "positionTitle",
-                type: "text",
-              },
-              {
-                label: "Company Name",
-                name: "companyName",
-                type: "text",
-              },
-              {
-                label: "Start Date",
-                name: "startDate",
-                type: "date",
-              },
-              {
-                label: "Last Date",
-                name: "lastDate",
-                type: "date",
-              },
-            ].map((input, index) => (
-              <div key={index} className="user-exp-wrap">
-                <label>{input.label}</label>
-                <input
-                  type={input.type}
-                  name={input.name}
-                  value={experienceFormData.experiences[key][input.name]}
-                  onChange={handleExpInputChange}
-                />
+        {experienceFormData &&
+          experienceFormData.map((expData, index) => (
+            <>
+             <label className="switch">
+                  <input type="checkbox" />
+                  <span className="slider"></span>
+                </label>
+            
+            <div className="user-exp" key={index}>
+             
+              <div className="user-exp">
+                
+                {Object.keys(expData).map((key, inputIndex) => (
+                  <div key={inputIndex} className="user-exp-wrap">
+                    <label>{key}</label>
+                    <input
+                      type={handleInputType(key)}
+                      name={key}
+                      value={expData[key]}
+                      onChange={(e) => handleExpInputChange(e, index)}
+                    />
+                  </div>
+                ))}
               </div>
-            ))}
-            <div className="user-exp-work-summary-div">
-              <label>Work Summary</label>
-              <input
-                type="text"
-                name="workSummary"
-                value={experienceFormData.experiences[key].workSummary}
-                onChange={handleExpInputChange}
-              />
             </div>
-          </div>
-        ))}
-        <AddMoreExp onAddExperience={handleAddExperience} />
+            </>
+          ))}
+        <div onClick={handleAddExperience} className="user-exp-add-exp-btn-div">
+          <div className="user-exp-add-exp-btn">+ Add More Experience</div>
+        </div>
       </div>
     </>
   );
