@@ -7,6 +7,8 @@ import {
   ADD_NEW_EXPERIENCE,
   ADD_NEW_EDUCATION,
   ADD_NEW_SKILLS,
+  DELETE_EXPERIENCE,
+  DELETE_EDUCATION
 } from "./actionTypes";
 
 export const updatePersonalInfo = (info) => ({
@@ -54,4 +56,15 @@ export const addNewSkills = () => {
 export const addEducation = (education) => ({
   type: ADD_EDUCATION,
   payload: education,
+});
+
+
+export const deleteExperience = (index) => ({
+  type: DELETE_EXPERIENCE,
+  index,
+});
+
+export const deleteEducation = (index) => ({
+  type: DELETE_EDUCATION,
+  index
 });
