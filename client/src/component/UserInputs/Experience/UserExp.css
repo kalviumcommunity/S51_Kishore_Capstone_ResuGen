@@ -236,3 +236,11 @@ input:hover:checked + .slider:before {
 }
 
 
+.delete-btn{
+  position: absolute;
+  font-size: 28px;
+  left: 31%;
+  /* bottom: 10px; */
+  
+  cursor: pointer;
+}

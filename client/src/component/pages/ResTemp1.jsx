@@ -10,6 +10,7 @@ const ResTemp1 = () => {
   const experienceDataList = useSelector((state) => state.experienceInfo.experienceDataList);
   const educationFormData = useSelector((state) => state.educationInfo.educationFormData);
   const skillsFormData = useSelector((state) => state.skillsInfo.skillsFormData);
+  console.log(skillsFormData)
 
   return (
     <>
