@@ -1,13 +1,15 @@
-// eslint-disable-next-line no-unused-vars
-import React, { useState } from "react";
+// UserEducation.js
+
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   updateEducation,
   addNewEducation,
+  deleteEducation
 } from "../../../Redux/Actions/actions";
+import { MdDeleteOutline } from "react-icons/md";
 import "./UserEducation.css";
 
-// eslint-disable-next-line react/prop-types
 const UserEducation = ({ onNext, onBack }) => {
   const dispatch = useDispatch();
   const educationFormData = useSelector(
@@ -24,12 +26,15 @@ const UserEducation = ({ onNext, onBack }) => {
 
   const handleEducationInputChange = (e, index) => {
     const { name, value } = e.target;
-    // Dispatch action to update education information
     dispatch(updateEducation({ [name]: value }, index));
   };
 
   const handleAddEducation = () => {
     dispatch(addNewEducation());
+  };
+
+  const handleDeleteEducation = (index) => {
+    dispatch(deleteEducation(index));
   };
 
   return (
@@ -51,6 +56,14 @@ const UserEducation = ({ onNext, onBack }) => {
       {educationFormData &&
         educationFormData.map((eduData, index) => (
           <div className="user-education" key={index}>
+            {index > 0 && (
+              <div
+                className="delete-btn"
+                onClick={() => handleDeleteEducation(index)}
+              >
+                <MdDeleteOutline />
+              </div>
+            )}
             <div className="user-education">
               {Object.keys(eduData).map((key, inputIndex) => (
                 <div key={inputIndex} className="user-edu-wrap">
@@ -67,7 +80,10 @@ const UserEducation = ({ onNext, onBack }) => {
           </div>
         ))}
 
-      <div onClick={handleAddEducation} className="user-exp-add-exp-btn-div">
+      <div
+        onClick={handleAddEducation}
+        className="user-exp-add-exp-btn-div"
+      >
         <div className="user-exp-add-exp-btn">+ Add More Education</div>
       </div>
     </div>
