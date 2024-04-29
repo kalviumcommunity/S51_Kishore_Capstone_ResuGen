@@ -1,14 +1,16 @@
-import { UPDATE_EDUCATION, ADD_NEW_EDUCATION } from "../Actions/actionTypes";
+// educationInfoReducer.js
+
+import { UPDATE_EDUCATION, ADD_NEW_EDUCATION, DELETE_EDUCATION } from "../Actions/actionTypes";
 
 const initialState = {
   educationFormData: [
     {
-      schoolName: "University of Fictional Studies",
-      schoolLocation: "Fiction City",
-      startDate: "September 2010",
-      endDate: "May 2014",
-      degree: "Bachelor of Science",
-      fieldOfStudy: "Computer Science",
+      schoolName: "",
+      schoolLocation: "",
+      startDate: "",
+      endDate: "",
+      degree: "",
+      fieldOfStudy: "",
     },
   ],
 };
@@ -30,7 +32,11 @@ const educationInfoReducer = (state = initialState, action) => {
           { ...initialState.educationFormData[0] },
         ],
       };
-
+    case DELETE_EDUCATION:
+      return {
+        ...state,
+        educationFormData: state.educationFormData.filter((edu, index) => index !== action.index)
+      };
     default:
       return state;
   }

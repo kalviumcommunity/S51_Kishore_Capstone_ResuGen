@@ -1,4 +1,4 @@
-import { ADD_EXPERIENCE, ADD_NEW_EXPERIENCE } from "./../Actions/actionTypes";
+import { ADD_EXPERIENCE, ADD_NEW_EXPERIENCE, DELETE_EXPERIENCE } from "./../Actions/actionTypes";
 
 const initialState = {
   experienceDataList: [
@@ -14,7 +14,7 @@ const initialState = {
 };
 
 const experienceInfoReducer = (state = initialState, action) => {
-  console.log(action.payload)
+  console.log(action.payload);
   switch (action.type) {
     case ADD_EXPERIENCE:
       return {
@@ -26,7 +26,17 @@ const experienceInfoReducer = (state = initialState, action) => {
     case ADD_NEW_EXPERIENCE:
       return {
         ...state,
-        experienceDataList: [...state.experienceDataList, { ...initialState.experienceDataList[0] }],
+        experienceDataList: [
+          ...state.experienceDataList,
+          { ...initialState.experienceDataList[0] },
+        ],
+      };
+    case DELETE_EXPERIENCE:
+      return {
+        ...state,
+        experienceDataList: state.experienceDataList.filter(
+          (_, index) => index !== action.index
+        ),
       };
     default:
       return state;

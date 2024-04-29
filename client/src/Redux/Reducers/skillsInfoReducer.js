@@ -5,7 +5,6 @@ const initialState = {
 };
 
 const skillsInfoReducer = (state = initialState, action) => {
-  // console.log(action.payload)
   switch (action.type) {
     case UPDATE_SKILLS:
       return {
@@ -17,8 +16,8 @@ const skillsInfoReducer = (state = initialState, action) => {
     case ADD_NEW_SKILLS:
       return {
         ...state,
-        skillsFormData: [...state.skillsFormData, {...initialState.skillsFormData[0] }]
-      }
+        skillsFormData: [...state.skillsFormData, { skills: "", expertiseLevel: "" }]
+      };
     default:
       return state;
   }
