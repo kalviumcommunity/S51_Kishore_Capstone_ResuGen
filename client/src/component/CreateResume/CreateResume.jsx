@@ -9,6 +9,8 @@ import Header from "../HeaderComponent/Header";
 import UserEducation from "./../UserInputs/Education/UserEducation";
 import UserSkills from "../UserInputs/Skills/UserSkills";
 import UserAddiInfo from "../UserInputs/UserAdditional/UserAddiInfo";
+import PerfectScrollbar from 'perfect-scrollbar';
+import ResTemp2 from './../pages/ResTemp2';
 
 const CreateResume = () => {
   const [step, setStep] = useState(1);
@@ -36,7 +38,11 @@ const CreateResume = () => {
         )}
         {step === 4 && <UserSkills onNext={handleNext} onBack={handleBack} />}
         {step == 5 && <UserAddiInfo />}
-        <ResTemp1 />
+        <div className="temp1">
+          {/* <ResTemp1 /> */}
+          <ResTemp2 />
+        </div>
+        
       </div>
     </>
   );

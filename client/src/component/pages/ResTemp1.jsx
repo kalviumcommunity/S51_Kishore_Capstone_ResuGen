@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 import { FaPhoneAlt } from "react-icons/fa";
 import { IoMdMail } from "react-icons/io";
 import { IoMdHome } from "react-icons/io";
+import "../../utils/CustomScrollBar.css"
 
 const ResTemp1 = () => {
   const formData = useSelector((state) => state.personalInfo.formData);
@@ -25,24 +26,25 @@ const ResTemp1 = () => {
             <h2>Contacts</h2>
             <div className="contacts">
               <p>
-                <FaPhoneAlt /> {formData.phone}
+                <FaPhoneAlt /> {formData.phone || "0123456789"} 
               </p>
               <p>
-                <IoMdMail /> {formData.email}
+                <IoMdMail /> {formData.email || "john.doe@example.com"}
               </p>
               <p>
-                <IoMdHome /> {formData.zipCode} {formData.city} {formData.state} {formData.country}
+                <IoMdHome />  {formData.city} {formData.state} {formData.country} {formData.zipCode}
               </p>
             </div>
           </div>
           <div className="skills-info-div">
             <h2>Technical Skills</h2>
             {skillsFormData.map((skillData, index) => (
-              <div className="info-skills" key={index}>
-                <p>{skillData.skills}</p>
-                <p>{skillData.expertiseLevel}</p>
-              </div>
-            ))}
+            <div className="info-skills" key={index}>
+              {/* Update here to access skills and expertiseLevel correctly */}
+              <p>{skillData.skills}</p>
+              <p>{skillData.expertiseLevel}</p>
+            </div>
+          ))}
           </div>
         </div>
         <div className="res1-top-right">
@@ -56,12 +58,12 @@ const ResTemp1 = () => {
             <h2>Education</h2>
             {educationFormData.map((eduData, index) => (
               <div className="res1-education" key={index}>
-                <h3>{eduData.schoolName || "Hallo"}</h3>
-                <p>{eduData.schoolLocation}</p>
-                <p>{eduData.startDate}</p>
-                <p>{eduData.lastDate}</p>
-                <p>{eduData.degree}</p>
-                <p>{eduData.fieldOfStudy}</p>
+                <h3>{eduData.SchoolName || "ABC School"}</h3>
+                <p>{eduData.SchoolLocation || "Paris"}</p>
+                <p>{eduData.StartDate} || </p>
+                <p>{eduData.LastDate}</p>
+                <p>{eduData.Degree}</p>
+                <p>{eduData.FieldOfStudy}</p>
               </div>
             ))}
           </div>
