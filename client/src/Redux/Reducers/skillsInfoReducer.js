@@ -16,7 +16,9 @@ const skillsInfoReducer = (state = initialState, action) => {
     case ADD_NEW_SKILLS:
       return {
         ...state,
-        skillsFormData: [...state.skillsFormData, { skills: "", expertiseLevel: "" }]
+        skillsFormData: [...state.skillsFormData, 
+        { ...initialState.skillsFormData[0] },
+      ]
       };
     default:
       return state;

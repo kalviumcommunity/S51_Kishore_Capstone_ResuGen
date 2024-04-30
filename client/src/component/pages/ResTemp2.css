@@ -1,0 +1,58 @@
+.restemp2-resume {
+  font-family: Arial, sans-serif;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #fff;
+  overflow-y: auto;
+}
+
+.restemp2-resume header {
+  text-align: center;
+}
+
+.restemp2-name {
+  margin: 0;
+  font-size: 24px;
+}
+
+.restemp2-job-title {
+  margin: 5px 0;
+  font-size: 18px;
+  color: #666;
+}
+
+.restemp2-resume section {
+  margin-bottom: 20px;
+}
+
+.restemp2-resume h2 {
+  margin: 0;
+  font-size: 20px;
+  color: #333;
+}
+
+.restemp2-contact-info p {
+  margin: 5px 0;
+}
+
+.restemp2-skills-list {
+  list-style: none;
+  padding-left: 0;
+}
+
+.restemp2-skills-list li {
+  margin-bottom: 5px;
+}
+
+.restemp2-summary p {
+  margin: 0;
+}
+
+.restemp2-education-info h3 {
+  margin-top: 0;
+}
+
+.restemp2-experience-info h3 {
+  margin-top: 0;
+}
