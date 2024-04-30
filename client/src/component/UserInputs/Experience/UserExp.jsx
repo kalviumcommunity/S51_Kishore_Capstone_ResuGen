@@ -83,8 +83,8 @@ const UserExp = ({ onNext, onBack }) => {
             </div>
           ))}
 
-        <div onClick={handleAddExperience} className="user-exp-add-exp-btn-div">
-          <div className="user-exp-add-exp-btn">+ Add More Experience</div>
+        <div className="user-exp-add-exp-btn-div">
+          <div onClick={handleAddExperience}  className="user-exp-add-exp-btn">+ Add More Experience</div>
         </div>
       </div>
     </>

@@ -5,12 +5,12 @@ import { UPDATE_EDUCATION, ADD_NEW_EDUCATION, DELETE_EDUCATION } from "../Action
 const initialState = {
   educationFormData: [
     {
-      schoolName: "",
-      schoolLocation: "",
-      startDate: "",
-      endDate: "",
-      degree: "",
-      fieldOfStudy: "",
+      SchoolName: "",
+      SchoolLocation: "",
+      StartDate: "",
+      LastDate: "",
+      Degree: "",
+      FieldOfStudy: "",
     },
   ],
 };

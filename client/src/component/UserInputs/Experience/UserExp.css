@@ -244,3 +244,7 @@ input:hover:checked + .slider:before {
   
   cursor: pointer;
 }
+
+.user-exp-add-exp-btn{
+  color: black;
+}

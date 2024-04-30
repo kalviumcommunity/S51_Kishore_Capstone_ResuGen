@@ -37,6 +37,12 @@ const UserEducation = ({ onNext, onBack }) => {
     dispatch(deleteEducation(index));
   };
 
+  const handleInputType = (key) => {
+    if (key === "StartDate" || key === "LastDate") {
+      return "date";
+    }
+  };
+
   return (
     <div className="user-input-div">
       <div className="user-exp-top-buttons">
@@ -69,7 +75,7 @@ const UserEducation = ({ onNext, onBack }) => {
                 <div key={inputIndex} className="user-edu-wrap">
                   <label>{key}</label>
                   <input
-                    type="text"
+                    type={handleInputType(key)}
                     name={key}
                     value={eduData[key]}
                     onChange={(e) => handleEducationInputChange(e, index)}
@@ -81,10 +87,10 @@ const UserEducation = ({ onNext, onBack }) => {
         ))}
 
       <div
-        onClick={handleAddEducation}
+        
         className="user-exp-add-exp-btn-div"
       >
-        <div className="user-exp-add-exp-btn">+ Add More Education</div>
+        <div onClick={handleAddEducation} className="user-exp-add-exp-btn">+ Add More Education</div>
       </div>
     </div>
   );
