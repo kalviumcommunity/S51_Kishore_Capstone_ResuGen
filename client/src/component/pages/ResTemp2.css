@@ -1,58 +1,77 @@
 .restemp2-resume {
   font-family: Arial, sans-serif;
-  padding: 20px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  background-color: #fff;
-  overflow-y: auto;
-}
-
-.restemp2-resume header {
-  text-align: center;
+  max-width: 800px;
+  margin: 0 auto;
 }
 
 .restemp2-name {
+  font-size: 36px;
   margin: 0;
-  font-size: 24px;
 }
 
 .restemp2-job-title {
-  margin: 5px 0;
   font-size: 18px;
+  margin-top: 5px;
   color: #666;
 }
 
-.restemp2-resume section {
+.restemp2-contact-section,
+.restemp2-skills-section,
+.restemp2-summary-section,
+.restemp2-education-section,
+.restemp2-experience-section {
   margin-bottom: 20px;
 }
 
-.restemp2-resume h2 {
-  margin: 0;
-  font-size: 20px;
-  color: #333;
+.restemp2-contact-info,
+.restemp2-skills-list,
+.restemp2-summary-content,
+.restemp2-education-info,
+.restemp2-experience-info {
+  margin-left: 20px;
 }
 
-.restemp2-contact-info p {
+.restemp2-contact-info p,
+.restemp2-skills-list li,
+.restemp2-summary-content,
+.restemp2-education-info p,
+.restemp2-experience-info p {
   margin: 5px 0;
 }
 
-.restemp2-skills-list {
-  list-style: none;
-  padding-left: 0;
+.restemp2-contact-info p svg,
+.restemp2-summary-content,
+.restemp2-education-info p svg,
+.restemp2-experience-info p svg {
+  vertical-align: middle;
+  margin-right: 5px;
+}
+
+.restemp2-resume h2 {
+  font-size: 24px;
+  color: #333;
+}
+
+.restemp2-resume h3 {
+  font-size: 20px;
+  color: #444;
+  margin: 10px 0;
 }
 
 .restemp2-skills-list li {
-  margin-bottom: 5px;
+  list-style-type: none;
 }
 
-.restemp2-summary p {
-  margin: 0;
+.restemp2-skills-list li strong {
+  font-weight: bold;
 }
 
-.restemp2-education-info h3 {
-  margin-top: 0;
+.restemp2-summary-content {
+  font-style: italic;
 }
 
-.restemp2-experience-info h3 {
-  margin-top: 0;
+.restemp2-experience-info {
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 10px;
+  margin-bottom: 20px;
 }
