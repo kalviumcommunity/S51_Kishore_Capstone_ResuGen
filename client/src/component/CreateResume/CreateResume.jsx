@@ -2,6 +2,8 @@
 import React, { useState } from "react";
 
 import ResTemp1 from "../pages/ResTemp1";
+import ResTemp2 from './../pages/ResTemp2';
+import ResTemp3 from "../pages/ResTemp3";
 import UserInput from "../UserInputs/PersonalDetails/UserInput";
 import UserExp from "../UserInputs/Experience/UserExp";
 import "./CreateResume.css";
@@ -9,8 +11,7 @@ import Header from "../HeaderComponent/Header";
 import UserEducation from "./../UserInputs/Education/UserEducation";
 import UserSkills from "../UserInputs/Skills/UserSkills";
 import UserAddiInfo from "../UserInputs/UserAdditional/UserAddiInfo";
-import PerfectScrollbar from 'perfect-scrollbar';
-import ResTemp2 from './../pages/ResTemp2';
+
 
 const CreateResume = () => {
   const [step, setStep] = useState(1);
@@ -40,7 +41,8 @@ const CreateResume = () => {
         {step == 5 && <UserAddiInfo />}
         <div className="temp1">
           {/* <ResTemp1 /> */}
-          <ResTemp2 />
+          {/* <ResTemp2 /> */}
+          <ResTemp3 />
         </div>
         
       </div>
