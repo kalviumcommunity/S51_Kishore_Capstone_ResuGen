@@ -26,6 +26,7 @@ import customfonticon from "../assets/font-size.png";
 import Skeleton from "react-loading-skeleton";
 import Foot from "./Footer/Footer";
 import { MdOutlineKeyboardArrowUp } from "react-icons/md";
+import "../utils/CustomScrollBar.css"
 
 // import {useUser} from "../Hooks"
 
@@ -93,9 +94,11 @@ const LandingPage = () => {
     fetchTemplateData();
     // fetchData();
     window.addEventListener("scroll", handleBackToTopScroll);
+    window.addEventListener("scroll", handleScroll);
 
     return () => {
       window.removeEventListener("scroll", handleBackToTopScroll);
+      window.removeEventListener("scroll", handleScroll);
     };
   }, []);
 
@@ -294,11 +297,6 @@ const LandingPage = () => {
             <Link to="/my-resumes">
               <p className="context">My Resumes</p>
             </Link>
-            {/* {adminId.includes(data?.uid) && (
-                <Link to="/templates/create">
-                  <p className="context">Add Templates</p>
-                </Link>
-              )} */}
           </div>
 
           <div className="top-right">
@@ -320,6 +318,7 @@ const LandingPage = () => {
                     border: "2px solid lightblue",
                     color: "black",
                     borderRadius: "15px",
+                    textDecoration: "none",
                     "&:hover": {
                       backgroundColor: "lightblue",
                       color: "white",

@@ -358,6 +358,7 @@ body {
   margin-top: 100px;
   width: 100vw;
   background-color: yellow;
+  text-decoration: none;
   height: 81.7vh;
   position: fixed;
 }
@@ -478,6 +479,7 @@ body {
     /* border: 2px solid; */
     display: flex;
     justify-content: space-between;
+    position: sticky;
   }
 
   .navi-bar{

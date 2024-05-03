@@ -23,6 +23,7 @@
     "dotenv": "^16.4.5",
     "firebase": "^10.6.0",
     "framer-motion": "^11.0.24",
+    "perfect-scrollbar": "^1.5.5",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-firebaseui": "^6.0.0",

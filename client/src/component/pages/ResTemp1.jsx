@@ -17,9 +17,9 @@ const ResTemp1 = () => {
     <>
     <div className="res-temp1">
       <h1>
-        {formData.firstName} {formData.lastName}
+        {formData.firstName || "John"} {formData.lastName || "Doe"}
       </h1>
-      <p className="job-title">{formData.jobTitle}</p>
+      <p className="job-title">{formData.jobTitle || "Software Engineer"}</p>
       <div className="res1-contents">
         <div className="res1-top-left">
           <div className="user-contacts">
@@ -32,7 +32,7 @@ const ResTemp1 = () => {
                 <IoMdMail /> {formData.email || "john.doe@example.com"}
               </p>
               <p>
-                <IoMdHome />  {formData.city} {formData.state} {formData.country} {formData.zipCode}
+                <IoMdHome />  {formData.city || "New York"} {formData.state || "New York"} {formData.country || "USA"} {formData.zipCode || "10001"}
               </p>
             </div>
           </div>
@@ -40,7 +40,6 @@ const ResTemp1 = () => {
             <h2>Technical Skills</h2>
             {skillsFormData.map((skillData, index) => (
             <div className="info-skills" key={index}>
-              {/* Update here to access skills and expertiseLevel correctly */}
               <p>{skillData.skills}</p>
               <p>{skillData.expertiseLevel}</p>
             </div>
@@ -61,7 +60,7 @@ const ResTemp1 = () => {
                 <h3>{eduData.SchoolName || "ABC School"}</h3>
                 <p>{eduData.SchoolLocation || "Paris"}</p>
                 <p>{eduData.StartDate} || </p>
-                <p>{eduData.LastDate}</p>
+                <p>{eduData.LastDate || "Present"}</p>
                 <p>{eduData.Degree}</p>
                 <p>{eduData.FieldOfStudy}</p>
               </div>

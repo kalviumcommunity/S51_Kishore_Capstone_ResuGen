@@ -3,7 +3,6 @@ import React, { useEffect, useRef, useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import Logo from "../../assets/Logo.png";
 import { GoEyeClosed, GoEye } from "react-icons/go";
-import { Scrollbars } from "react-custom-scrollbars";
 import { Link } from "react-router-dom";
 // import { useAuth } from "../context/AuthContext"
 import Head from "../HeaderComponent/Header";
@@ -72,7 +71,7 @@ const SignUpPage = () => {
 
   return (
     <>
-      <Scrollbars style={{ width: "100%", height: "100vh" }}>
+      
         <Head />
 
         <div className="login-content">
@@ -224,7 +223,6 @@ const SignUpPage = () => {
             </div>
           </div>
         </div>
-      </Scrollbars>
     </>
   );
 };
