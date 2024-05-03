@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   addExperience,
@@ -13,6 +13,8 @@ const UserExp = ({ onNext, onBack }) => {
   const experienceFormData = useSelector(
     (state) => state.experienceInfo.experienceDataList
   );
+
+  const [currentlyWorking, setCurrentlyWorking] = useState(false);
 
   const handleNextClick = () => {
     onNext();
@@ -36,9 +38,13 @@ const UserExp = ({ onNext, onBack }) => {
   };
 
   const handleInputType = (key) => {
-    if (key === "StartDate" || key === "LastDate") {
+    if (key === "StartDate" || (key === "LastDate" && !currentlyWorking)) {
       return "date";
     }
+  };
+
+  const handleLastDateValue = () => {
+    return currentlyWorking ? "Present" : ""; 
   };
 
   return (
@@ -57,10 +63,18 @@ const UserExp = ({ onNext, onBack }) => {
           <h1>Experience</h1>
           <p>Tell us more about your work experience</p>
         </div>
+        <label className="switch">
+          <input
+            type="checkbox"
+            onChange={() => setCurrentlyWorking(!currentlyWorking)}
+          />
+          <span className="slider"></span>
+          <label>Are you currently working there</label>
+        </label>
         {experienceFormData &&
           experienceFormData.map((expData, index) => (
             <div className="user-exp" key={index}>
-              {index > 0 && ( // Render delete button from index 1 onwards
+              {index > 0 && (
                 <div
                   className="delete-btn"
                   onClick={() => handleDeleteExperience(index)}
@@ -74,8 +88,9 @@ const UserExp = ({ onNext, onBack }) => {
                   <input
                     type={handleInputType(key)}
                     name={key}
-                    value={expData[key]}
+                    value={key === "LastDate" ? handleLastDateValue : expData[key]}
                     onChange={(e) => handleExpInputChange(e, index)}
+                    readOnly={key === "LastDate" && currentlyWorking} 
                   />
                 </div>
               ))}
@@ -84,7 +99,9 @@ const UserExp = ({ onNext, onBack }) => {
           ))}
 
         <div className="user-exp-add-exp-btn-div">
-          <div onClick={handleAddExperience}  className="user-exp-add-exp-btn">+ Add More Experience</div>
+          <div onClick={handleAddExperience} className="user-exp-add-exp-btn">
+            + Add More Experience
+          </div>
         </div>
       </div>
     </>
