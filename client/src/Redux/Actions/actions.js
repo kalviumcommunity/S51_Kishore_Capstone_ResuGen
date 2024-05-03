@@ -8,7 +8,8 @@ import {
   ADD_NEW_EDUCATION,
   ADD_NEW_SKILLS,
   DELETE_EXPERIENCE,
-  DELETE_EDUCATION
+  DELETE_EDUCATION,
+  DELETE_SKILLS
 } from "./actionTypes";
 
 export const updatePersonalInfo = (info) => ({
@@ -68,3 +69,8 @@ export const deleteEducation = (index) => ({
   type: DELETE_EDUCATION,
   index
 });
+
+export const deleteSkills = (index) => ({
+  type: DELETE_SKILLS,
+  index,
+})

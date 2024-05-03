@@ -6,7 +6,7 @@ import AuthButton from "../AuthButtonCompo/AuthButton";
 import useUser from "../../Hooks/useUser";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../firebase";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import Header from "./../HeaderComponent/Header";
 import Spinner from "../SpinnerCompo/Spinner";
@@ -77,7 +77,6 @@ const LoginPage = () => {
             <label>
               <input
                 required
-                placeholder=""
                 type="email"
                 className="input"
                 name="email"
@@ -115,7 +114,7 @@ const LoginPage = () => {
               Submit
             </button>
             <p className="signin">
-              Already have an account? <a href="#">Sign in</a>
+              Already have an account? <Link to="/signup">Sign in</Link>
             </p>
           </form>
           <div className="flex-row">

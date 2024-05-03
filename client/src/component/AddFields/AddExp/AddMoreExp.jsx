@@ -8,24 +8,12 @@ import { v4 as uuidv4 } from 'uuid'; // Import UUID generator
 const AddMoreExp = () => {
   const dispatch = useDispatch();
 
-  const handleAddMoreExp = () => {
-    // Generate a unique UUID for the new experience object
-    const experienceId = uuidv4();
-    console.log(experienceId)
-
-    // Dispatch the "ADD_NEW_EXPERIENCE" action with new experience data including the generated ID
-    dispatch(addNewExperience({
-      id: experienceId, 
-      positionTitle: "",
-      companyName: "",
-      startDate: "",
-      lastDate: "",
-      workSummary: "",
-    }));
+  const handleAddExperience = () => {
+    dispatch(addNewExperience());
   };
 
   return (
-    <div onClick={handleAddMoreExp} className="user-exp-add-exp-btn-div">
+    <div onClick={handleAddExperience} className="user-exp-add-exp-btn-div">
       <div className="user-exp-add-exp-btn">+ Add More Experience</div>
     </div>
   );
