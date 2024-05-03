@@ -23,9 +23,16 @@ const UserSkills = ({ onNext, onBack }) => {
     const { name, value } = e.target;
     dispatch(updateSkills({ [name]: value }, index));
   };
+  
 
   const handleNewSkills = () => {
     dispatch(addNewSkills())
+  }
+
+  const handleSkillsInput = (key) => {
+    if (key == "expertiseLevel"){
+      return "range"
+    }
   }
 
   return (
@@ -51,7 +58,7 @@ const UserSkills = ({ onNext, onBack }) => {
                 <div className="user-skill-wrap" key={inputIndex}>
                   <label>{key}</label>
                   <input
-                    type="text"
+                    type={handleSkillsInput(key)}
                     name={key}
                     value={skillData[key]}
                     onChange={(e) => handleSkillsInputChange(e, index)}
