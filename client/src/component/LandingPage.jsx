@@ -7,7 +7,6 @@ import Button from "@mui/material/Button";
 import { Link, useNavigate } from "react-router-dom";
 import { Splide, SplideSlide } from "@splidejs/react-splide";
 import "@splidejs/react-splide/css/sea-green";
-// import { Scrollbars } from "react-custom-scrollbars";
 import { useSpring, animated } from "@react-spring/web";
 import useUser from "../Hooks/useUser";
 import { GiHamburgerMenu } from "react-icons/gi";

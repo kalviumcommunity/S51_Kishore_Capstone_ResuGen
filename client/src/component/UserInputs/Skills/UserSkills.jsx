@@ -4,7 +4,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { updateSkills, addNewSkills } from "../../../Redux/Actions/actions";
 import "./UserSkills.css";
 
-// eslint-disable-next-line react/prop-types
 const UserSkills = ({ onNext, onBack }) => {
   const dispatch = useDispatch();
   const skillsFormData = useSelector(
@@ -21,19 +20,19 @@ const UserSkills = ({ onNext, onBack }) => {
 
   const handleSkillsInputChange = (e, index) => {
     const { name, value } = e.target;
-    dispatch(updateSkills({ [name]: value }, index));
+    dispatch(updateSkills({ name, value }, index)); // Pass name and value directly
   };
-  
 
   const handleNewSkills = () => {
-    dispatch(addNewSkills())
-  }
+    dispatch(addNewSkills());
+  };
 
   const handleSkillsInput = (key) => {
-    if (key == "expertiseLevel"){
-      return "range"
+    if (key === "expertiseLevel") {
+      return "range";
     }
-  }
+    return "text"; // Default to text input
+  };
 
   return (
     <>
