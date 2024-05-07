@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux';
 import { FaPhoneAlt } from 'react-icons/fa';
 import { IoMdMail, IoMdHome } from 'react-icons/io';
 import './ResTemp3.css';
+import "../../utils/CustomScrollBar.css"
 
 const ResTemp3 = () => {
   const formData = useSelector((state) => state.personalInfo.formData);
@@ -51,7 +52,7 @@ const ResTemp3 = () => {
         <ul className="restemp3-skills-list">
           {skillsFormData.map((skillData, index) => (
             <li key={index}>
-              <strong>{skillData.skills}</strong> - {skillData.expertiseLevel}
+              <strong>{skillData.skills.value}</strong> - {skillData.expertiseLevel.value}
             </li>
           ))}
         </ul>
