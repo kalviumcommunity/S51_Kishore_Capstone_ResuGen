@@ -1,15 +1,14 @@
 .user-input-div{
     display: flex;
     flex-direction: column;
-    /* align-items: center; */
     border: 2px solid black;
-    width: 35vw;
+    border-radius: 15px;
+    width: 32.5vw;
     height: 100vh;
-    /* align-items: center; */
+    margin: 10px;
 }
 
 .user-input-next-btn-div{
-    /* border: 2px solid black; */
     text-decoration: none;
     text-decoration-line: none;
     display: flex;
@@ -58,7 +57,6 @@
 .user-input{
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    /* border: 2px solid yellow; */
     font: inherit;
     vertical-align: baseline;
     -webkit-font-smoothing: antialiased;
@@ -70,7 +68,7 @@
     flex-direction: column;
     padding: 10px;
     justify-content: space-around;
-    height: 13vh;
+    /* height: 13vh; */
 }
 
 .user-input-wrap input{

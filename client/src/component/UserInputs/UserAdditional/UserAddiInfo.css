@@ -1,41 +1,88 @@
 .user-input-div {
-    display: flex;
-    flex-direction: column;
-    /* align-items: center; */
-    /* justify-content: center; */
-    height: 100vh;
-  }
-  
-  .user-exp-top-btn-div {
-    display: flex;
-    justify-content: flex-end;
-    width: 100%;
-    margin-bottom: 20px;
-  }
-  
-  .finish-btn {
-    cursor: pointer;
-    background-color: lightblue;
-    padding: 10px 20px;
-    border-radius: 5px;
-    font-size: 16px;
-  }
-  
-  .finish-btn:hover {
-    background-color: blue;
-    color: white;
-  }
-  
-  .user-input-top {
-    text-align: center;
-  }
-  
-  .user-input-top h1 {
-    font-size: 32px;
-    margin-bottom: 10px;
-  }
-  
-  .user-input-top p {
-    font-size: 18px;
-  }
-  
+  display: flex;
+  flex-direction: column;
+  /* align-items: center; */
+  /* justify-content: center; */
+  height: 100vh;
+}
+
+.user-exp-top-btn-div {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.finish-btn {
+  cursor: pointer;
+  background-color: lightblue;
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+.finish-btn:hover {
+  background-color: blue;
+  color: white;
+}
+
+.user-input-top {
+  text-align: center;
+}
+
+.user-input-top h1 {
+  font-size: 32px;
+  margin-bottom: 10px;
+}
+
+.user-input-top p {
+  font-size: 18px;
+}
+
+.user-addiInfo-div{
+  display: flex;
+  flex-direction: column;
+  border-radius: 15px;
+  border: 2px solid black;
+  width: 40vw;
+  justify-content: flex-start;
+  /* margin: 10px; */
+}
+
+.addi-top{
+  width: 32.5vw;
+  /* border: 2px solid red; */
+}
+
+.additional-info-div{
+  display: flex;
+  align-items: center;
+  /* border: 2px solid black; */
+  /* padding: 20px; */
+  margin: 20px;
+  flex-direction: column;
+  height: 22rem;
+  justify-content: space-between;
+  gap: 15px;
+}
+
+.addi{
+  border: 2px solid black;
+  border-radius: 12px;
+  padding: 1em;
+  width: 20rem;
+  /* justify-content: center; */
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 1.5em;
+  cursor: pointer;
+  transform: scale(1);
+  transition: 0.3s ease-in;
+  text-align: left;
+}
+
+.addi:hover{
+  background-color: rgb(243, 243, 243);
+  transform: scale(1.05);
+}

@@ -15,6 +15,7 @@ const UserInput = ({onNext}) => {
 
   return (
     <>
+    <div className="user-input-full-div">
       <div className="user-input-div">
         <div className="user-input-next-btn-div">
           <div className="user-input-next-btn" onClick={onNext}>Next</div>
@@ -96,6 +97,7 @@ const UserInput = ({onNext}) => {
             />
           </div>
         ))}
+      </div>
       </div>
       </div>
     </>
