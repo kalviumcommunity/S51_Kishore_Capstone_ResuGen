@@ -2,6 +2,7 @@
   font-family: Arial, sans-serif;
   max-width: 800px;
   margin: 0 auto;
+  overflow-y: auto;
 }
 
 .restemp2-name {

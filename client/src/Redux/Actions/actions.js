@@ -9,7 +9,12 @@ import {
   ADD_NEW_SKILLS,
   DELETE_EXPERIENCE,
   DELETE_EDUCATION,
-  DELETE_SKILLS
+  DELETE_SKILLS,
+  ADD_ADDITIONAL_INFOS,
+  ADD_ACHIEVEMENT,
+  DELETE_ACHIEVEMENT,
+  UPDATE_ACHIEVEMENT,
+  ADD_CERTIFICATE
 } from "./actionTypes";
 
 export const updatePersonalInfo = (info) => ({
@@ -74,3 +79,24 @@ export const deleteSkills = (index) => ({
   type: DELETE_SKILLS,
   index,
 })
+
+export const additionalInfos = () => ({
+  type: ADD_ADDITIONAL_INFOS
+})
+
+export const addAchievement = (achievement) => ({
+  type: ADD_ACHIEVEMENT,
+  payload: achievement,
+});
+
+export const updateAchievement = (achievement, index) => ({
+  type: UPDATE_ACHIEVEMENT,
+  payload: achievement,
+  index,
+});
+
+export const deleteAchievement = (index) => ({
+  type: DELETE_ACHIEVEMENT,
+  index,
+});
+
