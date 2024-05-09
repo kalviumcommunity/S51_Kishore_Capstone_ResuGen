@@ -1,9 +1,16 @@
+.user-input-full-div{
+    border: 2px solid black;
+    height: 100vh;
+    overflow-y: auto;
+    width: 69vw;
+    overflow-x: hidden;
+}
+
 .user-input-div{
     display: flex;
     flex-direction: column;
-    border: 2px solid black;
     border-radius: 15px;
-    width: 32.5vw;
+    width: 40vw;
     height: 100vh;
     margin: 10px;
 }
@@ -15,7 +22,7 @@
     align-items: center;
     justify-content: flex-end;
     padding: 10px;
-    margin: 10px;
+    /* margin: 10px; */
     border-bottom: 2px solid black;
 }
 
@@ -55,24 +62,23 @@
 }
 
 .user-input{
+    width: inherit;
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
     font: inherit;
     vertical-align: baseline;
     -webkit-font-smoothing: antialiased;
-    height: 50vh;
 }
 
 .user-input-wrap{
     display: flex;
     flex-direction: column;
     padding: 10px;
-    justify-content: space-around;
-    /* height: 13vh; */
+    justify-content: space-evenly;
 }
 
 .user-input-wrap input{
-    width: 200px;
+    width: 230px;
     padding: 10px;
     margin: 5px 0;
     box-sizing: border-box; 
@@ -84,8 +90,48 @@
     transition: border-color 0.3s, box-shadow 0.3s;
 }
 
+/* .user-input-wrap label{
+    font-weight: ;
+} */
+
 .user-input-wrap input:focus{
     border-color: #0066cc; 
     box-shadow: 0 0 8px rgba(0, 102, 204, 0.3);
     outline: none;
+}
+
+.pro-description{
+    display: flex;
+    flex-direction: column;
+    /* align-items: center; */
+    padding: 10px;
+    justify-content: start;
+    /* border: 2px solid black; */
+}
+
+.pro-description label{
+    display: flex;
+    align-items: start;
+    justify-content: start;
+    /* border: 2px solid slateblue; */
+    width: 80%;
+    padding: 5px;
+}
+
+.pro-description textarea{
+    border: 2px solid red;
+    display: flex;
+    margin: 15px;
+    resize: none;
+    width: inherit;
+    height: 150px;
+    padding: 10px;
+    margin: 5px 0;
+    box-sizing: border-box; 
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    background-color: #f8f8f8; 
+    font-size: 16px; 
+    color: #333; 
+    transition: border-color 0.3s, box-shadow 0.3s;
 }

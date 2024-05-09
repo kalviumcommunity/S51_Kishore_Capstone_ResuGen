@@ -13,6 +13,7 @@ import UserSkills from "../UserInputs/Skills/UserSkills";
 import UserAddiInfo from "../UserInputs/UserAdditional/UserAddiInfo";
 
 
+
 const CreateResume = () => {
   const [step, setStep] = useState(1);
 
@@ -38,11 +39,11 @@ const CreateResume = () => {
           />
         )}
         {step === 4 && <UserSkills onNext={handleNext} onBack={handleBack} />}
-        {step == 5 && <UserAddiInfo />}
-        <div className="temp1">
-          {/* <ResTemp1 /> */}
+        {step == 5 && <UserAddiInfo onBack={handleBack} /> }
+        <div className="temp">
+          <ResTemp1 />
           {/* <ResTemp2 /> */}
-          <ResTemp3 />
+          {/* <ResTemp3 /> */}
         </div>
         
       </div>
