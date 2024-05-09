@@ -21,7 +21,7 @@ const personalInfoReducer = (state = initialState, action) => {
         ...state,
         formData: {
           ...state.formData,
-          ...action.payload,
+          ...action.payload.formData,
         },
       };
     default:
