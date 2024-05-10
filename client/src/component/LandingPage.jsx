@@ -12,7 +12,7 @@ import useUser from "../Hooks/useUser";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { AnimatePresence, motion } from "framer-motion";
 import { GrFormClose } from "react-icons/gr";
-import Spinner from "./SpinnerCompo/Spinner";
+// import Spinner from "./SpinnerCompo/Spinner";
 import { signOut } from "firebase/auth";
 import { auth } from "../firebase";
 import { useQueryClient } from "react-query";
@@ -25,7 +25,7 @@ import customfonticon from "../assets/font-size.png";
 import Skeleton from "react-loading-skeleton";
 import Foot from "./Footer/Footer";
 import { MdOutlineKeyboardArrowUp } from "react-icons/md";
-import "../utils/CustomScrollBar.css"
+import "../utils/CustomScrollBar.css";
 
 // import {useUser} from "../Hooks"
 
@@ -54,9 +54,9 @@ const LandingPage = () => {
     }
   };
 
-  if (isLoading){
-    <Spinner />
-  }
+  // if (!isLoading) {
+  //   <Spinner />;
+  // }
 
   const fetchTemplateData = async () => {
     try {
@@ -209,6 +209,7 @@ const LandingPage = () => {
 
   return (
     <>
+      {/* {isLoading && <Spinner />} */}
       {isMenuOpen && (
         <AnimatePresence>
           <motion.div
@@ -299,7 +300,6 @@ const LandingPage = () => {
           </div>
 
           <div className="top-right">
-            {/* {console.log(userLoggedIn)} */}
             {data ? (
               <p onClick={handleLogOut} className="logout context pointer">
                 Log out
@@ -318,6 +318,7 @@ const LandingPage = () => {
                     color: "black",
                     borderRadius: "15px",
                     textDecoration: "none",
+                    fontFamily: "inherit",
                     "&:hover": {
                       backgroundColor: "lightblue",
                       color: "white",
@@ -351,8 +352,8 @@ const LandingPage = () => {
                   color: "black",
                   fontWeight: "medium",
                   padding: "8px",
-
                   borderRadius: "10px",
+                  fontFamily: "inherit",
                   "&:hover": {
                     backgroundColor: "black",
                     color: "white",
