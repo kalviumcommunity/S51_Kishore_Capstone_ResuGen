@@ -1,28 +1,28 @@
 .user-education {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
   font: inherit;
   vertical-align: baseline;
   --webkit-font-smoothing: antialiased;
-  margin-top: 20px; 
 }
 
 .user-edu-wrap {
   display: flex;
   padding: 10px;
   flex-direction: column;
-  justify-content: space-around;
+  justify-content: space-evenly;
 }
 
 .user-edu-wrap input {
-  width: 200px;
+  width: 230px;
   padding: 10px;
   margin: 5px 0;
-  box-sizing: border-box;
+  box-sizing: border-box; 
   border: 2px solid #ccc;
   border-radius: 5px;
-  background-color: #f8f8f8;
-  color: #333;
+  background-color: #f8f8f8; 
+  font-size: 16px; 
+  color: #333; 
   transition: border-color 0.3s, box-shadow 0.3s;
 }
 

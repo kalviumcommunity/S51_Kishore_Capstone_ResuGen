@@ -11,7 +11,7 @@ const ResTemp1 = () => {
   const experienceDataList = useSelector((state) => state.experienceInfo.experienceDataList);
   const educationFormData = useSelector((state) => state.educationInfo.educationFormData);
   const skillsFormData = useSelector((state) => state.skillsInfo.skillsFormData);
-  console.log(skillsFormData)
+  // console.log(skillsFormData.skills)
 
   return (
     <>
@@ -40,6 +40,7 @@ const ResTemp1 = () => {
             <h2>Technical Skills</h2>
             {skillsFormData.map((skillData, index) => (
             <div className="info-skills" key={index}>
+              {console.log("skills", skillData.skills)}
               <p>{skillData.skills}</p>
               <p>{skillData.expertiseLevel}</p>
             </div>
@@ -50,7 +51,8 @@ const ResTemp1 = () => {
           <div className="res1-user-description">
             <h2>Summary</h2>
             <div className="res1-profile-desc">
-              <p>{formData.profileDescription}</p>
+    
+              <p>{formData.profileDescription || "I'm a aspiring software developer"}</p>
             </div>
           </div>
           <div className="education-info-div">
