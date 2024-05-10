@@ -44,6 +44,9 @@ const UserEducation = ({ onNext, onBack }) => {
   };
 
   return (
+    <div className="user-input-full-div">
+
+    
     <div className="user-input-div">
       <div className="user-exp-top-buttons">
         <div className="user-exp-back-btn-div" onClick={handleBackClick}>
@@ -92,6 +95,7 @@ const UserEducation = ({ onNext, onBack }) => {
       >
         <div onClick={handleAddEducation} className="user-exp-add-exp-btn">+ Add More Education</div>
       </div>
+    </div>
     </div>
   );
 };
