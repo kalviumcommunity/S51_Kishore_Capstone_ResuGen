@@ -1,20 +1,21 @@
 const initialState = {
   formData: {
-    firstName: "John",
-    lastName: "Doe",
-    email: "john.doe@example.com",
-    phone: "123-456-7890",
-    jobTitle: "Software Engineer",
-    city: "New York",
-    state: "NY",
-    zipCode: "10001",
-    country: "USA",
+    firstName: "",
+    lastName: "",
+    email: "",
+    phone: "",
+    jobTitle: "",
+    city: "",
+    state: "",
+    zipCode: "",
+    country: "",
     profileDescription:
-      "A passionate software engineer with experience in building web applications.Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ratione dolorum rerum necessitatibus",
+      "",
   },
 };
 
 const personalInfoReducer = (state = initialState, action) => {
+  console.log(action.payload)
   switch (action.type) {
     case "UPDATE_PERSONAL_INFO":
       return {

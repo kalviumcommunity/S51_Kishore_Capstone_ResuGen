@@ -14,7 +14,7 @@ const initialState = {
 };
 
 const experienceInfoReducer = (state = initialState, action) => {
-  console.log(action.payload);
+  // console.log(action.payload);
   switch (action.type) {
     case ADD_EXPERIENCE:
       return {

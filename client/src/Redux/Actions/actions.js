@@ -48,9 +48,10 @@ export const addNewEducation = () => {
   };
 };
 
-export const updateSkills = (info) => ({
+export const updateSkills = (payload, index) => ({
   type: UPDATE_SKILLS,
-  payload: info,
+  payload,
+  index,
 });
 
 export const addNewSkills = () => {
