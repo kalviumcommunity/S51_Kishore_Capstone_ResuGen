@@ -5,7 +5,8 @@ const { GoogleGenerativeAI } = require("@google/generative-ai");
 const cors = require("cors");
 const port = process.env.PORT || 3000;
 const { connectToDB } = require("./database");
-const templatesRouter = require("./Routes/route"); 
+const {templatesRouter, signUpRouter} = require("./Routes/route"); 
+// const userRouter = require("./Routes/route")
 
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 
@@ -43,6 +44,8 @@ app.post("/summary", async (req, res) => {
 
 // Mount the templates router at the /api path
 app.use("/template", templatesRouter);
+app.use("/", signUpRouter);
+// app.use("/signup", userRouter)
 
 app.listen(port, () => {
   console.log(`Server listening at port ${port}`);
