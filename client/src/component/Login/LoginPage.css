@@ -155,3 +155,8 @@
   justify-content: center;
   gap: 20px;
 }
+
+.continue-with{
+  font-weight: 500;
+  color: lightgray;
+}

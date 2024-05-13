@@ -7,11 +7,12 @@ import useUser from "../../Hooks/useUser";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../firebase";
 import { Link, useNavigate } from "react-router-dom";
+import axios from "axios"
 
 import Header from "./../HeaderComponent/Header";
 import Spinner from "../SpinnerCompo/Spinner";
 
-const LoginPage = () => {
+const LoginPage = ({ setSignUp }) => {
   const navigate = useNavigate();
   const { isLoading, data } = useUser();
 
@@ -47,7 +48,7 @@ const LoginPage = () => {
   const [formData, setFormData] = useState({
     email: "",
     password: "",
-    confirmPassword: "",
+    // confirmPassword: "",
   });
 
   const handleChange = (e) => {
@@ -57,10 +58,22 @@ const LoginPage = () => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     // Handle form submission logic here
     console.log(formData);
+    const response = await axios.post("http://localhost:6969/signup", {
+      userEmail: formData.email,
+      userPassword: formData.password
+    })
+    if (response.status === 200){
+      const { token } = response.data
+      document.cookie = `token=${token}; path=/signup`
+      document.cookie = `id=${response.data.user._id};`
+      alert("sucess")
+      setSignUp(true)
+      navigate("/")
+    }
   };
 
   return (
@@ -71,7 +84,7 @@ const LoginPage = () => {
           <form className="form" onSubmit={handleSubmit}>
             <p className="title">Register </p>
             <p className="message">
-              Signup now and get full access to our app.{" "}
+              Login now {" "}
             </p>
 
             <label>
@@ -98,25 +111,14 @@ const LoginPage = () => {
               />
               <span>Password</span>
             </label>
-            <label>
-              <input
-                required
-                placeholder=""
-                type="password"
-                className="input"
-                name="confirmPassword"
-                value={formData.confirmPassword}
-                onChange={handleChange}
-              />
-              <span>Confirm password</span>
-            </label>
             <button type="submit" className="submit">
               Submit
             </button>
             <p className="signin">
-              Already have an account? <Link to="/signup">Sign in</Link>
+              Are you new to your Website!? <Link to="/login">Sign in</Link>
             </p>
           </form>
+          <p className="continue-with">Or continue with</p>
           <div className="flex-row">
             <AuthButton
               Icon={FaGoogle}
