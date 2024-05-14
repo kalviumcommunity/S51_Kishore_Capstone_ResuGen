@@ -7,6 +7,7 @@ const port = process.env.PORT || 3000;
 const { connectToDB } = require("./database");
 const {templatesRouter, signUpRouter} = require("./Routes/route"); 
 // const userRouter = require("./Routes/route")
+const nodemailer = require('nodemailer')
 
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 
