@@ -12,6 +12,8 @@ import useUser from "../Hooks/useUser";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { AnimatePresence, motion } from "framer-motion";
 import { GrFormClose } from "react-icons/gr";
+import { GiArtificialIntelligence } from "react-icons/gi";
+
 // import Spinner from "./SpinnerCompo/Spinner";
 import { signOut } from "firebase/auth";
 import { auth } from "../firebase";
@@ -247,7 +249,7 @@ const LandingPage = () => {
                   Log out
                 </p>
               ) : (
-                <Link className="login" to="/login">
+                <Link className="login" to="/signup">
                   <p className="login context pointer">Login</p>
                 </Link>
               )}
@@ -412,7 +414,7 @@ const LandingPage = () => {
           </div>
           <div className="feature four">
             <div className="feature-heading">
-              <img className="features-img" src={stickynote} alt="" />
+            <GiArtificialIntelligence style={{fontSize:"60px"}} />
               <h2>Professional Templates</h2>
             </div>
 
