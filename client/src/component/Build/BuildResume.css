@@ -8,7 +8,7 @@ body {
   font-family: "Lexend", sans-serif;
 }
 
-.template-heading{
+.template-heading {
   padding: 20px;
 }
 
@@ -33,55 +33,14 @@ body {
   text-align: center;
 }
 
-.colored-squares {
-  display: flex;
-  justify-content: center;
-  gap: 10px;
-  border: 2px solid black;
-}
-
-.default-colors{
-  width: 20vw;
-  display: flex;
-
-  justify-content: space-evenly;
-  border: 2px solid blue;
-}
-.square {
-  cursor: pointer;
-  width: 40px;
-  border-radius: 10px;
-  height: 40px;
-}
-
-.square-1 {
-  background-color: #f00;
-}
-
-.square-2 {
-  background-color: #0f0;
-}
-
-.square-3 {
-  background-color: #00f;
-}
-
-.square-4 {
-  background-color: #0ff;
-}
-
-.square-5 {
-  background-color: #f0f;
-}
-
-.custom-color-picker{
+.custom-color-picker {
   display: flex;
   justify-content: space-around;
   align-items: center;
   width: 6.5rem;
 }
 
-.custom-color{
+.custom-color {
   width: 30px;
 }
 
@@ -97,13 +56,22 @@ body {
 
 .template {
   background-color: #ffffff;
-  height: 70vh;
   border: 1px solid #ddd;
   border-radius: 5px;
   padding: 15px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s ease-in-out;
-  border: 2px solid black;
+  border: 2px solid whitesmoke;
+  display: flex; 
+  justify-content: center; 
+  align-items: center; 
+}
+
+.template img {
+  max-width: 100%; 
+  max-height: 100%; 
+  object-fit: contain; 
+  cursor: pointer;
 }
 
 .template:hover {
@@ -111,7 +79,8 @@ body {
 }
 
 .template-footer {
-  box-shadow: rgba(27, 31, 35, 0.04) 0px 1px 0px, rgba(255, 255, 255, 0.25) 0px 1px 0px inset;
+  box-shadow: rgba(27, 31, 35, 0.04) 0px 1px 0px,
+    rgba(255, 255, 255, 0.25) 0px 1px 0px inset;
   background-color: #333;
   position: fixed;
   bottom: 0;

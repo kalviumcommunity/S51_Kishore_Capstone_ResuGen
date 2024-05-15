@@ -9,10 +9,10 @@ import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import Header from "./../HeaderComponent/Header";
 import Spinner from "../SpinnerCompo/Spinner";
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
-const LoginPage = ({ setSignUp }) => {
+const LoginPage = () => {
   const navigate = useNavigate();
   const { isLoading, data } = useUser();
   const [formData, setFormData] = useState({
@@ -41,7 +41,9 @@ const LoginPage = ({ setSignUp }) => {
         userPassword: formData.password,
       });
       if (response.status === 200) {
-        toast.success("Registration successful! Please check your email for verification.");
+        toast.success(
+          "Registration successful! Please check your email for verification."
+        );
         setFormData({ email: "", password: "" });
       }
     } catch (error) {
@@ -72,7 +74,10 @@ const LoginPage = ({ setSignUp }) => {
       <div className="login-div">
         <div className="log-div">
           <form className="form" onSubmit={handleSubmit}>
-            <p className="title">Register </p>
+            <p className="title">Login </p>
+            <pre>
+              Lorem ipsum dolor sit amet consectetur 
+            </pre>
             <label>
               <input
                 required
