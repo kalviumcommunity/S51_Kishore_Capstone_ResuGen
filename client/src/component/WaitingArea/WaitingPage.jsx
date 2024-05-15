@@ -1,42 +1,45 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import "./WaitingPage.css"; // Import CSS file
-// import Spinner from "../SpinnerCompo/Spinner"; // Import your spinner component
+import "./WaitingPage.css";
+import axios from "axios";
 
 const WaitingPage = () => {
-  let navigate = useNavigate();
-  const [loading, setLoading] = useState(true);
+  const navigate = useNavigate();
 
   useEffect(() => {
-    const queryParams = new URLSearchParams(window.location.search);
-    const success = queryParams.get("success");
-    const message = queryParams.get("message");
 
-    if (success === "true") {
-      toast.success(message || "Email verified successfully");
-    } else {
-      toast.error(message || "Failed to verify email");
-    }
+    // Periodically check email verification status every 5 seconds
+    const interval = setInterval(checkEmailVerificationStatus, 50000);
 
-    setTimeout(() => {
-      setLoading(false);
-      navigate("/");
-    }, 10000);
+    return () => clearInterval(interval);
   }, [navigate]);
+
+  const checkEmailVerificationStatus = async () => {
+    try {
+      const response = await axios.get(
+        "http://localhost:6969/waiting/email-verification-status"
+      );
+  
+      if (response.data.isEmailVerified) {
+        // Email verified, redirect to home page
+        navigate("/");
+        // Show success notification
+        toast.success("Email verification successful!");
+      }
+    } catch (error) {
+      console.error("Error checking email verification status:", error);
+      // Show error notification
+      toast.error("Error checking email verification status.");
+    }
+  };
+  
 
   return (
     <div className="waiting-container">
+      <h2 className="waiting-title">Verify your email</h2>
       <ToastContainer />
-      {/* {loading ? (
-        <Spinner />
-      ) : ( */}
-        <>
-          <h2 className="waiting-title">Please wait...</h2>
-          {/* <Spinner /> */}
-        </>
-      {/* )} */}
     </div>
   );
 };

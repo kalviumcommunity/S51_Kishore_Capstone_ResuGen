@@ -10,7 +10,7 @@ const nodemailer = require("nodemailer");
 templatesRouter.get("/template", async (req, res) => {
   try {
     const templates = await Templates.find();
-    res.status(200).json(templates);
+    res.status(200).json({ templates });
   } catch (err) {
     console.error("Error fetching templates:", err);
     res.status(500).json({ message: "Internal server error" });
@@ -29,6 +29,7 @@ function generateRandomToken() {
 }
 
 // Route for user signup
+// Route for user signup
 signUpRouter.post("/signup", async (req, res) => {
   try {
     const { userPassword, userEmail } = req.body;
@@ -46,12 +47,17 @@ signUpRouter.post("/signup", async (req, res) => {
     let newUser = await User.create({
       userPassword: hashedPassword,
       userEmail,
-      // Add a field to store verification token
-      verificationToken: generateRandomToken(),
     });
 
+    // Generate verification token
+    const verificationToken = generateRandomToken();
+
     // Send verification email
-    await sendVerificationEmail(newUser.userEmail, newUser.verificationToken);
+    await sendVerificationEmail(newUser.userEmail, verificationToken);
+
+    // Add verification token to the user
+    newUser.verificationToken = verificationToken;
+    await newUser.save();
 
     return res.status(200).json({
       message: `Welcome, ${newUser.userEmail}`,
@@ -62,7 +68,6 @@ signUpRouter.post("/signup", async (req, res) => {
   }
 });
 
-// Route for verifying user's email
 // Route for verifying user's email
 signUpRouter.get("/signup/:token", async (req, res) => {
   try {
@@ -84,16 +89,42 @@ signUpRouter.get("/signup/:token", async (req, res) => {
     await user.save();
 
     // Redirect the user to the home page with a success message
-    return res.redirect("/").json({ success: true, message: "Email verified successfully" });
+    return res
+      .redirect("/")
+      .json({ success: true, message: "Email verified successfully" });
   } catch (err) {
     return res.status(500).json({ success: false, message: err.message });
+  }
+});
+
+// Route to check email verification status
+signUpRouter.get("/waiting/email-verification-status", async (req, res) => {
+  try {
+    // Assuming you have a middleware to verify the user's authentication status
+    // You can access user information from the request object
+    console.log(req.user.email)
+    const userEmail = req.user.email; // Get the email of the authenticated user
+
+    // Find the user with the provided email
+    const user = await User.findOne({ userEmail });
+
+    if (!user) {
+      // User not found
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    // Return whether the user's email is verified or not
+    res.json({ isEmailVerified: user.isVerified });
+  } catch (error) {
+    console.error("Error checking email verification status:", error);
+    res.status(500).json({ error: "Failed to check email verification status" });
   }
 });
 
 // Function to send verification email
 async function sendVerificationEmail(email, verificationToken) {
   try {
-    // Create transporter using nodemailer
+    // Created transporter using nodemailer
     const transporter = nodemailer.createTransport({
       service: "gmail",
       auth: {
@@ -103,14 +134,13 @@ async function sendVerificationEmail(email, verificationToken) {
     });
 
     // Construct email message
-    // Construct email message with HTML content
     const mailOptions = {
       from: "ki225ku@gmail.com",
       to: email,
       subject: "Account Verification",
       html: `
     <p>Please click the following button to verify your email address:</p>
-    <a href="http://localhost:5173" style="background-color: blue; color: white; padding: 10px 15px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; margin: 4px 2px; cursor: pointer; border-radius: 10px;">Verify Email</a>
+    <a href="http://localhost:5173/" style="background-color: lightgreen; color: white; padding: 10px 15px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; margin: 4px 2px; cursor: pointer; border-radius: 8px; target="_self"">Verify Email</a>
   `,
     };
 
