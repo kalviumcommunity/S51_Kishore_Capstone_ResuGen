@@ -3,7 +3,7 @@ import "./AuthButton.css";
 import {
   GoogleAuthProvider,
   GithubAuthProvider,
-  signInWithRedirect,
+  signInWithPopup,
 } from "firebase/auth";
 import { auth } from "../../firebase";
 
@@ -12,48 +12,28 @@ const AuthButton = ({ Icon, label, provider }) => {
   const githubAuthProvider = new GithubAuthProvider();
 
   const handleAuthClick = async () => {
-    switch (provider) {
-      case "GoogleAuthProvider":
-        console.log("Google Auth");
-        await signInWithRedirect(auth, googleAuthProvider)
-          .then((res) => {
-            console.log(res);
-          })
-          .catch((err) => {
-            console.log("Error", err.message);
-          });
-        break;
-      case "GithubAuthProvider":
-        console.log("Github Auth");
-        await signInWithRedirect(auth, githubAuthProvider)
-          .then((res) => {
-            console.log(res);
-          })
-          .catch((err) => {
-            console.log("Error", err.message);
-          });
-        break;
-
-      default:
-        console.log("GoogLE Auth");
-        await signInWithRedirect(auth, googleAuthProvider)
-          .then((res) => {
-            console.log(res);
-          })
-          .catch((err) => {
-            console.log("Error", err.message);
-          });
-        break;
+    try {
+      switch (provider) {
+        case "GoogleAuthProvider":
+          await signInWithPopup(auth, googleAuthProvider);
+          break;
+        case "GithubAuthProvider":
+          await signInWithPopup(auth, githubAuthProvider);
+          break;
+        default:
+          await signInWithPopup(auth, googleAuthProvider);
+          break;
+      }
+    } catch (error) {
+      console.error("Error", error.message);
     }
   };
 
   return (
-    <>
-      <div onClick={handleAuthClick} className="auth-btn-div">
-        <Icon />
-        <p>{label}</p>
-      </div>
-    </>
+    <div onClick={handleAuthClick} className="auth-btn-div">
+      <Icon />
+      <p>{label}</p>
+    </div>
   );
 };
 

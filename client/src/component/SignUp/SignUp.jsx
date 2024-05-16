@@ -1,21 +1,20 @@
 import React, { useState, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import Header from "../HeaderComponent/Header";
 import AuthButton from "../AuthButtonCompo/AuthButton";
 import { FaGoogle, FaGithub } from "react-icons/fa6";
 import axios from "axios";
-import { createUserWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../../firebase";
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const SignUpPage = () => {
   const navigate = useNavigate();
+  const {token} = useParams()
 
   const [formData, setFormData] = useState({
     email: "",
     password: "",
-    confirmPassword: ""
+    confirmPassword: "",
   });
 
   useEffect(() => {
@@ -32,27 +31,28 @@ const SignUpPage = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+  
     if (formData.password !== formData.confirmPassword) {
       toast.error("Passwords do not match");
       return;
     }
-
+  
     try {
-      const response = await axios.post("http://localhost:6969/signup", {
+      const response = await axios.post(`http://localhost:6969/signup/${token}`, {
         userEmail: formData.email,
-        userPassword: formData.password
-      })
-      if (response.status === 200){
-        toast.success("Registration successful! Please check your email for verification.");
-        setFormData({ email: "", password: "", confirmPassword: "" });
-        navigate("/waiting");
+        userPassword: formData.password,
+      });
+      console.log(response.data);
+      if (response.status === 200) {
+        navigate(`/signup/${response.data.token}`);
+        localStorage.setItem("isLoggedIn", true);
       }
     } catch (error) {
       console.error("Error:", error);
       toast.error("Error during registration. Please try again later.");
     }
   };
+  
 
   return (
     <>
@@ -60,7 +60,9 @@ const SignUpPage = () => {
       <div className="login-div">
         <div className="log-div">
           <form className="form" onSubmit={handleSubmit}>
-            <p className="title">Register </p>
+            <p className="title">Sign Up </p>
+            <pre>Lorem ipsum dolor sit amet consectetur</pre>
+
             <label>
               <input
                 required
@@ -95,7 +97,7 @@ const SignUpPage = () => {
               <span>Confirm Password</span>
             </label>
             <button type="submit" className="submit">
-              Submit  
+              Submit
             </button>
             <p className="signin">
               Already have an account? <Link to="/login">Login</Link>
