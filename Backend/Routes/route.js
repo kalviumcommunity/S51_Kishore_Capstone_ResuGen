@@ -1,6 +1,7 @@
 const express = require("express");
 const templatesRouter = express.Router();
 const signUpRouter = express.Router();
+const loginRouter = express.Router();
 const Templates = require("../model/Template.model");
 const User = require("../model/User.model");
 const jwt = require("jsonwebtoken");
@@ -67,6 +68,50 @@ signUpRouter.post("/signup", async (req, res) => {
     return res.status(500).json({ success: false, message: err.message });
   }
 });
+
+loginRouter.post("/login", async (req, res) => {
+  try {
+    const { userEmail, userPassword } = req.body;
+
+    // Check if email and password are provided
+    if (!userEmail || !userPassword) {
+      return res.status(400).json({ message: "Please provide email and password" });
+    }
+
+    // Find user by email
+    const user = await User.findOne({ userEmail });
+
+    // If user doesn't exist, return error
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    // Check if user's email is verified
+    if (!user.isVerified) {
+      return res.status(400).json({ message: "Please verify your email before logging in" });
+    }
+
+    // Compare provided password with hashed password stored in the database
+    const isPasswordValid = await bcrypt.compare(userPassword, user.userPassword);
+
+    // If passwords don't match, return error
+    if (!isPasswordValid) {
+      return res.status(401).json({ message: "Invalid password" });
+    }
+
+    // Generate JWT token
+    const token = jwt.sign({ userEmail: user.userEmail }, process.env.SECRET_KEY, {
+      expiresIn: "1h" // Token expires in 1 hour
+    });
+
+    // Return token and user data
+    res.status(200).json({ token, user });
+  } catch (error) {
+    console.error("Error logging in:", error);
+    res.status(500).json({ message: "Internal server error" });
+  }
+});
+
 
 // Route for verifying user's email
 signUpRouter.get("/signup/:token", async (req, res) => {
@@ -152,4 +197,4 @@ async function sendVerificationEmail(email, verificationToken) {
   }
 }
 
-module.exports = { templatesRouter, signUpRouter };
+module.exports = { templatesRouter, signUpRouter, loginRouter };

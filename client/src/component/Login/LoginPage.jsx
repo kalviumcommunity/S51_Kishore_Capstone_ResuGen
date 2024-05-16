@@ -36,7 +36,7 @@ const LoginPage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post("http://localhost:6969/signup", {
+      const response = await axios.post("http://localhost:6969/login", {
         userEmail: formData.email,
         userPassword: formData.password,
       });
@@ -51,20 +51,14 @@ const LoginPage = () => {
     }
   };
 
-  const handleSignIn = async (provider) => {
+  const handleSignIn = async () => {
     try {
-      const userCredentials = await signInWithEmailAndPassword(
-        auth,
-        formData.email,
-        formData.password
-      );
-      console.log(userCredentials);
-      const user = userCredentials.user;
-      localStorage.setItem("token", user.accessToken);
-      localStorage.setItem("user", JSON.stringify(user));
-      navigate("/");
+      
+
+      
     } catch (error) {
       console.log("Error", error);
+      toast.error("An error occurred. Please try again later.");
     }
   };
 
@@ -75,9 +69,7 @@ const LoginPage = () => {
         <div className="log-div">
           <form className="form" onSubmit={handleSubmit}>
             <p className="title">Login </p>
-            <pre>
-              Lorem ipsum dolor sit amet consectetur 
-            </pre>
+            <pre>Lorem ipsum dolor sit amet consectetur</pre>
             <label>
               <input
                 required
@@ -102,7 +94,7 @@ const LoginPage = () => {
               />
               <span>Password</span>
             </label>
-            <button type="submit" className="submit">
+            <button onClick={handleSubmit} type="submit" className="submit">
               Submit
             </button>
             <p className="signin">
