@@ -9,7 +9,7 @@ import "react-toastify/dist/ReactToastify.css";
 
 const SignUpPage = () => {
   const navigate = useNavigate();
-  const {token} = useParams()
+  // const {token} = useParams()
 
   const [formData, setFormData] = useState({
     email: "",
@@ -38,13 +38,13 @@ const SignUpPage = () => {
     }
   
     try {
-      const response = await axios.post(`http://localhost:6969/signup/${token}`, {
+      const response = await axios.post(`http://localhost:6969/signup`, {
         userEmail: formData.email,
         userPassword: formData.password,
       });
       console.log(response.data);
       if (response.status === 200) {
-        navigate(`/signup/${response.data.token}`);
+        navigate(`/waiting`);
         localStorage.setItem("isLoggedIn", true);
       }
     } catch (error) {
