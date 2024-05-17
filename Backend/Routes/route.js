@@ -71,11 +71,14 @@ signUpRouter.post("/signup", async (req, res) => {
 
 loginRouter.post("/login", async (req, res) => {
   try {
+    // Extract email and password from request body
     const { userEmail, userPassword } = req.body;
 
-    // Check if email and password are provided
+    // Check if both email and password are provided
     if (!userEmail || !userPassword) {
-      return res.status(400).json({ message: "Please provide email and password" });
+      return res
+        .status(400)
+        .json({ message: "Please provide email and password" });
     }
 
     // Find user by email
@@ -86,23 +89,25 @@ loginRouter.post("/login", async (req, res) => {
       return res.status(404).json({ message: "User not found" });
     }
 
-    // Check if user's email is verified
-    if (!user.isVerified) {
-      return res.status(400).json({ message: "Please verify your email before logging in" });
-    }
-
     // Compare provided password with hashed password stored in the database
-    const isPasswordValid = await bcrypt.compare(userPassword, user.userPassword);
+    const isPasswordValid = await bcrypt.compare(
+      userPassword,
+      user.userPassword
+    );
 
     // If passwords don't match, return error
     if (!isPasswordValid) {
-      return res.status(401).json({ message: "Invalid password" });
+      return res.status(401).json({ message: "Invalid email or password" });
     }
 
     // Generate JWT token
-    const token = jwt.sign({ userEmail: user.userEmail }, process.env.SECRET_KEY, {
-      expiresIn: "1h" // Token expires in 1 hour
-    });
+    const token = jwt.sign(
+      { userEmail: user.userEmail },
+      process.env.SECRET_KEY,
+      {
+        expiresIn: "1h", // Token expires in 1 hour
+      }
+    );
 
     // Return token and user data
     res.status(200).json({ token, user });
@@ -112,57 +117,23 @@ loginRouter.post("/login", async (req, res) => {
   }
 });
 
-
 // Route for verifying user's email
-signUpRouter.get("/signup/:token", async (req, res) => {
+signUpRouter.get("/waiting", async (req, res) => {
   try {
-    const token = req.params.token;
-    const decodedToken = jwt.verify(token, process.env.SECRET_KEY);
-    const userEmail = decodedToken.data;
-
-    // Find the user with the provided email
-    const user = await User.findOne({ userEmail });
-
-    // Check if the user exists and if the verification token matches
-    if (!user || user.verificationToken !== token) {
-      return res.status(400).json({ message: "Invalid verification token" });
-    }
-
-    // Update the user's verification status in the database
-    user.isVerified = true;
-    user.verificationToken = undefined; // Remove the verification token
-    await user.save();
-
-    // Redirect the user to the home page with a success message
-    return res
-      .redirect("/")
-      .json({ success: true, message: "Email verified successfully" });
-  } catch (err) {
-    return res.status(500).json({ success: false, message: err.message });
-  }
-});
-
-// Route to check email verification status
-signUpRouter.get("/waiting/email-verification-status", async (req, res) => {
-  try {
-    // Assuming you have a middleware to verify the user's authentication status
-    // You can access user information from the request object
-    console.log(req.user.email)
-    const userEmail = req.user.email; // Get the email of the authenticated user
-
-    // Find the user with the provided email
-    const user = await User.findOne({ userEmail });
+    const user = await User.findOneAndUpdate(
+      { isEmailVerified: false },
+      { isEmailVerified: true },
+      { new: true }
+    );
 
     if (!user) {
-      // User not found
-      return res.status(404).json({ message: "User not found" });
+      return res.status(404).send({ message: "User not found" });
     }
 
-    // Return whether the user's email is verified or not
-    res.json({ isEmailVerified: user.isVerified });
+    res.status(200).send({ message: "Email verified successfully" });
   } catch (error) {
-    console.error("Error checking email verification status:", error);
-    res.status(500).json({ error: "Failed to check email verification status" });
+    console.error(error);
+    res.status(500).send({ message: "Internal Server Error" });
   }
 });
 
@@ -185,7 +156,7 @@ async function sendVerificationEmail(email, verificationToken) {
       subject: "Account Verification",
       html: `
     <p>Please click the following button to verify your email address:</p>
-    <a href="http://localhost:5173/" style="background-color: lightgreen; color: white; padding: 10px 15px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; margin: 4px 2px; cursor: pointer; border-radius: 8px; target="_self"">Verify Email</a>
+    <a href="http://localhost:5173/waiting" style="background-color: lightgreen; color: white; padding: 10px 15px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; margin: 4px 2px; cursor: pointer; border-radius: 8px; target="_self"">Verify Email</a>
   `,
     };
 
