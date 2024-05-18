@@ -41,24 +41,17 @@ const LoginPage = () => {
         userPassword: formData.password,
       });
       if (response.status === 200) {
-        toast.success(
-          "Registration successful! Please check your email for verification."
-        );
+        // Login successful, redirect or show success message
+        toast.success("Login successful!");
         setFormData({ email: "", password: "" });
+        // Redirect the user to the homepage or any desired route
+        navigate("/", { replace: true });
+        localStorage.setItem("isLoggedIn", true)
       }
     } catch (error) {
-      console.log("Error", error);
-    }
-  };
-
-  const handleSignIn = async () => {
-    try {
-      
-
-      
-    } catch (error) {
-      console.log("Error", error);
-      toast.error("An error occurred. Please try again later.");
+      console.log("Error", error.message);
+      // Handle login error, show error message to the user
+      toast.error("Invalid email or password. Please try again.");
     }
   };
 
@@ -94,7 +87,7 @@ const LoginPage = () => {
               />
               <span>Password</span>
             </label>
-            <button onClick={handleSubmit} type="submit" className="submit">
+            <button type="submit" className="submit">
               Submit
             </button>
             <p className="signin">
@@ -107,13 +100,13 @@ const LoginPage = () => {
               Icon={FaGoogle}
               label={"Continue with Google"}
               provider={"GoogleAuthProvider"}
-              onClick={handleSignIn}
+              onClick={() => console.log("Google Auth")}
             />
             <AuthButton
               Icon={FaGithub}
               label={"Continue with Github"}
               provider={"GithubAuthProvider"}
-              onClick={handleSignIn}
+              onClick={() => console.log("Github Auth")}
             />
           </div>
         </div>
