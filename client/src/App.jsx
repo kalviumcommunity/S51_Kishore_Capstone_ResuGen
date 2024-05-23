@@ -1,24 +1,26 @@
 // eslint-disable-next-line no-unused-vars
-import React from 'react';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import { QueryClient, QueryClientProvider } from 'react-query';
-import { ReactQueryDevtools } from 'react-query/devtools';
-import LandingPage from './component/LandingPage';
-import LoginPage from './component/Login/LoginPage';
-import BuildResume from './component/Build/BuildResume';
-import MyResume from './component/UserResumes/MyResume';
-import SignUpPage from './component/SignUp/SignUp';
-import ProtectUserData from './component/ProtectUserData';
-import ForgotPassCompo from './component/ForgotPass/ForgotPassCompo';
-import ResTemp1 from './component/pages/ResTemp1';
-import 'react-toastify/dist/ReactToastify.css';
-import { ToastContainer } from 'react-toastify';
-import UserInput from './component/UserInputs/PersonalDetails/UserInput';
-import CreateResume from './component/CreateResume/CreateResume';
-import UserExp from './component/UserInputs/Experience/UserExp';
+import React, { useState } from "react";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { QueryClient, QueryClientProvider } from "react-query";
+import { ReactQueryDevtools } from "react-query/devtools";
+import LandingPage from "./component/LandingPage";
+import LoginPage from "./component/Login/LoginPage";
+import BuildResume from "./component/Build/BuildResume";
+import MyResume from "./component/UserResumes/MyResume";
+import SignUpPage from "./component/SignUp/SignUp";
+import ProtectUserData from "./component/ProtectUserData";
+import ForgotPassCompo from "./component/ForgotPass/ForgotPassCompo";
+import ResTemp1 from "./component/pages/ResTemp1";
+import "react-toastify/dist/ReactToastify.css";
+import { ToastContainer } from "react-toastify";
+import UserInput from "./component/UserInputs/PersonalDetails/UserInput";
+import CreateResume from "./component/CreateResume/CreateResume";
+import UserExp from "./component/UserInputs/Experience/UserExp";
+import WaitingPage from "./component/WaitingArea/WaitingPage";
 
 function App() {
   const queryClient = new QueryClient();
+  // const [signUp, isSignUp] = useState(false);
 
   return (
     <QueryClientProvider client={queryClient}>
@@ -34,17 +36,18 @@ function App() {
           </Route>
           <Route path="/forgotpass" element={<ForgotPassCompo />} />
           {/* <Route path="/profile/:uid" element={<MyResume />} /> */}
-          <Route path="/templates" element={<ResTemp1 />} /> {/* Remove this route after testing */}
-          
-          <Route path="/inputs" element={<UserInput />}></Route> {/* Remove this route after testing */}
-          <Route path='/build/create-resume' element={<CreateResume />} />
+          <Route path="/templates" element={<ResTemp1 />} />{" "}
+          {/* Remove this route after testing */}
+          <Route path="/inputs" element={<UserInput />}></Route>{" "}
+          {/* Remove this route after testing */}
+          <Route path="/build/create-resume" element={<CreateResume />} />
           <Route path="/work-experience" element={<UserExp />}></Route>
+          <Route path="/waiting" element={<WaitingPage />}></Route>
         </Routes>
       </BrowserRouter>
       <ToastContainer position="top-right" theme="dark" />
       <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>
-    
   );
 }
 

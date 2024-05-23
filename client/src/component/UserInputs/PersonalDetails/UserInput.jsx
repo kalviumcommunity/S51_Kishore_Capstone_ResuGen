@@ -3,17 +3,21 @@ import { useDispatch } from "react-redux";
 import { updatePersonalInfo } from "../../../Redux/Actions/actions";
 import "./UserInput.css";
 
-const UserInput = ({onNext}) => {
+const UserInput = ({ onNext }) => {
   const dispatch = useDispatch();
   const [summary, setSummary] = useState("");
   const [formData, setFormData] = useState({});
 
-  const handleNextClick = () => {
-    onNext()
-  }
+  const handleNextClick = (e) => {
+    e.preventDefault()
+    toast.success("Information saved successfully!");
+    setTimeout(() => {
+      onNext();
+    }, 2000);
+  };
 
   const handlePersonalInfoInputChange = async (e) => {
-    e.preventDefault()
+    e.preventDefault();
     const { name, value } = e.target;
     dispatch(updatePersonalInfo({ formData: { [name]: value } }));
 
@@ -29,7 +33,10 @@ const UserInput = ({onNext}) => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(formData), // Use updated formData here
+        body: JSON.stringify({
+          ...formData, // Include all form data
+          [name]: value, // Update the specific field
+        }),
       });
       const data = await response.json();
       setSummary(data.summary);
@@ -43,7 +50,9 @@ const UserInput = ({onNext}) => {
       <div className="user-input-full-div">
         <div className="user-input-div">
           <div className="user-input-next-btn-div">
-            <div className="user-input-next-btn" onClick={handleNextClick}>Next</div>
+            <div className="user-input-next-btn" onClick={handleNextClick}>
+              Next
+            </div>
           </div>
           <div className="user-input-top">
             <h1>Personal Details</h1>
@@ -92,7 +101,7 @@ const UserInput = ({onNext}) => {
               {
                 label: "Zip Code",
                 name: "zipCode",
-                type: "text",
+                type: "number",
                 placeholder: "Enter your zip code",
               },
               {
@@ -127,12 +136,6 @@ const UserInput = ({onNext}) => {
               value={summary}
             />
           </div>
-          {summary && (
-            <div className="summary">
-              <h2>Summary</h2>
-              <p>{summary}</p>
-            </div>
-          )}
         </div>
       </div>
     </>
