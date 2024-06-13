@@ -15,6 +15,7 @@ const UserExp = ({ onNext, onBack }) => {
   );
 
   const [currentlyWorking, setCurrentlyWorking] = useState(false);
+  const [summary, setSummary] = useState("");
 
   const handleNextClick = () => {
     onNext();
@@ -38,13 +39,27 @@ const UserExp = ({ onNext, onBack }) => {
   };
 
   const handleInputType = (key) => {
-    if (key === "StartDate" || (key === "LastDate" && !currentlyWorking)) {
+    if (key === "StartDate" || (key === "EndDate" && !currentlyWorking)) {
       return "date";
     }
   };
 
   const handleLastDateValue = () => {
     return currentlyWorking ? "Present" : "";
+  };
+
+  const generateWorkSummary = async () => {
+    const response = await fetch("http://localhost:6969/work-summary", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        experience: experienceFormData
+      })
+    });
+    const data = await response.json();
+    setSummary(data.summary);
   };
 
   return (
@@ -101,18 +116,17 @@ const UserExp = ({ onNext, onBack }) => {
                           type={handleInputType(key)}
                           name={key}
                           value={
-                            key === "LastDate"
+                            key === "EndDate"
                               ? handleLastDateValue()
                               : expData[key]
                           }
                           onChange={(e) => handleExpInputChange(e, index)}
-                          readOnly={key === "LastDate" && currentlyWorking}
+                          readOnly={key === "EndDate" && currentlyWorking}
                         />
                       </div>
                     )}
                   </div>
                 ))}
-
                 <br />
               </div>
             ))}
@@ -122,6 +136,19 @@ const UserExp = ({ onNext, onBack }) => {
               + Add More Experience
             </div>
           </div>
+
+          <div className="user-exp-generate-summary-btn-div">
+            <div onClick={generateWorkSummary} className="user-exp-generate-summary-btn">
+              Generate Work Summary
+            </div>
+          </div>
+
+          {summary && (
+            <div className="user-exp-summary">
+              <h2>Generated Work Summary</h2>
+              <p>{summary}</p>
+            </div>
+          )}
         </div>
       </div>
     </>

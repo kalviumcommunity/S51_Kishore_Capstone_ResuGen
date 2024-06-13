@@ -35,6 +35,7 @@ const LandingPage = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [navbarVisible, setNavbarVisible] = useState(true);
   const [userLoggedIn, setUserLoggedIn] = useState(false);
+  const [userFormLoggedIn, setUserFromLoggedIn] = useState(false);
   const [tempImg, setTemplateImg] = useState("");
   const [showBackToTop, setShowBackToTop] = useState(false);
   // const [userData, setUserData] = useState(null);
@@ -56,13 +57,23 @@ const LandingPage = () => {
     }
   };
 
+  useEffect(() => {
+    // Check if user is logged in from local storage or session storage
+    const isLoggedIn = localStorage.getItem("isLoggedIn");
+    if (isLoggedIn) {
+      setUserFromLoggedIn(true);
+    }else{
+      setUserFromLoggedIn(false);
+    }
+  }, []);
+
   // if (!isLoading) {
   //   <Spinner />;
   // }
 
   const fetchTemplateData = async () => {
     try {
-      const response = await fetch("http://localhost:3000/template");
+      const response = await fetch("http://localhost:6969/template");
       const templateData = await response.json();
       setTemplateImg(templateData);
       console.log(tempImg, "templateData");
@@ -192,15 +203,19 @@ const LandingPage = () => {
       await auth.signOut();
       queryClient.setQueryData("user", null);
       toast.success("Logged Out Successfully");
-      setUserData(null);
-
-      // navigate("/");
-      // Show success message
+      // Clear local storage
+      localStorage.clear();
+      // Update states
+      setUserLoggedIn(false);
+      setUserFromLoggedIn(false);
       console.log("Logged Out Successfully");
+      // Navigate to the login page
+      navigate("/");
     } catch (error) {
       console.error("Logout error:", error);
     }
   };
+  
 
   const scrollToTop = () => {
     window.scrollTo({
@@ -244,12 +259,13 @@ const LandingPage = () => {
                 <p className="context menu">My Resumes</p>
               </Link>
 
-              {data ? (
+              {!(userLoggedIn || userFormLoggedIn) ? (
                 <p onClick={handleLogOut} className="logout context pointer">
                   Log out
                 </p>
               ) : (
-                <Link className="login" to="/signup">
+                <Link className="login" to="/login">
+                  
                   <p className="login context pointer">Login</p>
                 </Link>
               )}
@@ -302,7 +318,7 @@ const LandingPage = () => {
           </div>
 
           <div className="top-right">
-            {data ? (
+            {userFormLoggedIn || userLoggedIn ? (
               <p onClick={handleLogOut} className="logout context pointer">
                 Log out
               </p>
@@ -414,7 +430,7 @@ const LandingPage = () => {
           </div>
           <div className="feature four">
             <div className="feature-heading">
-            <GiArtificialIntelligence style={{fontSize:"60px"}} />
+              <GiArtificialIntelligence style={{ fontSize: "60px" }} />
               <h2>Professional Templates</h2>
             </div>
 

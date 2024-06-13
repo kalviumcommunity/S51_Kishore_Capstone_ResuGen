@@ -10,10 +10,11 @@ const UserInput = ({ onNext }) => {
 
   const handleNextClick = (e) => {
     e.preventDefault()
-    toast.success("Information saved successfully!");
-    setTimeout(() => {
-      onNext();
-    }, 2000);
+    onNext();
+    // toast.success("Information saved successfully!");
+    // setTimeout(() => {
+      
+    // }, 2000);
   };
 
   const handlePersonalInfoInputChange = async (e) => {

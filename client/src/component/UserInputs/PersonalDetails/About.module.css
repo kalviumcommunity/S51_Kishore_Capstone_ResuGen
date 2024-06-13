@@ -1,0 +1,52 @@
+.about-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.about-hstack {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.about-form-control {
+  display: flex;
+  flex-direction: column;
+}
+
+.about-form-label {
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+}
+
+.about-input {
+  padding: 0.5rem;
+  border: 1px solid #e2e8f0;
+  border-radius: 0.375rem;
+  background-color: #edf2f7;
+}
+
+.about-button {
+  padding: 0.5rem 1rem;
+  border: 1px solid #e2e8f0;
+  border-radius: 0.375rem;
+  background-color: #e53e3e;
+  color: white;
+  cursor: pointer;
+}
+
+.about-button:hover {
+  background-color: #c53030;
+}
+
+.about-button-outline {
+  background-color: transparent;
+  color: #e53e3e;
+  border: 1px solid #e53e3e;
+}
+
+.about-button-outline:hover {
+  background-color: #e53e3e;
+  color: white;
+}
