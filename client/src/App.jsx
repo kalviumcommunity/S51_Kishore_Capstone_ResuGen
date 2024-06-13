@@ -1,5 +1,5 @@
 // eslint-disable-next-line no-unused-vars
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
@@ -17,37 +17,41 @@ import UserInput from "./component/UserInputs/PersonalDetails/UserInput";
 import CreateResume from "./component/CreateResume/CreateResume";
 import UserExp from "./component/UserInputs/Experience/UserExp";
 import WaitingPage from "./component/WaitingArea/WaitingPage";
+import ResumeBuilderMain from "./ResumeBuilderMain";
+
 
 function App() {
   const queryClient = new QueryClient();
   // const [signUp, isSignUp] = useState(false);
-
   return (
-    <QueryClientProvider client={queryClient}>
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<LandingPage />} />
-          <Route path="/login" element={<LoginPage />} />
-          <Route path="/build" element={<BuildResume />} />
-          <Route path="/my-resumes" element={<MyResume />} />
-          <Route path="/signup" element={<SignUpPage />} />
-          <Route path="/" element={<ProtectUserData />}>
+    <>
+      
+      <QueryClientProvider client={queryClient}>
+        <BrowserRouter>
+          <Routes>
             <Route path="/" element={<LandingPage />} />
-          </Route>
-          <Route path="/forgotpass" element={<ForgotPassCompo />} />
-          {/* <Route path="/profile/:uid" element={<MyResume />} /> */}
-          <Route path="/templates" element={<ResTemp1 />} />{" "}
-          {/* Remove this route after testing */}
-          <Route path="/inputs" element={<UserInput />}></Route>{" "}
-          {/* Remove this route after testing */}
-          <Route path="/build/create-resume" element={<CreateResume />} />
-          <Route path="/work-experience" element={<UserExp />}></Route>
-          <Route path="/waiting" element={<WaitingPage />}></Route>
-        </Routes>
-      </BrowserRouter>
-      <ToastContainer position="top-right" theme="dark" />
-      <ReactQueryDevtools initialIsOpen={false} />
-    </QueryClientProvider>
+            <Route path="/login" element={<LoginPage />} />
+            <Route path="/build" element={<BuildResume />} />
+            <Route path="/my-resumes" element={<MyResume />} />
+            <Route path="/signup" element={<SignUpPage />} />
+            <Route path="/" element={<ProtectUserData />}>
+              <Route path="/" element={<LandingPage />} />
+            </Route>
+            <Route path="/forgotpass" element={<ForgotPassCompo />} />
+            {/* <Route path="/profile/:uid" element={<MyResume />} /> */}
+            <Route path="/templates" element={<ResTemp1 />} />{" "}
+            {/* Remove this route after testing */}
+            <Route path="/inputs" element={<UserInput />}></Route>{" "}
+            {/* Remove this route after testing */}
+            <Route path="/build/create-resume" element={<CreateResume />} />
+            <Route path="/work-experience" element={<UserExp />}></Route>
+            <Route path="/waiting" element={<WaitingPage />}></Route>
+          </Routes>
+        </BrowserRouter>
+        <ToastContainer position="top-right" theme="dark" />
+        <ReactQueryDevtools initialIsOpen={false} />
+      </QueryClientProvider>
+    </>
   );
 }
 

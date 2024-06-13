@@ -1,0 +1,64 @@
+.skills-hstack {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-end;
+}
+
+.skills-form-control {
+  display: flex;
+  flex-direction: column;
+}
+
+.skills-form-label {
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+}
+
+.skills-input {
+  padding: 0.5rem;
+  border: 1px solid #e2e8f0;
+  border-radius: 0.375rem;
+  background-color: #edf2f7;
+}
+
+.skills-button {
+  padding: 0.5rem 1rem;
+  border: 1px solid #e2e8f0;
+  border-radius: 0.375rem;
+  background-color: #805ad5;
+  color: white;
+  cursor: pointer;
+}
+
+.skills-button:hover {
+  background-color: #6b46c1;
+}
+
+.skills-box {
+  border: 1px solid #e2e8f0;
+  border-radius: 0.375rem;
+  padding: 1rem;
+  margin-top: 1rem;
+}
+
+.skills-tag {
+  display: inline-flex;
+  align-items: center;
+  background-color: #805ad5;
+  color: white;
+  padding: 0.25rem 0.5rem;
+  border-radius: 9999px;
+  margin: 0.25rem;
+}
+
+.skills-tag-close-button {
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+  margin-left: 0.5rem;
+}
+
+.skills-tag-close-button:hover {
+  color: #e2e8f0;
+}

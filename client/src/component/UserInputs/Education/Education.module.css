@@ -1,0 +1,73 @@
+.education-accordion {
+  border: 1px solid #ccc;
+  border-radius: 0.375rem;
+}
+
+.education-accordion-item {
+  border-bottom: 1px solid #ccc;
+}
+
+.education-accordion-button {
+  background-color: #f5f5f5;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  padding: 0.75rem 1rem;
+  width: 100%;
+  text-align: left;
+}
+
+.education-accordion-button:hover {
+  background-color: #e0e0e0;
+}
+
+.education-accordion-panel {
+  display: none;
+  padding: 1rem;
+}
+
+.education-accordion-panel.show {
+  display: block;
+}
+
+.education-vstack {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.education-hstack {
+  display: flex;
+  gap: 1rem;
+}
+
+.education-form-control {
+  display: flex;
+  flex-direction: column;
+}
+
+.education-form-label {
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+}
+
+.education-input {
+  padding: 0.5rem;
+  border: 1px solid #e2e8f0;
+  border-radius: 0.375rem;
+  background-color: #edf2f7;
+}
+
+.education-button {
+  padding: 0.5rem 1rem;
+  border: 1px solid #e2e8f0;
+  border-radius: 0.375rem;
+  background-color: #805ad5;
+  color: white;
+  cursor: pointer;
+}
+
+.education-button:hover {
+  background-color: #6b46c1;
+}

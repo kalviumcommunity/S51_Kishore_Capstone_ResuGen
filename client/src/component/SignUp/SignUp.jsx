@@ -61,7 +61,7 @@ const SignUpPage = () => {
         <div className="log-div">
           <form className="form" onSubmit={handleSubmit}>
             <p className="title">Sign Up </p>
-            <pre>Lorem ipsum dolor sit amet consectetur</pre>
+            <pre>Sign up to my website to get started</pre>
 
             <label>
               <input

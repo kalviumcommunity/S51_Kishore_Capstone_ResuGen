@@ -3,12 +3,10 @@ import "./LoginPage.css";
 import { FaGoogle, FaGithub } from "react-icons/fa6";
 import AuthButton from "../AuthButtonCompo/AuthButton";
 import useUser from "../../Hooks/useUser";
-import { signInWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../../firebase";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import Header from "./../HeaderComponent/Header";
-import Spinner from "../SpinnerCompo/Spinner";
+import { FallingLines } from "react-loader-spinner";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -19,6 +17,7 @@ const LoginPage = () => {
     email: "",
     password: "",
   });
+  const [loading, setLoading] = useState(false); // state to control loader
 
   useEffect(() => {
     if (!isLoading && data) {
@@ -35,22 +34,25 @@ const LoginPage = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true); // show loader
     try {
       const response = await axios.post("http://localhost:6969/login", {
         userEmail: formData.email,
         userPassword: formData.password,
       });
       if (response.status === 200) {
-        // Login successful, redirect or show success message
         toast.success("Login successful!");
         setFormData({ email: "", password: "" });
-        // Redirect the user to the homepage or any desired route
-        navigate("/", { replace: true });
-        localStorage.setItem("isLoggedIn", true)
+
+        setTimeout(() => {
+          setLoading(false); // hide loader
+          navigate("/", { replace: true });
+          localStorage.setItem("isLoggedIn", true);
+        }, 2000);
       }
     } catch (error) {
+      setLoading(false); // hide loader in case of error
       console.log("Error", error.message);
-      // Handle login error, show error message to the user
       toast.error("Invalid email or password. Please try again.");
     }
   };
@@ -58,11 +60,21 @@ const LoginPage = () => {
   return (
     <>
       <Header />
-      <div className="login-div">
+      {loading && (
+        <div className="loader-container">
+          <FallingLines
+            color="#4fa94d"
+            width="100"
+            visible={true}
+            ariaLabel="falling-circles-loading"
+          />
+        </div>
+      )}
+      <div className={`login-div ${loading ? "blur" : ""}`}>
         <div className="log-div">
           <form className="form" onSubmit={handleSubmit}>
             <p className="title">Login </p>
-            <pre>Lorem ipsum dolor sit amet consectetur</pre>
+            <pre></pre>
             <label>
               <input
                 required
@@ -100,18 +112,34 @@ const LoginPage = () => {
               Icon={FaGoogle}
               label={"Continue with Google"}
               provider={"GoogleAuthProvider"}
-              onClick={() => console.log("Google Auth")}
+              setLoading={setLoading}
             />
             <AuthButton
               Icon={FaGithub}
               label={"Continue with Github"}
               provider={"GithubAuthProvider"}
-              onClick={() => console.log("Github Auth")}
+              setLoading={setLoading}
             />
           </div>
         </div>
       </div>
-      <ToastContainer />
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="colored"
+        toastStyle={{
+          backgroundColor: "#333",
+          color: "#fff",
+          boxShadow: "0px 0px 15px rgba(0, 0, 0, 0.5)",
+        }}
+      />
     </>
   );
 };

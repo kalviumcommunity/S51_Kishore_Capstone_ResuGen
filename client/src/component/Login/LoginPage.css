@@ -1,4 +1,4 @@
-.login-div{
+.login-div {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -6,7 +6,7 @@
   height: 90vh;
 }
 
-.log-div{
+.log-div {
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
   display: flex;
   flex-direction: column;
@@ -39,7 +39,8 @@
   padding-left: 30px;
 }
 
-.title::before,.title::after {
+.title::before,
+.title::after {
   position: absolute;
   content: "";
   height: 16px;
@@ -61,7 +62,8 @@
   animation: pulse 1s linear infinite;
 }
 
-.message, .signin {
+.message,
+.signin {
   color: rgba(88, 87, 87, 0.822);
   font-size: 14px;
 }
@@ -89,6 +91,7 @@
 }
 
 .form label .input {
+  display: flex;
   width: 100%;
   padding: 10px 10px 20px 10px;
   outline: 0;
@@ -111,7 +114,8 @@
   font-size: 0.9em;
 }
 
-.form label .input:focus + span,.form label .input:valid + span {
+.form label .input:focus + span,
+.form label .input:valid + span {
   top: 30px;
   font-size: 0.7em;
   font-weight: 600;
@@ -129,7 +133,7 @@
   border-radius: 10px;
   color: #fff;
   font-size: 16px;
-  transform: .3s ease;
+  transform: 0.3s ease;
 }
 
 .submit:hover {
@@ -156,7 +160,20 @@
   gap: 20px;
 }
 
-.continue-with{
+.continue-with {
   font-weight: 500;
   color: lightgray;
+}
+
+.loader-container {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 999;
+}
+
+.blur {
+  opacity: 0;
+  pointer-events: none;
 }

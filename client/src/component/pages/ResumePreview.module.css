@@ -1,0 +1,73 @@
+.container {
+    background-color: white;
+    width: 100%;
+    max-width: 32rem;
+    border-radius: 0.375rem;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+  }
+  
+  .header {
+    display: flex;
+    align-items: center;
+    margin: 20px;
+  }
+  
+  .headerContent {
+    margin-left: 15px;
+  }
+  
+  .name {
+    font-weight: bold;
+  }
+  
+  .contact {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+  }
+  
+  .contactItem {
+    display: flex;
+    align-items: center;
+  }
+  
+  .contactItem svg {
+    margin-right: 5px;
+  }
+  
+  .contactItem a {
+    color: white;
+  }
+  
+  .content {
+    padding: 20px;
+  }
+  
+  .section {
+    margin-bottom: 20px;
+  }
+  
+  .sectionTitle {
+    margin-bottom: 10px;
+    font-weight: bold;
+  }
+  
+  .education,
+  .work,
+  .skills,
+  .project {
+    margin-bottom: 10px;
+  }
+  
+  .projectLink {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: inherit;
+  }
+  
+  .projectLink svg {
+    margin-left: 5px;
+  }
+  
