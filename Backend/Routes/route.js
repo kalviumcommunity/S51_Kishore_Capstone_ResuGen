@@ -30,7 +30,6 @@ function generateRandomToken() {
 }
 
 // Route for user signup
-// Route for user signup
 signUpRouter.post("/signup", async (req, res) => {
   try {
     const { userPassword, userEmail } = req.body;
