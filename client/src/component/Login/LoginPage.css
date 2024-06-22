@@ -13,8 +13,8 @@
   align-items: center;
   justify-content: center;
   border-radius: 10px;
-  width: 40vw;
-  height: 80vh;
+  width: 60vw;
+  height: 70vh;
 }
 
 .form {
@@ -88,6 +88,13 @@
 
 .form label {
   position: relative;
+}
+
+.input{
+  display: flex;
+  /* width: 100vw; */
+  outline: 0;
+  border-radius: 10px;
 }
 
 .form label .input {
@@ -176,4 +183,10 @@
 .blur {
   opacity: 0;
   pointer-events: none;
+}
+
+@media (max-width: 425px){
+  .log-div{
+    box-shadow: none;
+  }
 }

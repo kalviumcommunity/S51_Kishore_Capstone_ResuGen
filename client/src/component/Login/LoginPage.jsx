@@ -74,7 +74,7 @@ const LoginPage = () => {
         <div className="log-div">
           <form className="form" onSubmit={handleSubmit}>
             <p className="title">Login </p>
-            <pre></pre>
+            <pre>Already have an account? Log In here!  </pre>
             <label>
               <input
                 required

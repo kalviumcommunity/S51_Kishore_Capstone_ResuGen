@@ -54,7 +54,7 @@ const AuthButton = ({ Icon, label, provider, setLoading }) => {
 
   return (
     <div onClick={handleAuthClick} className="auth-btn-div">
-      <Icon />
+      <Icon className="auth-btn-icon" />
       <p>{label}</p>
     </div>
   );
