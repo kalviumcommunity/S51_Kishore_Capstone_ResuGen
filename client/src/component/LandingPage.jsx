@@ -2,29 +2,26 @@ import React, { useState, useEffect } from "react";
 import "./LandingPage.css";
 import SignUpPage from "./SignUp/SignUp";
 import Logo from "../assets/Logo.png";
+import templateIcon from "../assets/templateIcon.png"
+import customFont from "../assets/font.png"
+import resumeIcon from "../assets/resume.png"
+import aiIcon from "../assets/ai-icon.png"
+import { useSpring, animated } from "@react-spring/web";
 import LandingPageLogo from "../assets/landing-page-img.png";
 import Button from "@mui/material/Button";
 import { Link, useNavigate } from "react-router-dom";
 import { Splide, SplideSlide } from "@splidejs/react-splide";
 import "@splidejs/react-splide/css/sea-green";
-import { useSpring, animated } from "@react-spring/web";
 import useUser from "../Hooks/useUser";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { AnimatePresence, motion } from "framer-motion";
 import { GrFormClose } from "react-icons/gr";
-import { GiArtificialIntelligence } from "react-icons/gi";
-
 // import Spinner from "./SpinnerCompo/Spinner";
 import { signOut } from "firebase/auth";
 import { auth } from "../firebase";
 import { useQueryClient } from "react-query";
 import { toast } from "react-toastify";
 import { adminId } from "../admin/AdminAcc";
-import stickynote from "../assets/sticky-notes.png";
-import templateicon from "../assets/feature-template-img.png";
-import resumeicon from "../assets/resume.png";
-import customfonticon from "../assets/font-size.png";
-import Skeleton from "react-loading-skeleton";
 import Foot from "./Footer/Footer";
 import { MdOutlineKeyboardArrowUp } from "react-icons/md";
 import "../utils/CustomScrollBar.css";
@@ -62,7 +59,7 @@ const LandingPage = () => {
     const isLoggedIn = localStorage.getItem("isLoggedIn");
     if (isLoggedIn) {
       setUserFromLoggedIn(true);
-    }else{
+    } else {
       setUserFromLoggedIn(false);
     }
   }, []);
@@ -170,6 +167,14 @@ const LandingPage = () => {
     setIsMenuOpen(!isMenuOpen);
   };
 
+  useEffect(() => {
+    if (isMenuOpen) {
+      document.body.classList.add("no-scroll");
+    } else {
+      document.body.classList.remove("no-scroll");
+    }
+  }, [isMenuOpen]);
+
   const animation = useSpring({
     from: { opacity: 0, transform: "translateY(-15%)" },
     to: {
@@ -215,7 +220,6 @@ const LandingPage = () => {
       console.error("Logout error:", error);
     }
   };
-  
 
   const scrollToTop = () => {
     window.scrollTo({
@@ -259,26 +263,19 @@ const LandingPage = () => {
                 <p className="context menu">My Resumes</p>
               </Link>
 
-              {!(userLoggedIn || userFormLoggedIn) ? (
-                <p onClick={handleLogOut} className="logout context pointer">
-                  Log out
-                </p>
-              ) : (
-                <Link className="login" to="/login">
-                  
-                  <p className="login context pointer">Login</p>
-                </Link>
-              )}
             </div>
           </motion.div>
         </AnimatePresence>
       )}
 
       {showBackToTop && (
-        <div className="back-to-top-btn" onClick={scrollToTop}>
-          <svg className="svgIcon" viewBox="0 0 384 512">
-            <path d="M214.6 41.4c-12.5-12.5-32.8-12.5-45.3 0l-160 160c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L160 141.2V448c0 17.7 14.3 32 32 32s32-14.3 32-32V141.2L329.4 246.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3l-160-160z"></path>
-          </svg>
+        <div className="Btn" onClick={scrollToTop}>
+          
+            <svg height="1.2em" className="arrow" viewBox="0 0 512 512">
+              <path d="M233.4 105.4c12.5-12.5 32.8-12.5 45.3 0l192 192c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L256 173.3 86.6 342.6c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3l192-192z"></path>
+            </svg>
+            {/* <p class="text">Back to Top</p> */}
+          {/* </button> */}
         </div>
       )}
 
@@ -286,7 +283,7 @@ const LandingPage = () => {
         <GiHamburgerMenu
           onClick={toggleHamburgerClick}
           className="hamburger-icon"
-          style={{ width: "7.5rem" }}
+          style={{ width: "7.5rem", height: "3rem"}}
         />
 
         <div className="top-left">
@@ -394,7 +391,7 @@ const LandingPage = () => {
         <div className="features">
           <div className="feature one">
             <div className="feature-heading">
-              <img className="features-img" src={templateicon} alt="" />
+              <img className="features-img" src={templateIcon} alt="" />
               <h2>Professional Templates</h2>
             </div>
 
@@ -406,7 +403,9 @@ const LandingPage = () => {
           </div>
           <div className="feature two">
             <div className="feature-heading">
-              <img className="features-img" src={customfonticon} alt="" />
+              <img className="features-img" 
+              src={customFont}
+              alt="img" />
               <h2>Customisable fonts and colors</h2>
             </div>
 
@@ -418,7 +417,9 @@ const LandingPage = () => {
           </div>
           <div className="feature three">
             <div className="feature-heading">
-              <img className="features-img" src={resumeicon} alt="" />
+              <img className="features-img" 
+              src={resumeIcon} 
+              alt="img" />
               <h2>Free resume Examples</h2>
             </div>
 
@@ -430,7 +431,9 @@ const LandingPage = () => {
           </div>
           <div className="feature four">
             <div className="feature-heading">
-              <GiArtificialIntelligence style={{ fontSize: "60px" }} />
+            <img className="features-img" 
+              src={aiIcon} 
+              alt="img" />
               <h2>Professional Templates</h2>
             </div>
 
@@ -488,19 +491,6 @@ const LandingPage = () => {
         </div>
       </div>
 
-      <div className="resume-example-div">
-        <div className="example-heading">
-          <h2>Our Most Popular Resume Example</h2>
-        </div>
-        <div className="examples">
-          {Array.isArray(tempImg) &&
-            tempImg.map((data) => (
-              <div className="example">
-                <img key={data.id} src={data.templateImg} alt="template" />
-              </div>
-            ))}
-        </div>
-      </div>
       {/* </Scrollbars> */}
       <Foot />
     </>
