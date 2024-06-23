@@ -39,7 +39,6 @@ const ResumePreview = () => {
             {about.picture && (
               <img
                 style={imgStyle}
-                
                 src={about.picture}
                 alt="avatar"
               />
