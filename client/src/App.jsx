@@ -10,7 +10,6 @@ import MyResume from "./component/UserResumes/MyResume";
 import SignUpPage from "./component/SignUp/SignUp";
 import ProtectUserData from "./component/ProtectUserData";
 import ForgotPassCompo from "./component/ForgotPass/ForgotPassCompo";
-import ResTemp1 from "./component/pages/ResTemp1";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
 import UserInput from "./component/UserInputs/PersonalDetails/UserInput";
@@ -39,7 +38,6 @@ function App() {
             </Route>
             <Route path="/forgotpass" element={<ForgotPassCompo />} />
             {/* <Route path="/profile/:uid" element={<MyResume />} /> */}
-            <Route path="/templates" element={<ResTemp1 />} />{" "}
             {/* Remove this route after testing */}
             <Route path="/inputs" element={<UserInput />}></Route>{" "}
             {/* Remove this route after testing */}
