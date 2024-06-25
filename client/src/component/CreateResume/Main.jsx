@@ -1,11 +1,16 @@
+import React, { useState } from 'react';
 import {
-    Box,
     Container,
     Stack,
-    Text,
-    HStack,
-    Heading,
     Button,
+    Modal,
+    ModalOverlay,
+    ModalContent,
+    ModalHeader,
+    ModalFooter,
+    ModalBody,
+    ModalCloseButton,
+    useDisclosure,
 } from '@chakra-ui/react';
 import Builder from './Builder';
 import ResumePreview from '../pages/ResumePreview';
@@ -13,32 +18,26 @@ import ThemeSelect from '../UserInputs/Theme/ThemeSelect';
 import { useReactToPrint } from 'react-to-print';
 import { useResume } from '../../Context';
 import { MdOutlineFileDownload } from 'react-icons/md';
-import React from 'react';
+import ChatBox from './ChatBox';
 const Main = () => {
-
     const { printElem } = useResume();
-
+    const { isOpen, onOpen, onClose } = useDisclosure();
     const handlePrint = useReactToPrint({
         content: () => printElem.current,
     });
 
+    const handleDownload = () => {
+        handlePrint();
+        onClose();
+    };
+
     return (
-        <Container
-            bg={'gray.50'}
-            minW={'full'}
-            py={10}
-            id='builder'
-        >
-
-            {/* <Heading as='h4' size='lg' textAlign={'center'} color={'gray.700'} style={{ fontFamily: 'Poppins' }} fontWeight={'medium'}>Builder Dashboard</Heading> */}
-
+        <Container bg={'gray.50'} minW={'full'} py={10} id='builder'>
             <Container maxW={'7xl'} px={8} my={3}>
-
                 <Stack justifyContent={'space-between'} pt={4} direction={{ base: 'column', sm: 'row' }}>
                     <ThemeSelect />
-                    <Button rightIcon={<MdOutlineFileDownload />} onClick={handlePrint} colorScheme={'purple'}>Download</Button>
+                    <Button rightIcon={<MdOutlineFileDownload />} onClick={onOpen} colorScheme={'purple'}>Download</Button>
                 </Stack>
-
             </Container>
 
             <Stack
@@ -53,8 +52,30 @@ const Main = () => {
                 <Builder />
                 <ResumePreview />
             </Stack>
-        </Container>
-    )
-}
 
-export default Main
+            <ChatBox />
+
+            <Modal isOpen={isOpen} onClose={onClose} isCentered>
+                <ModalOverlay />
+                <ModalContent>
+                    <ModalHeader>Download Resume</ModalHeader>
+                    <ModalCloseButton />
+                    <ModalBody>
+                        Are you sure you want to download your resume as a PDF?
+                    </ModalBody>
+
+                    <ModalFooter>
+                        <Button colorScheme="blue" mr={3} onClick={onClose}>
+                            Cancel
+                        </Button>
+                        <Button colorScheme="purple" onClick={handleDownload}>
+                            Download
+                        </Button>
+                    </ModalFooter>
+                </ModalContent>
+            </Modal>
+        </Container>
+    );
+};
+
+export default Main;

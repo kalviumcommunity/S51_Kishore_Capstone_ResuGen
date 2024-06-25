@@ -1,0 +1,86 @@
+.LiBuilder-top {
+  margin-top: 40px;
+  padding: 20px;
+}
+
+.LiBuilder-top h1 {
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
+  font-size: 36px;
+  line-height: 43px;
+  color: #013564;
+  margin: 0;
+  margin-bottom: 11px;
+  text-align: center;
+}
+
+.LiBuilder-top p {
+  margin: 0;
+  color: #013564;
+  font-size: 13px;
+  line-height: 20px;
+  font-family: "Poppins", sans-serif;
+  font-weight: 400;
+  text-align: center;
+}
+
+.LiBuilder-main {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  padding: 20px;
+  width: 90%;
+  height: 70vh;
+  margin: auto;
+}
+
+.file-upload-form {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.file-upload-label input {
+  display: none;
+}
+
+.file-upload-label {
+  cursor: pointer;
+  height: 21rem;
+  width: 35rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* background-color: #ddd; */
+  padding: 30px 70px;
+  border-radius: 10px;
+  border: 2px dashed rgb(188, 176, 255);
+}
+
+.file-upload-design {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+}
+
+.file-upload-design p {
+  font-size: 20px;
+  text-align: center;
+}
+.browse-button {
+  margin-top: 50px;
+  width: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #013564;
+  padding: 13px;
+  border-radius: 10px;
+  color: white;
+  transition: all 0.3s;
+}
+.browse-button:hover {
+  background-color: rgb(14, 14, 14);
+}
