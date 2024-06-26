@@ -1,3 +1,5 @@
+req
+
 meta {
   name: Login route
   type: http
@@ -5,7 +7,7 @@ meta {
 }
 
 post {
-  url: http://localhost:6969/login
+  url: process.env.LOGIN_ROUTE
   body: none
   auth: none
 }
