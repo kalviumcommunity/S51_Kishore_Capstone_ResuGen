@@ -228,7 +228,7 @@ const ResumePreview = () => {
                   );
                 })}
               </VStack>
-              // PROJECTS
+              PROJECTS
             </VStack>
           </HStack>
         </div>

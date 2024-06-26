@@ -38,7 +38,7 @@ const SignUpPage = () => {
     }
   
     try {
-      const response = await axios.post(`http://localhost:6969/signup`, {
+      const response = await axios.post(`https://s51-kishore-capstone-resume-builder.onrender.com/signup`, {
         userEmail: formData.email,
         userPassword: formData.password,
       });

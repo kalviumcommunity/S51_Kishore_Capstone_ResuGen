@@ -34,9 +34,9 @@ const LoginPage = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setLoading(true); // show loader
+    setLoading(true);
     try {
-      const response = await axios.post("http://localhost:6969/login", {
+      const response = await axios.post("https://s51-kishore-capstone-resume-builder.onrender.com/login", {
         userEmail: formData.email,
         userPassword: formData.password,
       });
@@ -59,7 +59,7 @@ const LoginPage = () => {
 
   return (
     <>
-      <Header />
+      <Header/>
       {loading && (
         <div className="loader-container">
           <FallingLines

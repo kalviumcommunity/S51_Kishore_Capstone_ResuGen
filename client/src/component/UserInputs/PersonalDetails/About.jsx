@@ -4,7 +4,7 @@ import {
   FormLabel,
   HStack,
   Input,
-  Stack,
+Stack,
   Button,
 } from "@chakra-ui/react";
 import { useResume } from "../../../Context";
