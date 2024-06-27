@@ -1,12 +1,12 @@
 .footer-div{
     display: flex;
-    border: 2px solid black;
-    background-color: black;
-    color: white;
+    /* border: 2px solid black; */
+    background-color: rgb(235, 235, 235);
+    color: black;
     align-items: center;
     justify-content: space-between;
-    /* padding: 20px; */
-    /* width: 120%; */
+    padding: 25px;
+    width: 100%;
 }
 
 .footer-logo-div{

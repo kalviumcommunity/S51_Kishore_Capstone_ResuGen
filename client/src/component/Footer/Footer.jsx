@@ -1,6 +1,8 @@
 import React from "react";
 import "./Footer.css";
 import Logo from "../../assets/Logo.png";
+import { chakra, Flex, Icon } from "@chakra-ui/react";
+
 import { FiGithub } from "react-icons/fi";
 import { CiLinkedin } from "react-icons/ci";
 import { AiOutlineInstagram } from "react-icons/ai";
@@ -28,7 +30,7 @@ const Foot = () => {
             >
               <FiGithub
                 style={{
-                  color: "#ffffff",
+                  color: "#000000",
                   fontSize: "30px",
                 }}
               />
@@ -40,7 +42,7 @@ const Foot = () => {
             >
               <CiLinkedin
                 style={{
-                  color: "#ffffff",
+                  color: "#000000",
                   fontSize: "30px",
                 }}
               />
@@ -48,7 +50,7 @@ const Foot = () => {
             <a href="#">
               <AiOutlineInstagram
                 style={{
-                  color: "#ffffff",
+                  color: "#000000",
                   fontSize: "30px",
                 }}
               />

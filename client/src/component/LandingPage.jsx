@@ -2,10 +2,10 @@ import React, { useState, useEffect } from "react";
 import "./LandingPage.css";
 import SignUpPage from "./SignUp/SignUp";
 import Logo from "../assets/Logo.png";
-import templateIcon from "../assets/templateIcon.png"
-import customFont from "../assets/font.png"
-import resumeIcon from "../assets/resume.png"
-import aiIcon from "../assets/ai-icon.png"
+import templateIcon from "../assets/templateIcon.png";
+import customFont from "../assets/font.png";
+import resumeIcon from "../assets/resume.png";
+import aiIcon from "../assets/ai-icon.png";
 import { useSpring, animated } from "@react-spring/web";
 import LandingPageLogo from "../assets/landing-page-img.png";
 import Button from "@mui/material/Button";
@@ -262,7 +262,6 @@ const LandingPage = () => {
               <Link to="/my-resumes">
                 <p className="context menu">My Resumes</p>
               </Link>
-
             </div>
           </motion.div>
         </AnimatePresence>
@@ -270,11 +269,10 @@ const LandingPage = () => {
 
       {showBackToTop && (
         <div className="Btn" onClick={scrollToTop}>
-          
-            <svg height="1.2em" className="arrow" viewBox="0 0 512 512">
-              <path d="M233.4 105.4c12.5-12.5 32.8-12.5 45.3 0l192 192c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L256 173.3 86.6 342.6c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3l192-192z"></path>
-            </svg>
-            {/* <p class="text">Back to Top</p> */}
+          <svg height="1.2em" className="arrow" viewBox="0 0 512 512">
+            <path d="M233.4 105.4c12.5-12.5 32.8-12.5 45.3 0l192 192c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L256 173.3 86.6 342.6c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3l192-192z"></path>
+          </svg>
+          {/* <p class="text">Back to Top</p> */}
           {/* </button> */}
         </div>
       )}
@@ -283,7 +281,7 @@ const LandingPage = () => {
         <GiHamburgerMenu
           onClick={toggleHamburgerClick}
           className="hamburger-icon"
-          style={{ width: "7.5rem", height: "3rem"}}
+          style={{ width: "7.5rem", height: "3rem" }}
         />
 
         <div className="top-left">
@@ -331,7 +329,8 @@ const LandingPage = () => {
                   sx={{
                     border: "2px solid lightblue",
                     color: "black",
-                    borderRadius: "15px",
+                    borderRadius: "10px",
+                    color: "grey",
                     textDecoration: "none",
                     fontFamily: "inherit",
                     "&:hover": {
@@ -356,7 +355,7 @@ const LandingPage = () => {
         <div className="content-left">
           <h1>Build Your Dream Resume Now!</h1>
           <div className="description">
-            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Cum</p>
+            <p>Build your resume and land your dream job now.</p>
           </div>
 
           <div className="get-started-btn">
@@ -367,7 +366,7 @@ const LandingPage = () => {
                   color: "black",
                   fontWeight: "medium",
                   padding: "8px",
-                  borderRadius: "10px",
+                  borderRadius: "8px",
                   fontFamily: "inherit",
                   "&:hover": {
                     backgroundColor: "black",
@@ -396,51 +395,53 @@ const LandingPage = () => {
             </div>
 
             <p className="feature-p">
-              Lorem ipsum dolor sit amet consectetur, adipisicing elit. Cum sint
-              dignissimos quia temporibus id! Lorem ipsum dolor sit amet,
-              consectetur adipisicing elit. Esse ?
+              Our platform offers a variety of professionally designed templates
+              that cater to different industries and roles. These templates are
+              crafted by experts to help you create a polished and impactful
+              resume effortlessly. With clean layouts and modern designs, your
+              resume will stand out to potential employers.
             </p>
           </div>
           <div className="feature two">
             <div className="feature-heading">
-              <img className="features-img" 
-              src={customFont}
-              alt="img" />
-              <h2>Customisable fonts and colors</h2>
+              <img className="features-img" src={customFont} alt="img" />
+              <h2>Customizable fonts and colors</h2>
             </div>
 
             <p className="feature-p">
-              Lorem ipsum dolor sit amet consectetur, adipisicing elit. Cum sint
-              dignissimos quia temporibus id! Lorem ipsum dolor sit amet,
-              consectetur adipisicing elit. Esse ?
+              Express your personality and style with our customizable fonts and
+              color options. Tailor your resume to match your personal branding
+              or the tone of the job you're applying for. Whether you prefer
+              classic elegance or modern flair, you have full control over the
+              appearance of your resume.
             </p>
           </div>
           <div className="feature three">
             <div className="feature-heading">
-              <img className="features-img" 
-              src={resumeIcon} 
-              alt="img" />
+              <img className="features-img" src={resumeIcon} alt="img" />
               <h2>Free resume Examples</h2>
             </div>
 
             <p className="feature-p">
-              Lorem ipsum dolor sit amet consectetur, adipisicing elit. Cum sint
-              dignissimos quia temporibus id! Lorem ipsum dolor sit amet,
-              consectetur adipisicing elit. Esse ?
+              Get inspired by our collection of free resume examples. These
+              samples cover a wide range of professions and career levels,
+              providing you with ideas and guidance on how to structure and
+              write your own resume. Learn from real-life examples and
+              understand what makes a resume effective.
             </p>
           </div>
           <div className="feature four">
             <div className="feature-heading">
-            <img className="features-img" 
-              src={aiIcon} 
-              alt="img" />
-              <h2>Professional Templates</h2>
+              <img className="features-img" src={aiIcon} alt="img" />
+              <h2>AI Chat-Box</h2>
             </div>
 
             <p className="feature-p">
-              Lorem ipsum dolor sit amet consectetur, adipisicing elit. Cum sint
-              dignissimos quia temporibus id! Lorem ipsum dolor sit amet,
-              consectetur adipisicing elit. Esse ?
+              Leverage the power of AI with our intelligent chat-box feature,
+              Gemni. This tool assists you in crafting a resume by providing
+              real-time suggestions, feedback, and summaries based on your
+              input. Gemni helps streamline the resume-building process, making
+              it more efficient and tailored to your needs.
             </p>
           </div>
         </div>
@@ -471,27 +472,25 @@ const LandingPage = () => {
               },
             }}
           >
-            <SplideSlide>
-              <img src={Logo} alt="Slide 1" />
-              <p>This is slide one.</p>
+            <SplideSlide className="splide-slide">
+              <img src="https://cdn.enhancv.com/timeline_traditional_resume_template_519a441f5c.png" alt="Slide 1" />
+              {/* <p>This is slide one.</p> */}
             </SplideSlide>
-            <SplideSlide>
-              <img src={Logo} alt="Slide 2" />
-              <p>This is slide two.</p>
+            <SplideSlide className="splide-slide">
+              <img src="https://cdn.enhancv.com/timeline_traditional_resume_template_519a441f5c.png" alt="Slide 2" />
+              {/* <p>This is slide two.</p> */}
             </SplideSlide>
-            <SplideSlide>
-              <img src={Logo} alt="Slide 3" />
-              <p>This is slide three</p>
+            <SplideSlide className="splide-slide">
+              <img src="https://cdn.enhancv.com/timeline_traditional_resume_template_519a441f5c.png" alt="Slide 3" />
+              {/* <p>This is slide three</p> */}
             </SplideSlide>
-            <SplideSlide>
-              <img src={Logo} alt="Slide 4" />
-              <p>This is slide four</p>
+            <SplideSlide className="splide-slide">
+              <img src='https://cdn.enhancv.com/timeline_traditional_resume_template_519a441f5c.png' alt="Slide 4" />
+              {/* <p>This is slide four</p> */}
             </SplideSlide>
           </Splide>
         </div>
       </div>
-
-      {/* </Scrollbars> */}
       <Foot />
     </>
   );
