@@ -1,15 +1,14 @@
 import React, { useState, useEffect } from "react";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Header from "../HeaderComponent/Header";
 import AuthButton from "../AuthButtonCompo/AuthButton";
-import { FaGoogle, FaGithub } from "react-icons/fa6";
+import { FaGoogle, FaGithub } from "react-icons/fa";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const SignUpPage = () => {
   const navigate = useNavigate();
-  // const {token} = useParams()
 
   const [formData, setFormData] = useState({
     email: "",
@@ -31,12 +30,12 @@ const SignUpPage = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-  
+
     if (formData.password !== formData.confirmPassword) {
       toast.error("Passwords do not match");
       return;
     }
-  
+
     try {
       const response = await axios.post(`https://s51-kishore-capstone-resume-builder.onrender.com/signup`, {
         userEmail: formData.email,
@@ -44,15 +43,18 @@ const SignUpPage = () => {
       });
       console.log(response.data);
       if (response.status === 200) {
-        navigate(`/waiting`);
         localStorage.setItem("isLoggedIn", true);
+        navigate(`/`);
       }
     } catch (error) {
       console.error("Error:", error);
-      toast.error("Error during registration. Please try again later.");
+      if (error.response && error.response.data.message) {
+        toast.error(error.response.data.message);
+      } else {
+        toast.error("Error during registration. Please try again later.");
+      }
     }
   };
-  
 
   return (
     <>
@@ -60,7 +62,7 @@ const SignUpPage = () => {
       <div className="login-div">
         <div className="log-div">
           <form className="form" onSubmit={handleSubmit}>
-            <p className="title">Sign Up </p>
+            <p className="title">Sign Up</p>
             <pre>Sign up to my website to get started</pre>
 
             <label>
