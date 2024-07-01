@@ -13,10 +13,8 @@ const Foot = () => {
       <div className="footer-logo-div">
         <img className="footer-logo" src={Logo} alt="logo" />
         <pre>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto{" "}
-          <br />
-          tenetur nisi suscipit doloremque nobis praesentium <br />
-          perferendis, quam
+          We are dedicated to providing the best service possible. <br />
+          Connect with us on social media and stay updated with our  <br /> latest news and updates.
         </pre>
       </div>
       <div className="footer-socails-div">

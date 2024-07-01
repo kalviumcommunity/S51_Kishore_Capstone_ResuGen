@@ -16,6 +16,7 @@ import UserInput from "./component/UserInputs/PersonalDetails/UserInput";
 import CreateResume from "./component/CreateResume/CreateResume";
 import UserExp from "./component/UserInputs/Experience/UserExp";
 import WaitingPage from "./component/WaitingArea/WaitingPage";
+import LinkedInBuilder from "./component/CreateResume/LinkedInBuilder";
 import ResumeBuilderMain from "./ResumeBuilderMain";
 
 
@@ -42,8 +43,10 @@ function App() {
             <Route path="/inputs" element={<UserInput />}></Route>{" "}
             {/* Remove this route after testing */}
             <Route path="/build/create-resume" element={<CreateResume />} />
+            <Route path="/build/linkedin" element={<LinkedInBuilder />}></Route>
             <Route path="/work-experience" element={<UserExp />}></Route>
-            <Route path="/waiting" element={<WaitingPage />}></Route>
+            <Route path="/verify-email/" element={<WaitingPage />}></Route>
+
           </Routes>
         </BrowserRouter>
         <ToastContainer position="top-right" theme="dark" />

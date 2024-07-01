@@ -56,6 +56,7 @@ body {
 
 .middle {
   /* border: 2px solid red; */
+  /* gap: 10px; */
   display: flex;
   margin-top: 0;
   margin-bottom: 0;
@@ -63,6 +64,7 @@ body {
   padding: 10px;
   justify-content: space-around;
   flex: 0.8;
+  width: 70vw;
   text-align: center;
 }
 
@@ -226,7 +228,6 @@ body {
   border-radius: 10px;
 }
 
-/* Splide Slider Styles */
 
 .splide-div {
   display: flex;

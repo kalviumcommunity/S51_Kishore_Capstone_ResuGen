@@ -10,17 +10,7 @@ const MyResume = () => {
   return (
     <>
         <Header />  
-        <div className="user-resume-div">
-            <h2 className="user-resume-heading">Your Resumes</h2>
-            <div className="user-resume">
-                <div className="user"></div>
-                <div className="user"></div>
-                <div className="user"></div>
-                <div className="user"></div>
-                <div className="user"></div>
-                <div className="user"></div>
-            </div>
-        </div>
+        
     </>
   );
 };

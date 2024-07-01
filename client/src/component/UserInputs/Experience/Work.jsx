@@ -46,7 +46,7 @@ const Work = () => {
     const generateSummary = async () => {
         try {
             const skills = JSON.parse(localStorage.getItem('skills')) || [];
-            const response = await axios.post('http://localhost:6969/chat', { experience: workList, skills: skills.map(skill => skill.name) });
+            const response = await axios.post('hhttps://s51-kishore-capstone-resume-builder.onrender.com/chat', { experience: workList, skills: skills.map(skill => skill.name) });
             const summaries = response.data.summaries || []; // Default to an empty array if summaries are not returned
             const updatedWorkList = workList.map((work, index) => ({
                 ...work,

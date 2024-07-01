@@ -6,6 +6,7 @@ import { FaGoogle, FaGithub } from "react-icons/fa";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Loader from "react-loader-spinner"; // Import loader spinner
 
 const SignUpPage = () => {
   const navigate = useNavigate();
@@ -15,6 +16,8 @@ const SignUpPage = () => {
     password: "",
     confirmPassword: "",
   });
+
+  const [isLoading, setIsLoading] = useState(false); // State for loading
 
   useEffect(() => {
     // Check if user is already authenticated and redirect if necessary
@@ -36,6 +39,8 @@ const SignUpPage = () => {
       return;
     }
 
+    setIsLoading(true); // Set loading to true when form is submitted
+
     try {
       const response = await axios.post(`https://s51-kishore-capstone-resume-builder.onrender.com/signup`, {
         userEmail: formData.email,
@@ -43,16 +48,14 @@ const SignUpPage = () => {
       });
       console.log(response.data);
       if (response.status === 200) {
-        localStorage.setItem("isLoggedIn", true);
-        navigate(`/`);
+        toast.success("Registration successful! Please check your email for verification.");
+        navigate(`/verify-email?token=${response.data.verificationToken}`);
       }
     } catch (error) {
-      console.error("Error:", error);
-      if (error.response && error.response.data.message) {
-        toast.error(error.response.data.message);
-      } else {
-        toast.error("Error during registration. Please try again later.");
-      }
+      console.log(error);
+      toast.error("Error during registration. Please try again later.");
+    } finally {
+      setIsLoading(false); // Set loading to false after registration is complete
     }
   };
 
@@ -98,8 +101,12 @@ const SignUpPage = () => {
               />
               <span>Confirm Password</span>
             </label>
-            <button type="submit" className="submit">
-              Submit
+            <button type="submit" className="submit" disabled={isLoading}>
+              {isLoading ? (
+                <Loader type="ThreeDots" color="#00BFFF" height={20} width={20} />
+              ) : (
+                "Submit"
+              )}
             </button>
             <p className="signin">
               Already have an account? <Link to="/login">Login</Link>
