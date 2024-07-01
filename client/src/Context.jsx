@@ -32,76 +32,7 @@
             },
         ]);
 
-        const [skills, setSkills] = useState([
-            {
-                id: 1,
-                name: "JavaScript",
-            },
-            {
-                id: 2,
-                name: "ReactJS",
-            },
-            {
-                id: 3,
-                name: "NodeJS",
-            },
-            {
-                id: 4,
-                name: "MongoDB",
-            },
-            {
-                id: 5,
-                name: "ExpressJS",
-            },
-            {
-                id: 6,
-                name: "PHP",
-            },
-            {
-                id: 7,
-                name: ".Net",
-            },
-            {
-                id: 8,
-                name: "Java",
-            },
-            {
-                id: 9,
-                name: "RestAPI",
-            },
-            {
-                id: 10,
-                name: "jQuery",
-            },
-            {
-                id: 11,
-                name: "MySQL",
-            },
-            {
-                id: 12,
-                name: "Ajax",
-            },
-            {
-                id: 13,
-                name: "GitHub",
-            },
-            {
-                id: 14,
-                name: "HTML",
-            },
-            {
-                id: 15,
-                name: "CSS",
-            },
-            {
-                id: 16,
-                name: "TailwindCSS",
-            },
-            {
-                id: 17,
-                name: "Bootstrap",
-            },
-        ]);
+        const [skills, setSkills] = useState([]);
 
         const [workList, setWorkList] = useState([
             {

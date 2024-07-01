@@ -126,7 +126,7 @@ const LandingPage = () => {
   };
 
   const handleTemplateScroll = () => {
-    const templateContainer = document.querySelector(".resume-example-div");
+    const templateContainer = document.querySelector(".footer");
     if (templateContainer) {
       templateContainer.scrollIntoView({ behavior: "smooth" });
     }
@@ -304,12 +304,12 @@ const LandingPage = () => {
               Resume Examples
             </p>
 
-            <p className="context" onClick={handleTemplateScroll}>
-              Resume Templates
-            </p>
             <Link to="/my-resumes">
               <p className="context">My Resumes</p>
             </Link>
+            <p className="context" onClick={handleTemplateScroll}>
+              Contact us
+            </p>
           </div>
 
           <div className="top-right">
@@ -328,7 +328,6 @@ const LandingPage = () => {
                 <Button
                   sx={{
                     border: "2px solid lightblue",
-                    color: "black",
                     borderRadius: "10px",
                     color: "grey",
                     textDecoration: "none",
@@ -491,7 +490,9 @@ const LandingPage = () => {
           </Splide>
         </div>
       </div>
-      <Foot />
+        <Foot />  
+      <div className="footer" >
+      </div>
     </>
   );
 };

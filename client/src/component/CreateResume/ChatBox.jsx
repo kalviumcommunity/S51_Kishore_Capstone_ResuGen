@@ -26,7 +26,7 @@ const ChatBox = () => {
             setHint(hintMessages[Math.floor(Math.random() * hintMessages.length)]);
             setShowHint(true);
             setTimeout(() => setShowHint(false), 5000);
-        }, 1000);
+        }, 13000);
 
         return () => clearInterval(hintInterval);
     }, []);
@@ -37,7 +37,7 @@ const ChatBox = () => {
             setInput('');
             let response;
             if (input.toLowerCase() === "give me some tips") {
-                response = await fetch('http://localhost:6969/chat', {
+                response = await fetch('https://s51-kishore-capstone-resume-builder.onrender.com/chat', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -45,7 +45,7 @@ const ChatBox = () => {
                     body: JSON.stringify({ message: input, experience: workList }),
                 });
             } else {
-                response = await fetch('http://localhost:6969/chat', {
+                response = await fetch('https://s51-kishore-capstone-resume-builder.onrender.com/chat', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',

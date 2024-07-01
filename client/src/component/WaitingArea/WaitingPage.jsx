@@ -12,7 +12,7 @@ const WaitingPage = () => {
 
   const verifyEmail = async () => {
     try {
-      const response = await axios.get(`http://localhost:6969/verify-email?token=${token}`);
+      const response = await axios.get(`https://s51-kishore-capstone-resume-builder.onrender.com/verify-email?token=${token}`);
       if (response.status === 200) {
         toast.success("Email verified successfully! Please Login to continue");
         navigate("/login");
