@@ -12,7 +12,7 @@ import React, { useState, useEffect } from "react";
 import { v4 as uuidv4 } from "uuid";
 import { useResume } from "../../../Context";
 import { useToast } from "@chakra-ui/react";
-import Select from "react-select";
+import CreatableSelect from "react-select/creatable";
 
 // List of potential skills
 const potentialSkills = [
@@ -196,7 +196,7 @@ const Skills = () => {
       >
         <FormControl isInvalid={error}>
           <FormLabel htmlFor="skill">Add Skills</FormLabel>
-          <Select
+          <CreatableSelect
             options={potentialSkills}
             value={skill}
             onChange={setSkill}
