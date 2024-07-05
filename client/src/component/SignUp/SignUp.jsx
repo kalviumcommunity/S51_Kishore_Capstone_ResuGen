@@ -6,7 +6,7 @@ import { FaGoogle, FaGithub } from "react-icons/fa";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import Loader from "react-loader-spinner"; // Import loader spinner
+// import Loader from "react-loader-spinner"; 
 
 const SignUpPage = () => {
   const navigate = useNavigate();
@@ -46,7 +46,7 @@ const SignUpPage = () => {
         userEmail: formData.email,
         userPassword: formData.password,
       });
-      console.log(response.data);
+      // console.log(response.data);
       if (response.status === 200) {
         toast.success("Registration successful! Please check your email for verification.");
         navigate(`/verify-email?token=${response.data.verificationToken}`);

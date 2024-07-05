@@ -1,10 +1,10 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   FormControl,
   FormLabel,
   HStack,
   Input,
-Stack,
+  Stack,
   Button,
 } from "@chakra-ui/react";
 import { useResume } from "../../../Context";
@@ -17,6 +17,17 @@ const About = () => {
     const { name, value } = e.target;
     setAbout({ ...about, [name]: value });
   };
+
+  useEffect(() => {
+    const storedAbout = JSON.parse(localStorage.getItem("about"));
+    if (storedAbout) {
+      setAbout(storedAbout);
+    }
+  }, [setAbout]);
+
+  useEffect(() => {
+    localStorage.setItem("about", JSON.stringify(about));
+  }, [about]);
 
   return (
     <Stack spacing={4} mb={2}>
@@ -38,6 +49,7 @@ const About = () => {
         <FormControl>
           <FormLabel htmlFor="name">Full Name</FormLabel>
           <Input
+            value={about.name}
             onChange={handleChange}
             name="name"
             id="name"
@@ -49,6 +61,7 @@ const About = () => {
         <FormControl>
           <FormLabel htmlFor="role">Role</FormLabel>
           <Input
+            value={about.role}
             onChange={handleChange}
             name="role"
             id="role"
@@ -63,6 +76,7 @@ const About = () => {
         <FormControl>
           <FormLabel htmlFor="email">Email</FormLabel>
           <Input
+            value={about.email}
             onChange={handleChange}
             name="email"
             id="email"
@@ -74,6 +88,7 @@ const About = () => {
         <FormControl>
           <FormLabel htmlFor="phone">Phone</FormLabel>
           <Input
+            value={about.phone}
             onChange={handleChange}
             name="phone"
             id="phone"
@@ -88,6 +103,7 @@ const About = () => {
         <FormControl>
           <FormLabel htmlFor="address">Address</FormLabel>
           <Input
+            value={about.address}
             onChange={handleChange}
             name="address"
             id="address"
@@ -99,6 +115,7 @@ const About = () => {
         <FormControl>
           <FormLabel htmlFor="linkedin">LinkedIn</FormLabel>
           <Input
+            value={about.linkedin}
             onChange={handleChange}
             name="linkedin"
             id="linkedin"

@@ -31,7 +31,7 @@ const Education = () => {
                             <h2>
                                 <AccordionButton>
                                     <Box flex='1' textAlign='left'>
-                                        <Text fontWeight={'medium'}>{education.degree ? education.degree : "Degree"}</Text>
+                                        <Text fontWeight={'medium'}>{education.degree ? wwwweducation.degree : "Degree"}</Text>
                                     </Box>
                                     <AccordionIcon />
                                 </AccordionButton>

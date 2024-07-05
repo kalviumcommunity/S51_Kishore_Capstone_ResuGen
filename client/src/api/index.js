@@ -6,7 +6,6 @@ export const getUserDetail = () => {
         const unsubscribeAuth = auth.onAuthStateChanged((userCred) => {
             if (userCred) {
                 const userData = userCred.providerData[0];
-                console.log(userData); // Make sure to remove this in production
                 const userDocRef = doc(db, "users", userData?.uid);
                 const unsubscribeSnapshot = onSnapshot(userDocRef, (_doc) => {
                     if (_doc.exists()) {
