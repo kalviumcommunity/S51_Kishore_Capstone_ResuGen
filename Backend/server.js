@@ -1,22 +1,25 @@
 const express = require("express");
-require("dotenv").config();
-const app = express();
-const { GoogleGenerativeAI } = require("@google/generative-ai");
+const bodyParser = require('body-parser');
 const cors = require("cors");
-const port = process.env.PORT || 3000;
+require("dotenv").config();
+const { GoogleGenerativeAI } = require("@google/generative-ai");
 const { connectToDB } = require("./database");
 const {
   templatesRouter,
   signUpRouter,
   loginRouter,
+  reviewRouter,
 } = require("./Routes/route");
 
+const app = express();
+const port = process.env.PORT || 3000;
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 
-connectToDB();
+connectToDB(); // Connect to MongoDB
 
 // Middleware
 app.use(express.json());
+app.use(bodyParser.json());
 app.use(cors());
 
 // Routes
@@ -47,30 +50,30 @@ ${skills.join(', ')}`;
 
 app.post("/chat", async (req, res) => {
   try {
-      const { message, experience, skills } = req.body;
+    const { message, experience, skills } = req.body;
 
-      if (message.toLowerCase() === "give me some tips" && experience && skills) {
-          const experienceDetails = experience
-              .map(
-                  (exp) =>
-                      `Company: ${exp.company}, Position: ${exp.position}, StartDate: ${exp.startDate}, EndDate: ${exp.endDate}`
-              )
-              .join("; ");
-          const summaries = await generateSummary(experienceDetails, skills);
-          res.json({ response: summaries.join('\n') });
-      } else {
-          const prompt = `User asked: ${message}`;
-          const response = await generateResponse(prompt);
-          res.json({ response });
-      }
+    if (message.toLowerCase() === "give me some tips" && experience && skills) {
+      const experienceDetails = experience
+        .map(
+          (exp) =>
+            `Company: ${exp.company}, Position: ${exp.position}, StartDate: ${exp.startDate}, EndDate: ${exp.endDate}`
+        )
+        .join("; ");
+      const summaries = await generateSummary(experienceDetails, skills);
+      res.json({ response: summaries.join('\n') });
+    } else {
+      const prompt = `User asked: ${message}`;
+      const response = await generateResponse(prompt);
+      res.json({ response });
+    }
   } catch (error) {
-      console.error("Error generating chat response:", error);
-      res.status(500).json({ error: "Failed to generate chat response" });
+    console.error("Error generating chat response:", error);
+    res.status(500).json({ error: "Failed to generate chat response" });
   }
 });
 
-
 app.use("/template", templatesRouter);
+app.use('/reviews', reviewRouter);
 app.use("/", signUpRouter);
 app.use("/", loginRouter);
 
