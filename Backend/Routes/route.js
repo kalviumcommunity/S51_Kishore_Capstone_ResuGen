@@ -23,22 +23,13 @@ templatesRouter.get("/", async (req, res) => {
   }
 });
 
-function generateRandomToken() {
-  const token = jwt.sign(
-    { data: "verificationToken" },
-    process.env.SECRET_KEY,
-    {
-      expiresIn: "1d",
-    }
-  );
-  return token;
+// Generate a 6-digit OTP
+function generateOtp() {
+  return Math.floor(100000 + Math.random() * 900000).toString();
 }
 
-async function sendVerificationEmail(email, verificationToken) {
+async function sendOtpEmail(email, otp) {
   try {
-    console.log("Sending email to:", email);
-    console.log("Using token:", verificationToken);
-
     const transporter = nodemailer.createTransport({
       service: "gmail",
       auth: {
@@ -50,18 +41,19 @@ async function sendVerificationEmail(email, verificationToken) {
     const mailOptions = {
       from: process.env.ADMIN_EMAIL,
       to: email,
-      subject: "Account Verification",
+      subject: "Account Verification - OTP",
       html: `
-        <p>Please click the following button to verify your email address:</p>
-        <a href="http://localhost:5173/verify-email?token=${verificationToken}" style="background-color: lightgreen; color: white; padding: 10px 15px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; margin: 4px 2px; cursor: pointer; border-radius: 8px;" target="_self">Verify Email</a>
+        <p>Your OTP for account verification is:</p>
+        <h2>${otp}</h2>
+        <p>This OTP is valid for 10 minutes.</p>
       `,
     };
 
     await transporter.sendMail(mailOptions);
-    console.log("Verification email sent successfully");
+    console.log("OTP email sent successfully");
   } catch (error) {
-    console.error("Error sending verification email:", error);
-    throw new Error("Error sending verification email");
+    console.error("Error sending OTP email:", error);
+    throw new Error("Error sending OTP email");
   }
 }
 
@@ -80,25 +72,53 @@ signUpRouter.post("/signup", async (req, res) => {
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(userPassword, salt);
 
-    const verificationToken = generateRandomToken();
+    const otp = generateOtp();
+    const otpExpiry = Date.now() + 10 * 60 * 1000; // OTP valid for 10 minutes
 
     let newUser = await User.create({
       userPassword: hashedPassword,
       userEmail,
       isEmailVerified: false,
-      verificationToken,
+      otp,
+      otpExpiry,
     });
 
-    await sendVerificationEmail(userEmail, verificationToken);
+    await sendOtpEmail(userEmail, otp);
 
     return res.status(200).json({
-      message: `Welcome, ${newUser.userEmail}. A verification email has been sent to your email address.`,
-      verificationToken,
+      message: `Welcome, ${newUser.userEmail}. An OTP has been sent to your email address.`,
       user: newUser,
     });
   } catch (err) {
     console.error("Error during signup:", err);
     return res.status(500).json({ success: false, message: err.message });
+  }
+});
+
+// OTP Verification route
+signUpRouter.post("/verify-otp", async (req, res) => {
+  const { userEmail, otp } = req.body;
+
+  try {
+    const user = await User.findOne({ userEmail });
+
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    if (user.otp !== otp || user.otpExpiry < Date.now()) {
+      return res.status(400).json({ message: "Invalid or expired OTP" });
+    }
+
+    user.isEmailVerified = true;
+    user.otp = null;
+    user.otpExpiry = null;
+    await user.save();
+
+    res.status(200).json({ message: "Email verified successfully" });
+  } catch (error) {
+    console.error("Error verifying OTP:", error);
+    res.status(500).json({ message: "Internal server error" });
   }
 });
 
@@ -130,33 +150,6 @@ loginRouter.post("/login", async (req, res) => {
   } catch (error) {
     console.error("Error logging in:", error);
     res.status(500).json({ message: "Internal server error" });
-  }
-});
-
-// Email verification route
-signUpRouter.get("/verify-email", async (req, res) => {
-  const { token } = req.query;
-
-  try {
-    const decoded = jwt.verify(token, process.env.SECRET_KEY);
-
-    console.log("Decoded token:", decoded);
-
-    const user = await User.findOne({ verificationToken: token });
-
-    if (!user) {
-      console.log("User not found or token expired");
-      return res.status(400).send({ message: "Invalid or expired token" });
-    }
-
-    user.isEmailVerified = true;
-    user.verificationToken = null;
-    await user.save();
-
-    res.status(200).send({ message: "Email verified successfully" });
-  } catch (error) {
-    console.error("Error verifying email:", error);
-    res.status(500).send({ message: "Internal server error" });
   }
 });
 
