@@ -6,7 +6,7 @@ import { FaGoogle, FaGithub } from "react-icons/fa";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-// import Loader from "react-loader-spinner"; 
+import { FallingLines } from "react-loader-spinner";
 
 const SignUpPage = () => {
   const navigate = useNavigate();
@@ -17,7 +17,7 @@ const SignUpPage = () => {
     confirmPassword: "",
   });
 
-  const [isLoading, setIsLoading] = useState(false); // State for loading
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     // Check if user is already authenticated and redirect if necessary
@@ -33,35 +33,45 @@ const SignUpPage = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+    setLoading(true);
     if (formData.password !== formData.confirmPassword) {
       toast.error("Passwords do not match");
+      setLoading(false);
       return;
     }
 
-    setIsLoading(true); // Set loading to true when form is submitted
-
     try {
-      const response = await axios.post(`https://s51-kishore-capstone-resume-builder.onrender.com/signup`, {
+      const response = await axios.post(`http://localhost:6969/signup`, {
         userEmail: formData.email,
         userPassword: formData.password,
       });
-      // console.log(response.data);
       if (response.status === 200) {
-        toast.success("Registration successful! Please check your email for verification.");
-        navigate(`/verify-email?token=${response.data.verificationToken}`);
+        toast.success("An OTP has been sent to your email");
+        navigate("/signup/verification", {
+          state: { userEmail: formData.email },
+        });
       }
     } catch (error) {
       console.log(error);
       toast.error("Error during registration. Please try again later.");
     } finally {
-      setIsLoading(false); // Set loading to false after registration is complete
+      setLoading(false);
     }
   };
 
   return (
     <>
       <Header />
+      {loading && (
+        <div className="loading-container">
+          <FallingLines
+            color="#4fa94d"
+            width="100"
+            visible={true}
+            ariaLabel="falling-circles-loading"
+          />
+        </div>
+      )}
       <div className="login-div">
         <div className="log-div">
           <form className="form" onSubmit={handleSubmit}>
@@ -101,12 +111,8 @@ const SignUpPage = () => {
               />
               <span>Confirm Password</span>
             </label>
-            <button type="submit" className="submit" disabled={isLoading}>
-              {isLoading ? (
-                <Loader type="ThreeDots" color="#00BFFF" height={20} width={20} />
-              ) : (
-                "Submit"
-              )}
+            <button type="submit" className="submit">
+              Submit
             </button>
             <p className="signin">
               Already have an account? <Link to="/login">Login</Link>
@@ -118,11 +124,13 @@ const SignUpPage = () => {
               Icon={FaGoogle}
               label={"Continue with Google"}
               provider={"GoogleAuthProvider"}
+              setLoading={setLoading}
             />
             <AuthButton
               Icon={FaGithub}
               label={"Continue with Github"}
               provider={"GithubAuthProvider"}
+              setLoading={setLoading}
             />
           </div>
         </div>
