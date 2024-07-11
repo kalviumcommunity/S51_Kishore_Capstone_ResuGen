@@ -1,15 +1,34 @@
-import React from 'react';
+import React, { useState } from 'react';
 import "./LinkedInBuilder.css";
 import Header from '../HeaderComponent/Header';
 import { VscFilePdf } from "react-icons/vsc";
 import { PDFDocument } from 'pdf-lib';
 import { useNavigate } from 'react-router-dom';
 import { useResume } from '../../Context';
+import Spinner from '../SpinnerCompo/Spinner';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const LinkedInBuilder = () => {
   // const { setAbout, setEducationList, setSkills, setWorkList, setProjects } = useResume();
+  const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
 
   const handleFileUpload = async (event) => {
+    toast.info("This feature is still under research. Please try again later.", {
+      position: "top-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
+    return;
+
+    // Uncomment and use the below code once the feature is implemented
+
+    setLoading(true);
     const file = event.target.files[0];
     if (file) {
       const reader = new FileReader();
@@ -36,6 +55,9 @@ const LinkedInBuilder = () => {
         setSkills(extractedData.skills);
         setWorkList(extractedData.workList);
         setProjects(extractedData.projects);
+
+        // Redirect to the create-resume page
+        navigate("/build/create-resume");
       };
       reader.readAsArrayBuffer(file);
     }
@@ -61,10 +83,13 @@ const LinkedInBuilder = () => {
   return (
     <>
       <Header />
-      <div className="LiBuilder-top">
-        <h1>Import from LinkedIn</h1>
-        <p>Go to <a href="https://www.linkedin.com">LinkedIn</a> and open your profile. Then, hit "More" and "Save to PDF" to download your profile as a PDF file.</p>
-      </div>
+      <ToastContainer />
+      {loading ? <Spinner /> : (
+        <div className="LiBuilder-top">
+          <h1>Import from LinkedIn</h1>
+          <p>Go to <a href="https://www.linkedin.com">LinkedIn</a> and open your profile. Then, hit "More" and "Save to PDF" to download your profile as a PDF file.</p>
+        </div>
+      )}
       <div className="LiBuilder-main">
         <div className="Li-left">
           <img src="https://app.resumebuilder.com/assets/images/animated-linkedin-new.gif" alt="" />

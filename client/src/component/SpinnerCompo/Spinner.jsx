@@ -6,7 +6,7 @@ const Spinner = () => {
   return (
     <>
       <div className="spinner">
-        <HashLoader  size={35} />
+        <HashLoader size={35} />
       </div>
     </>
   );

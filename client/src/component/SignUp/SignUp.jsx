@@ -10,7 +10,6 @@ import { FallingLines } from "react-loader-spinner";
 
 const SignUpPage = () => {
   const navigate = useNavigate();
-
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -20,8 +19,7 @@ const SignUpPage = () => {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    // Check if user is already authenticated and redirect if necessary
-    // Add your authentication logic here if needed
+    
   }, []);
 
   const handleChange = (e) => {
@@ -72,7 +70,7 @@ const SignUpPage = () => {
           />
         </div>
       )}
-      <div className="login-div">
+      <div className={`login-div ${loading ? "blur" : ""}`}>
         <div className="log-div">
           <form className="form" onSubmit={handleSubmit}>
             <p className="title">Sign Up</p>

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./LoginPage.css";
-import { FaGoogle, FaGithub } from "react-icons/fa6";
+import { FaGoogle, FaGithub } from "react-icons/fa";
 import AuthButton from "../AuthButtonCompo/AuthButton";
 import useUser from "../../Hooks/useUser";
 import { Link, useNavigate } from "react-router-dom";
@@ -17,7 +17,7 @@ const LoginPage = () => {
     email: "",
     password: "",
   });
-  const [loading, setLoading] = useState(false); // state to control loader
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     if (!isLoading && data) {
@@ -35,25 +35,51 @@ const LoginPage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
-    try {
-      const response = await axios.post("https://s51-kishore-capstone-resume-builder.onrender.com/login", {
-        userEmail: formData.email,
-        userPassword: formData.password,
-      });
-      if (response.status === 200) {
-        toast.success("Login successful!");
-        setFormData({ email: "", password: "" });
-
-        setTimeout(() => {
-          setLoading(false); // hide loader
-          navigate("/", { replace: true });
-          localStorage.setItem("isLoggedIn", true);
-        }, 2000);
+    const resumeState = localStorage.getItem("resumeContent")
+    if (resumeState){
+      localStorage.setItem("isLoggedIn", true)
+      navigate("/build/create-resume")
+    }else{
+      try {
+        const response = await axios.post("http://localhost:6969/login", {
+          userEmail: formData.email,
+          userPassword: formData.password,
+        });
+  
+        if (response.status === 200) {
+          toast.success("Login successful!");
+          setFormData({ email: "", password: "" });
+  
+          setTimeout(() => {
+            setLoading(false); // hide loader
+            navigate("/", { replace: true });
+            localStorage.setItem("isLoggedIn", true);
+          }, 2000);
+        }
+      } catch (error) {
+        setLoading(false); // hide loader in case of error
+        if (error.response) {
+          switch (error.response.status) {
+            case 400:
+              toast.error("Please provide email and password");
+              break;
+            case 404:
+              toast.error("User not found");
+              break;
+            case 401:
+              toast.error("Invalid email or password");
+              break;
+            case 403:
+              toast.error("Email not verified. Please verify your email to log in.");
+              break;
+            default:
+              toast.error("Error during login. Please try again later.");
+          }
+        } else {
+          console.log("Error", error.message);
+          toast.error("An unexpected error occurred. Please try again.");
+        }
       }
-    } catch (error) {
-      setLoading(false); // hide loader in case of error
-      console.log("Error", error.message);
-      toast.error("Invalid email or password. Please try again.");
     }
   };
 
@@ -135,7 +161,7 @@ const LoginPage = () => {
         pauseOnHover
         theme="colored"
         toastStyle={{
-          backgroundColor: "#333",
+          backgroundColor: "lightgreen",
           color: "#fff",
           boxShadow: "0px 0px 15px rgba(0, 0, 0, 0.5)",
         }}

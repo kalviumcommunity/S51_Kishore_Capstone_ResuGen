@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import {
     Container,
     Stack,
@@ -19,8 +19,9 @@ import { useReactToPrint } from 'react-to-print';
 import { useResume } from '../../Context';
 import { MdOutlineFileDownload } from 'react-icons/md';
 import ChatBox from './ChatBox';
+
 const Main = () => {
-    const { printElem } = useResume();
+    const { printElem, saveResumePreview } = useResume();
     const { isOpen, onOpen, onClose } = useDisclosure();
     const handlePrint = useReactToPrint({
         content: () => printElem.current,
@@ -28,6 +29,7 @@ const Main = () => {
 
     const handleDownload = () => {
         handlePrint();
+        saveResumePreview(printElem.current.innerHTML);
         onClose();
     };
 

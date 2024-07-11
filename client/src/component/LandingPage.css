@@ -26,17 +26,12 @@ body {
   padding: 20px;
   width: 100%;
   top: 0;
-  position: fixed; 
-  background-color: rgba(
-    255,
-    255,
-    255,
-    0.95
-  ); 
-  z-index: 1000; 
-  border-bottom: 2px solid rgba(0, 0, 0, 0.1); 
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05); 
-  backdrop-filter: blur(10px); 
+  position: fixed;
+  background-color: rgba(255, 255, 255, 0.95);
+  z-index: 1000;
+  border-bottom: 2px solid rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  backdrop-filter: blur(10px);
 }
 
 .top-left {
@@ -228,7 +223,6 @@ body {
   border-radius: 10px;
 }
 
-
 .splide-div {
   display: flex;
   align-items: center;
@@ -240,7 +234,7 @@ body {
   font-size: 2.5em;
   font-weight: light;
   text-align: center;
-  margin-bottom: 30px; 
+  margin-bottom: 30px;
 }
 
 .splide {
@@ -259,9 +253,8 @@ body {
 .splide-slide img {
   width: 100%;
   height: 100%;
-  object-fit: cover; 
+  object-fit: cover;
 }
-
 
 .splide-img-div {
   border: 2px solid black;
@@ -370,7 +363,7 @@ body {
   align-items: center;
   flex-direction: column;
   /* padding: 50px; */
-  
+
   border: 2px solid;
   margin-top: 100px;
   /* width: 100%; */
@@ -379,10 +372,9 @@ body {
   position: fixed;
 }
 
-.menu{
+.menu {
   border-bottom: 2px solid whitesmoke;
   color: white;
-
 }
 
 .close-div {
@@ -442,6 +434,40 @@ body {
 
 .Btn:hover .arrow {
   animation: slide-in-bottom 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+}
+
+.display-user-reviews {
+  /* border: 2px solid black; */
+  width: 90vw;
+  margin: auto;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.display-user-reviews h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.dummy-reviews {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 40px;
+}
+
+/* .dummy-reviews: hover{
+  transform: scale(1.1);
+  transition-duration: 0.5s;
+} */
+
+.dummy-review {
+  border: 2px solid green;
+  height: 30vh;
+  width: 20rem;
 }
 
 @keyframes slide-in-bottom {
@@ -560,7 +586,7 @@ body {
     width: 30rem;
   }
 
-  .features-heading{
+  .features-heading {
     width: 150%;
     display: flex;
     align-items: center;
@@ -595,7 +621,7 @@ body {
 }
 
 @media (max-width: 425px) {
-  .nav-bar{
+  .nav-bar {
     width: 210%;
   }
 
@@ -613,27 +639,24 @@ body {
     margin-left: 60%;
   }
 
-  .content-left h1{
+  .content-left h1 {
     font-size: 30px;
     width: 40rem;
   }
 
-  .features-div{
+  .features-div {
     margin-left: 50%;
   }
 
-  .features-heading{
+  .features-heading {
     font-size: 29px;
   }
 
-  .features{
+  .features {
     width: 50rem;
   }
 
-  .splide-div{
+  .splide-div {
     width: 40rem;
   }
-
 }
-
-

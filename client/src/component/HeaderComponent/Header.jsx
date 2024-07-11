@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 const Header = () => {
   return (
     <>
-      <div className="header">
+      <div className="main-header">
         <Link to="/">
           <img className="logo" src={Logo} alt="logo" />
         </Link>
