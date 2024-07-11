@@ -4,6 +4,7 @@ import { QueryClient, QueryClientProvider } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
+import { ChakraProvider } from "@chakra-ui/react";
 import Spinner from "./component/SpinnerCompo/Spinner";
 
 const LandingPage = React.lazy(() => import("./component/LandingPage"));
@@ -12,13 +13,33 @@ const BuildResume = React.lazy(() => import("./component/Build/BuildResume"));
 const MyResume = React.lazy(() => import("./component/UserResumes/MyResume"));
 const SignUpPage = React.lazy(() => import("./component/SignUp/SignUp"));
 const ProtectUserData = React.lazy(() => import("./component/ProtectUserData"));
-const ForgotPassCompo = React.lazy(() => import("./component/ForgotPass/ForgotPassCompo"));
-const UserInput = React.lazy(() => import("./component/UserInputs/PersonalDetails/UserInput"));
-const CreateResume = React.lazy(() => import("./component/CreateResume/CreateResume"));
-const UserExp = React.lazy(() => import("./component/UserInputs/Experience/UserExp"));
-const WaitingPage = React.lazy(() => import("./component/WaitingArea/WaitingPage"));
-const LinkedInBuilder = React.lazy(() => import("./component/CreateResume/LinkedInBuilder"));
+const ForgotPassCompo = React.lazy(() =>
+  import("./component/ForgotPass/ForgotPassCompo")
+);
+const UserInput = React.lazy(() =>
+  import("./component/UserInputs/PersonalDetails/UserInput")
+);
+const CreateResume = React.lazy(() =>
+  import("./component/CreateResume/CreateResume")
+);
+const UserExp = React.lazy(() =>
+  import("./component/UserInputs/Experience/UserExp")
+);
+const WaitingPage = React.lazy(() =>
+  import("./component/WaitingArea/WaitingPage")
+);
+const LinkedInBuilder = React.lazy(() =>
+  import("./component/CreateResume/LinkedInBuilder")
+);
 const ResumeBuilderMain = React.lazy(() => import("./ResumeBuilderMain"));
+const ReviewList = React.lazy(() =>
+  import("./component/ReviewComponent/ReviewList")
+);
+const ReviewForm = React.lazy(() =>
+  import("./component/ReviewComponent/ReviewForm")
+);
+
+const OtpCompo = React.lazy(() => import('./component/OtpCompo/optCompo'));
 
 function App() {
   const queryClient = new QueryClient();
@@ -32,19 +53,55 @@ function App() {
               <Route path="/" element={<LandingPage />} />
               <Route path="/login" element={<LoginPage />} />
               <Route path="/build" element={<BuildResume />} />
-              <Route path="/my-resumes" element={<MyResume />} />
               <Route path="/signup" element={<SignUpPage />} />
               <Route path="/" element={<ProtectUserData />}>
                 <Route path="/" element={<LandingPage />} />
               </Route>
               <Route path="/forgotpass" element={<ForgotPassCompo />} />
               {/* Remove this route after testing */}
-              <Route path="/inputs" element={<UserInput />}></Route>{" "}
+              <Route path="/inputs" element={<UserInput />}></Route>
               {/* Remove this route after testing */}
               <Route path="/build/create-resume" element={<CreateResume />} />
-              <Route path="/build/linkedin" element={<LinkedInBuilder />}></Route>
+              <Route
+                path="/build/linkedin"
+                element={<LinkedInBuilder />}
+              ></Route>
               <Route path="/work-experience" element={<UserExp />}></Route>
               <Route path="/verify-email/" element={<WaitingPage />}></Route>
+              <Route
+                path="/review"
+                element={
+                  <ChakraProvider>
+                    <ReviewForm />
+                  </ChakraProvider>
+                }
+              ></Route>
+              <Route
+                path="/reviews"
+                element={
+                  <ChakraProvider>
+                    <ReviewList />
+                  </ChakraProvider>
+                }
+              ></Route>
+
+             
+              <Route
+                path="/my-resumes"
+                element={
+                  <ChakraProvider>
+                    <MyResume />
+                  </ChakraProvider>
+                }
+              />
+              <Route
+                path="/signup/verification"
+                element={
+                  <ChakraProvider>
+                    <OtpCompo />
+                  </ChakraProvider>
+                }
+              />
             </Routes>
           </Suspense>
         </BrowserRouter>

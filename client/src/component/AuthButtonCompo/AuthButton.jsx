@@ -14,41 +14,32 @@ const AuthButton = ({ Icon, label, provider, setLoading }) => {
   const githubAuthProvider = new GithubAuthProvider();
 
   const handleAuthClick = async () => {
-    setLoading(true); // show loader
+    setLoading(true);
     try {
+      let authProvider;
       switch (provider) {
         case "GoogleAuthProvider":
-          await signInWithPopup(auth, googleAuthProvider);
-          toast.success("Google login successful!");
-          setTimeout(() => {
-            setLoading(false); // hide loader
-            localStorage.setItem("isLoggedIn", true);
-            window.location.href = "/";
-          }, 2000);
+          authProvider = googleAuthProvider;
           break;
         case "GithubAuthProvider":
-          await signInWithPopup(auth, githubAuthProvider);
-          toast.success("GitHub login successful!");
-          setTimeout(() => {
-            setLoading(false); // hide loader
-            localStorage.setItem("isLoggedIn", true);
-            window.location.href = "/";
-          }, 2000);
+          authProvider = githubAuthProvider;
           break;
         default:
-          await signInWithPopup(auth, googleAuthProvider);
-          toast.success("Google login successful!");
-          setTimeout(() => {
-            setLoading(false); // hide loader
-            localStorage.setItem("isLoggedIn", true);
-            window.location.href = "/";
-          }, 2000);
+          authProvider = googleAuthProvider;
           break;
       }
+
+      const result = await signInWithPopup(auth, authProvider);
+      toast.success(`Logged In successfully!`);
+      setTimeout(() => {
+        setLoading(false); // hide loader
+        localStorage.setItem("isLoggedIn", true);
+        window.location.href = "/";
+      }, 2000);
     } catch (error) {
       setLoading(false); // hide loader in case of error
-      console.error("Error", error.message);
-      toast.error("Authentication failed. Please try again.");
+      console.error("Authentication Error:", error.message);
+      toast.error(`Authentication failed: ${error.message}`);
     }
   };
 

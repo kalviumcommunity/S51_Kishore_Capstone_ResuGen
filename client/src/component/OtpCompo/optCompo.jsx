@@ -14,6 +14,7 @@ import {
   Stack,
   useToast,
   Spinner,
+  Center
 } from "@chakra-ui/react";
 
 const OtpCompo = () => {
@@ -38,20 +39,7 @@ const OtpCompo = () => {
   }, [toast, userEmail]);
 
   const handleChange = (e, index) => {
-    const { value, key } = e;
-
-    // Handle backspace key
-    if (key === "Backspace") {
-      const newOtp = [...otp];
-      newOtp[index] = "";
-      setOtp(newOtp);
-
-      // Automatically move to the previous input
-      if (index > 0) {
-        document.getElementById(`otp-${index - 1}`).focus();
-      }
-      return;
-    }
+    const { value } = e.target;
 
     if (/^[0-9]$/.test(value) || value === "") {
       const newOtp = [...otp];
@@ -61,6 +49,19 @@ const OtpCompo = () => {
       // Automatically move to the next input
       if (value !== "" && index < 5) {
         document.getElementById(`otp-${index + 1}`).focus();
+      }
+    }
+  };
+
+  const handleKeyDown = (e, index) => {
+    if (e.key === "Backspace") {
+      const newOtp = [...otp];
+      newOtp[index] = "";
+      setOtp(newOtp);
+
+      // Automatically move to the previous input
+      if (index > 0) {
+        document.getElementById(`otp-${index - 1}`).focus();
       }
     }
   };
@@ -103,15 +104,18 @@ const OtpCompo = () => {
       <Box
         maxW="md"
         mx="auto"
-        mt="10"
+        mt="20"
         p="8"
         borderWidth="1px"
         borderRadius="lg"
         boxShadow="lg"
       >
-        <Heading as="h2" size="xl" textAlign="center" mb="6">
+        <Heading as="h2" size="xl" textAlign="center" mb="4" color="#013564">
           OTP Verification
         </Heading>
+        <Center mb={4} color="#013564">
+          <pre>An OTP has been sent to your email</pre>
+        </Center>
         <form onSubmit={handleSubmit}>
           <Stack spacing="6">
             <FormControl id="otp" isRequired>
@@ -125,7 +129,7 @@ const OtpCompo = () => {
                     maxLength="1"
                     value={otp[index]}
                     onChange={(e) => handleChange(e, index)}
-                    onKeyDown={(e) => handleChange(e, index)}
+                    onKeyDown={(e) => handleKeyDown(e, index)}
                     textAlign="center"
                     fontSize="2xl"
                     width="3rem"

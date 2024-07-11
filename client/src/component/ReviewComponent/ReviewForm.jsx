@@ -48,10 +48,24 @@ const ReviewForm = () => {
   return (
     <>
       <Header />
-      <Box maxW="md" mx="auto" mt={5} p={5} borderWidth={1} borderRadius="lg" shadow="md">
-        <Heading as="h2" size="lg" mb={4} textAlign="center">
+      <Box
+        maxW="md"
+        mx="auto"
+        mt={10}
+        p={5}
+        borderWidth={1}
+        borderRadius="lg"
+        shadow="md"
+      >
+        <Heading as="h2" size="lg" mb={4} textAlign="center" color="#013564">
           Leave a Review
         </Heading>
+
+        <Center mb={4} color="#013564">
+          <pre>
+            Share your valuable experience with us!!
+          </pre>
+        </Center>
         <form onSubmit={handleSubmit}>
           <VStack spacing={4}>
             <FormControl id="name" isRequired>
@@ -75,8 +89,8 @@ const ReviewForm = () => {
                 <HStack>
                   {[1, 2, 3, 4, 5].map((num) => (
                     <IconButton
-                    margin={"auto"}
-               w       key={num}
+                      margin={"auto"}
+                      key={num}
                       icon={<StarIcon />}
                       color={rating >= num ? "yellow.400" : "gray.300"}
                       onClick={() => handleRating(num)}

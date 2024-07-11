@@ -59,7 +59,7 @@ const ReviewList = () => {
 
   return (
     <>
-      {/* <Header /> */}
+      <Header />
 
       <Box
         maxW="800px"
@@ -70,9 +70,9 @@ const ReviewList = () => {
         borderRadius="lg"
         shadow="md"
       >
-        {/* <Heading as="h2" size="lg" mb={4} textAlign="center">
+        <Heading as="h2" size="lg" mb={4} textAlign="center">
           Reviews
-        </Heading> */}
+        </Heading>
         <VStack spacing={4} align="center">
           {paginatedReviews.map((review) => (
             <Box

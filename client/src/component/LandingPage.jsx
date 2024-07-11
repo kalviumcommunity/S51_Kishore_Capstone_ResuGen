@@ -25,7 +25,8 @@ import { adminId } from "../admin/AdminAcc";
 import Foot from "./Footer/Footer";
 import { MdOutlineKeyboardArrowUp } from "react-icons/md";
 import "../utils/CustomScrollBar.css";
-
+import DummyReviews from "./ReviewComponent/DummyReviews";
+import DidUserLogin from "./ModalCompo/DidUserLogin";
 // import {useUser} from "../Hooks"
 
 const LandingPage = () => {
@@ -35,12 +36,12 @@ const LandingPage = () => {
   const [userFormLoggedIn, setUserFromLoggedIn] = useState(false);
   const [tempImg, setTemplateImg] = useState("");
   const [showBackToTop, setShowBackToTop] = useState(false);
+  const [userLoginStatus, setUserLoginStatus] = useState(false);
   // const [userData, setUserData] = useState(null);
 
   const { data, isLoading, isError } = useUser();
 
   // console.log(isLoading, "Loading")
-  console.log(data, "data");
 
   const navigate = useNavigate();
 
@@ -78,6 +79,13 @@ const LandingPage = () => {
       console.log("Error fetching data", err);
     }
   };
+
+  useEffect(() => {
+    const userLoggedInDetails = localStorage.getItem("isLoggedIn");
+    if (userLoggedInDetails) {
+      setUserLoginStatus(true);
+    }
+  }, []);
 
   useEffect(() => {
     new Splide("#splide", {
@@ -250,9 +258,13 @@ const LandingPage = () => {
                   }}
                 />
               </div>
-              <Link to="/build">
-                <p className="context menu">Build Your Resume</p>
-              </Link>
+              {userLoginStatus ? (
+                <Link to="/build">
+                  <p className="context menu">Build Your Resume</p>
+                </Link>
+              ) : (
+                <DidUserLogin/>
+              )}
               <p className="context menu" onClick={handleExampleScroll}>
                 Resume Examples
               </p>
@@ -304,8 +316,8 @@ const LandingPage = () => {
               Resume Examples
             </p>
 
-            <Link to="/my-resumes">
-              <p className="context">My Resumes</p>
+            <Link to="/review">
+              <p className="context">Leave a review</p>
             </Link>
             <p className="context" onClick={handleTemplateScroll}>
               Contact us
@@ -472,27 +484,48 @@ const LandingPage = () => {
             }}
           >
             <SplideSlide className="splide-slide">
-              <img src="https://cdn.enhancv.com/timeline_traditional_resume_template_519a441f5c.png" alt="Slide 1" />
+              <img
+                src="https://cdn.enhancv.com/timeline_traditional_resume_template_519a441f5c.png"
+                alt="Slide 1"
+              />
               {/* <p>This is slide one.</p> */}
             </SplideSlide>
             <SplideSlide className="splide-slide">
-              <img src="https://cdn.enhancv.com/timeline_traditional_resume_template_519a441f5c.png" alt="Slide 2" />
+              <img
+                src="https://cdn.enhancv.com/timeline_traditional_resume_template_519a441f5c.png"
+                alt="Slide 2"
+              />
               {/* <p>This is slide two.</p> */}
             </SplideSlide>
             <SplideSlide className="splide-slide">
-              <img src="https://cdn.enhancv.com/timeline_traditional_resume_template_519a441f5c.png" alt="Slide 3" />
+              <img
+                src="https://cdn.enhancv.com/timeline_traditional_resume_template_519a441f5c.png"
+                alt="Slide 3"
+              />
               {/* <p>This is slide three</p> */}
             </SplideSlide>
             <SplideSlide className="splide-slide">
-              <img src='https://cdn.enhancv.com/timeline_traditional_resume_template_519a441f5c.png' alt="Slide 4" />
+              <img
+                src="https://cdn.enhancv.com/timeline_traditional_resume_template_519a441f5c.png"
+                alt="Slide 4"
+              />
               {/* <p>This is slide four</p> */}
             </SplideSlide>
           </Splide>
         </div>
       </div>
-        <Foot />  
-      <div className="footer" >
-      </div>
+      {/* <div className="display-user-reviews">
+        <h2>User Reviews</h2>
+        <div className="dummy-reviews">
+          <div className="dummy-review"></div>
+          <div className="dummy-review"></div>
+          <div className="dummy-review"></div>
+          <div className="dummy-review"></div>
+        </div>
+      </div> */}
+      <DummyReviews />
+      <Foot />
+      <div className="footer"></div>
     </>
   );
 };

@@ -19,7 +19,7 @@ export const getUserDetail = () => {
                 });
                 return () => {
                     unsubscribeSnapshot();
-                    unsubscribeAuth(); // Unsubscribe from onAuthStateChanged
+                    unsubscribeAuth();
                 };
             } 
         });
