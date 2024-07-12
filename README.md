@@ -22,7 +22,7 @@ To run ResuGen locally, follow these steps:
 2. Navigate to the project directory.
 3. Install dependencies using `npm install`.
 4. Start the development server with `npm start`.
-5. Open your web browser and visit `http://localhost:3000` to access ResuGen.
+5. Open your web browser and visit `http://localhost:5173` to access ResuGen.
 
 ## Usage
 
@@ -41,6 +41,8 @@ To run ResuGen locally, follow these steps:
 - MongoDB
 - HTML/CSS
 - Chakra-UI
+- Firebase
+- OTP Generation
 
 ## Contributing
 
@@ -54,5 +56,5 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 - Special thanks to [OpenAI](https://openai.com) for providing valuable resources and support.
 
-## Deployed Link (Frontend):- https://resugenn.netlify.app/
-## Deployed Link (Backend):- https://s51-kishore-capstone-resume-builder.onrender.com
+### Deployed Link (Frontend):- https://resugenn.netlify.app/
+### Deployed Link (Backend):- https://s51-kishore-capstone-resume-builder.onrender.com
