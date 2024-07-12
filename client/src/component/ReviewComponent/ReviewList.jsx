@@ -31,7 +31,7 @@ const ReviewList = () => {
   useEffect(() => {
     const fetchReviews = async () => {
       try {
-        const response = await axios.get('http://localhost:6969/reviews');  
+        const response = await axios.get('https://s51-kishore-capstone-resume-builder.onrender.com/reviews');  
         setReviews(response.data);
       } catch (error) {
         console.error("Failed to fetch reviews", error);

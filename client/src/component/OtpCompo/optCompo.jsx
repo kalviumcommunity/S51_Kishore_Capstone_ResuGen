@@ -70,7 +70,7 @@ const OtpCompo = () => {
     e.preventDefault();
     setLoading(true);
     try {
-      const response = await axios.post("http://localhost:6969/verify-otp", {
+      const response = await axios.post("https://s51-kishore-capstone-resume-builder.onrender.com/verify-otp", {
         userEmail,
         otp: otp.join(""),
       });
@@ -82,7 +82,7 @@ const OtpCompo = () => {
           duration: 5000,
           isClosable: true,
         });
-        navigate("/");
+        navigate("/login");
       }
     } catch (error) {
       console.error("Error verifying OTP:", error);

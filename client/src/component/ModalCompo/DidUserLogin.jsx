@@ -6,7 +6,6 @@ import {
   ModalOverlay,
   ModalContent,
   ModalHeader,
-  ModalCloseButton,
   ModalBody,
   ModalFooter,
   useDisclosure,
@@ -23,24 +22,21 @@ const DidUserLogin = () => {
 
   return (
     <>
-      <Box>
-        <Button onClick={onOpen}>Check Login Status</Button>
-      </Box>
-
-      <Modal isOpen={isOpen} onClose={onClose}>
+      <Modal isOpen={isOpen} isCentered>
         <ModalOverlay />
         <ModalContent>
           <ModalHeader>Login Required</ModalHeader>
-          <ModalCloseButton />
           <ModalBody>
             <Text>You have to log in to continue.</Text>
           </ModalBody>
           <ModalFooter>
-            <Button colorScheme="blue" mr={3} onClick={onClose}>
-              Close
-            </Button>
+            <Link to="/">
+              <Button variant="ghost" mr={3} onClick={onClose}>
+                Close
+              </Button>
+            </Link>
             <Link to="/login">
-              <Button variant="ghost">Log In</Button>
+              <Button colorScheme="blue">Log In</Button>
             </Link>
           </ModalFooter>
         </ModalContent>

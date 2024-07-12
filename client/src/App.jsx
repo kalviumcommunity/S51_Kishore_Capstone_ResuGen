@@ -39,7 +39,11 @@ const ReviewForm = React.lazy(() =>
   import("./component/ReviewComponent/ReviewForm")
 );
 
-const OtpCompo = React.lazy(() => import('./component/OtpCompo/optCompo'));
+const OtpCompo = React.lazy(() => import("./component/OtpCompo/optCompo"));
+
+const DidUserLogin = React.lazy(() =>
+  import("./component/ModalCompo/DidUserLogin")
+);
 
 function App() {
   const queryClient = new QueryClient();
@@ -85,7 +89,6 @@ function App() {
                 }
               ></Route>
 
-             
               <Route
                 path="/my-resumes"
                 element={
@@ -99,6 +102,14 @@ function App() {
                 element={
                   <ChakraProvider>
                     <OtpCompo />
+                  </ChakraProvider>
+                }
+              />
+              <Route
+                path="/funpopup"
+                element={
+                  <ChakraProvider>
+                    <DidUserLogin />
                   </ChakraProvider>
                 }
               />

@@ -6,6 +6,8 @@ import templateIcon from "../assets/templateIcon.png";
 import customFont from "../assets/font.png";
 import resumeIcon from "../assets/resume.png";
 import aiIcon from "../assets/ai-icon.png";
+import resuSplide1 from "../assets/resu_splide1.png";
+import resuSplide from "../assets/resu_splide2.png";
 import { useSpring, animated } from "@react-spring/web";
 import LandingPageLogo from "../assets/landing-page-img.png";
 import Button from "@mui/material/Button";
@@ -36,7 +38,7 @@ const LandingPage = () => {
   const [userFormLoggedIn, setUserFromLoggedIn] = useState(false);
   const [tempImg, setTemplateImg] = useState("");
   const [showBackToTop, setShowBackToTop] = useState(false);
-  const [userLoginStatus, setUserLoginStatus] = useState(false);
+  // const [userLoginStatus, setUserLoginStatus] = useState(false);
   // const [userData, setUserData] = useState(null);
 
   const { data, isLoading, isError } = useUser();
@@ -69,23 +71,23 @@ const LandingPage = () => {
   //   <Spinner />;
   // }
 
-  const fetchTemplateData = async () => {
-    try {
-      const response = await fetch("http://localhost:6969/template");
-      const templateData = await response.json();
-      setTemplateImg(templateData);
-      console.log(tempImg, "templateData");
-    } catch (err) {
-      console.log("Error fetching data", err);
-    }
-  };
+  // const fetchTemplateData = async () => {
+  //   try {
+  //     const response = await fetch("http://localhost:6969/template");
+  //     const templateData = await response.json();
+  //     setTemplateImg(templateData);
+  //     console.log(tempImg, "templateData");
+  //   } catch (err) {
+  //     console.log("Error fetching data", err);
+  //   }
+  // };
 
-  useEffect(() => {
-    const userLoggedInDetails = localStorage.getItem("isLoggedIn");
-    if (userLoggedInDetails) {
-      setUserLoginStatus(true);
-    }
-  }, []);
+  // useEffect(() => {
+  //   const userLoggedInDetails = localStorage.getItem("isLoggedIn");
+  //   if (!userLoggedInDetails) {
+  //     setUserLoginStatus(true);
+  //   }
+  // }, []);
 
   useEffect(() => {
     new Splide("#splide", {
@@ -108,7 +110,7 @@ const LandingPage = () => {
     });
 
     checkUserStatus();
-    fetchTemplateData();
+    // fetchTemplateData();
     // fetchData();
     window.addEventListener("scroll", handleBackToTopScroll);
     window.addEventListener("scroll", handleScroll);
@@ -215,15 +217,15 @@ const LandingPage = () => {
     try {
       await auth.signOut();
       queryClient.setQueryData("user", null);
-      toast.success("Logged Out Successfully");
+      toast.info("Logged Out Successfully", {
+        
+      });
       // Clear local storage
       localStorage.clear();
       // Update states
       setUserLoggedIn(false);
       setUserFromLoggedIn(false);
       console.log("Logged Out Successfully");
-      // Navigate to the login page
-      navigate("/");
     } catch (error) {
       console.error("Logout error:", error);
     }
@@ -258,12 +260,18 @@ const LandingPage = () => {
                   }}
                 />
               </div>
-              {userLoginStatus ? (
+              {console.log(userFormLoggedIn)}
+              {userFormLoggedIn ? (
                 <Link to="/build">
-                  <p className="context menu">Build Your Resume</p>
+                  <p className="context ">Build Your Resume</p>
                 </Link>
               ) : (
-                <DidUserLogin/>
+                <p
+                  onClick={() => navigate("/funpopup")}
+                  className="context "
+                >
+                  Build Your Resume
+                </p>
               )}
               <p className="context menu" onClick={handleExampleScroll}>
                 Resume Examples
@@ -309,9 +317,15 @@ const LandingPage = () => {
 
         <div className="navi-bar">
           <div className="middle">
-            <Link to="/build">
-              <p className="context">Build Your Resume</p>
-            </Link>
+            {userFormLoggedIn ? (
+              <Link to="/build">
+                <p className="context ">Build Your Resume</p>
+              </Link>
+            ) : (
+              <Link to="/funpopup">
+                <p className="context ">Build Your Resume</p>
+              </Link>
+            )}
             <p className="context" onClick={handleExampleScroll}>
               Resume Examples
             </p>
@@ -336,24 +350,45 @@ const LandingPage = () => {
             )}
 
             <div className="build-res-btn pointer">
-              <Link to="/build">
-                <Button
-                  sx={{
-                    border: "2px solid lightblue",
-                    borderRadius: "10px",
-                    color: "grey",
-                    textDecoration: "none",
-                    fontFamily: "inherit",
-                    "&:hover": {
-                      backgroundColor: "lightblue",
-                      color: "white",
-                    },
-                    transition: "background-color 0.3s ease",
-                  }}
-                >
-                  Build my Resume
-                </Button>
-              </Link>
+              {userFormLoggedIn ? (
+                <Link to="/build">
+                  <Button
+                    sx={{
+                      border: "2px solid lightblue",
+                      borderRadius: "10px",
+                      color: "grey",
+                      textDecoration: "none",
+                      fontFamily: "inherit",
+                      "&:hover": {
+                        backgroundColor: "lightblue",
+                        color: "white",
+                      },
+                      transition: "background-color 0.3s ease",
+                    }}
+                  >
+                    Build my Resume
+                  </Button>
+                </Link>
+              ) : (
+                <Link to="/funpopup">
+                  <Button
+                    sx={{
+                      border: "2px solid lightblue",
+                      borderRadius: "10px",
+                      color: "grey",
+                      textDecoration: "none",
+                      fontFamily: "inherit",
+                      "&:hover": {
+                        backgroundColor: "lightblue",
+                        color: "white",
+                      },
+                      transition: "background-color 0.3s ease",
+                    }}
+                  >
+                    Build my Resume
+                  </Button>
+                </Link>
+              )}
             </div>
           </div>
         </div>
@@ -370,25 +405,47 @@ const LandingPage = () => {
           </div>
 
           <div className="get-started-btn">
-            <Link to="/build">
-              <Button
-                sx={{
-                  border: "2px solid black",
-                  color: "black",
-                  fontWeight: "medium",
-                  padding: "8px",
-                  borderRadius: "8px",
-                  fontFamily: "inherit",
-                  "&:hover": {
-                    backgroundColor: "black",
-                    color: "white",
-                  },
-                }}
-                className="button"
-              >
-                Get Started
-              </Button>
-            </Link>
+            {userFormLoggedIn ? (
+              <Link to="/build">
+                <Button
+                  sx={{
+                    border: "2px solid black",
+                    color: "black",
+                    fontWeight: "medium",
+                    padding: "8px",
+                    borderRadius: "8px",
+                    fontFamily: "inherit",
+                    "&:hover": {
+                      backgroundColor: "black",
+                      color: "white",
+                    },
+                  }}
+                  className="button"
+                >
+                  Get Started
+                </Button>
+              </Link>
+            ) : (
+              <Link to="/funpopup">
+                <Button
+                  sx={{
+                    border: "2px solid black",
+                    color: "black",
+                    fontWeight: "medium",
+                    padding: "8px",
+                    borderRadius: "8px",
+                    fontFamily: "inherit",
+                    "&:hover": {
+                      backgroundColor: "black",
+                      color: "white",
+                    },
+                  }}
+                  className="button"
+                >
+                  Get Started
+                </Button>
+              </Link>
+            )}
           </div>
         </div>
       </animated.div>
