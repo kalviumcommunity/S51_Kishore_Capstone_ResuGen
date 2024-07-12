@@ -142,6 +142,10 @@ loginRouter.post("/login", async (req, res) => {
       return res.status(401).json({ message: "Invalid email or password" });
     }
 
+    if (!user.isEmailVerified) {
+      return res.status(403).json({ message: "Email not verified. Please verify your email to log in." });
+    }
+
     const token = jwt.sign({ userEmail: user.userEmail }, process.env.SECRET_KEY, {
       expiresIn: "1h",
     });
