@@ -49,7 +49,7 @@ const UserExp = ({ onNext, onBack }) => {
   };
 
   const generateWorkSummary = async () => {
-    const response = await fetch("http://localhost:6969/work-summary", {
+    const response = await fetch("https://s51-kishore-capstone-resume-builder.onrender.com", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"

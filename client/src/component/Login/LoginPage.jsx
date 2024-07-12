@@ -41,7 +41,7 @@ const LoginPage = () => {
       navigate("/build/create-resume")
     }else{
       try {
-        const response = await axios.post("http://localhost:6969/login", {
+        const response = await axios.post("https://s51-kishore-capstone-resume-builder.onrender.com/login", {
           userEmail: formData.email,
           userPassword: formData.password,
         });
@@ -57,7 +57,7 @@ const LoginPage = () => {
           }, 2000);
         }
       } catch (error) {
-        setLoading(false); // hide loader in case of error
+        setLoading(false); 
         if (error.response) {
           switch (error.response.status) {
             case 400:
@@ -161,7 +161,7 @@ const LoginPage = () => {
         pauseOnHover
         theme="colored"
         toastStyle={{
-          backgroundColor: "lightgreen",
+          backgroundColor: "#4fa94d",
           color: "#fff",
           boxShadow: "0px 0px 15px rgba(0, 0, 0, 0.5)",
         }}

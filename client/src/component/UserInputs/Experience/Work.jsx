@@ -46,11 +46,10 @@ const Work = () => {
     const generateSummary = async () => {
         try {
             const skills = JSON.parse(localStorage.getItem('skills')) || [];
-            const response = await axios.post('hhttps://s51-kishore-capstone-resume-builder.onrender.com/chat', { experience: workList, skills: skills.map(skill => skill.name) });
-            const summaries = response.data.summaries || []; // Default to an empty array if summaries are not returned
+            const response = await axios.post('https://s51-kishore-capstone-resume-builder.onrender.com/chat', { experience: workList, skills: skills.map(skill => skill.name) });
             const updatedWorkList = workList.map((work, index) => ({
                 ...work,
-                summary: summaries[index] || "" // Use an empty string if the summary is not available
+                summary: summaries[index] || "" 
             }));
             setWorkList(updatedWorkList);
         } catch (error) {

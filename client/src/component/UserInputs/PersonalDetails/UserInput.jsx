@@ -29,7 +29,7 @@ const UserInput = ({ onNext }) => {
     }));
 
     try {
-      const response = await fetch("http://localhost:6969/summary", {
+      const response = await fetch("https://s51-kishore-capstone-resume-builder.onrender.com", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

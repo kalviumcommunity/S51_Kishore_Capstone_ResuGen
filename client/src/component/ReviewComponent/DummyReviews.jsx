@@ -50,8 +50,8 @@ const DummyReviews = () => {
   const boxShadow = useColorModeValue("lg", "dark-lg");
 
   return (
-    <Box maxW="1200px" mx="auto" mt={10} p={5}>
-      <Heading as="h2" size="2.5em" mb={8} textAlign="center">
+    <Box maxW="1200px" mx="auto" p={5}>
+      <Heading as="h1" size="2.5em" mb={8} textAlign="center">
         User Reviews
       </Heading>
       <Box

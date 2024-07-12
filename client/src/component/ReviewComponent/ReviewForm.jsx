@@ -27,7 +27,7 @@ const ReviewForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post("http://localhost:6969/reviews", {
+      await axios.post("https://s51-kishore-capstone-resume-builder.onrender.com/reviews", {
         name,
         comment,
         rating,
